@@ -1,0 +1,50 @@
+body {
+  background-color: #ffcc66;
+  font-family: times;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+h2.unnumbered {
+  font-weight: bold;
+  font-size: 180%;
+}
+h2.chapheading {
+  font-style: italic;
+  background: #efefef;
+  padding: 10px;
+  padding-left: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: black;
+  letter-spacing: 4px;
+}
+h4.subheading {
+}
+h5.subsubheading {
+  font-style: italic;
+  text-decoration: underline;
+}
+div.node {
+}
+div.page {
+  background-color: #ffffff;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+ul.menu {
+}
+pre.display {
+}
+a:link {
+  color: blue;
+}
+a:visited {
+  color: blue;
+}
+a:active { color: red; }
+pre.display { font-size: 115% }

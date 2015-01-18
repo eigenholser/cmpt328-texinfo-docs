@@ -1,0 +1,63 @@
+\input texinfo   @c -*-texinfo-*-
+
+@set title IAR Workbench Setup
+@set subtitle CMPT 328-01 Computer Architecture
+@set splash westminster-splash.texi
+@set author Scott Overholser
+@set category Computer Science
+@set filename iar_workbench_setup
+
+@comment %**start of header
+@setfilename @value{filename}.info
+@settitle @value{title}
+@finalout
+@comment %**end of header
+
+@include @value{filename}.texi.updated
+@include copying.texi
+
+@titlepage
+@title @value{title}
+@subtitle @value{subtitle}
+@include @value{splash}
+@author @value{author}
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@comment Table of Contents
+@contents
+
+@dircategory @value{category}
+@direntry
+* Texinfo Doc Template: (TMP).                   Template for Creating New Docs
+@end direntry
+
+@include headings.texi
+@include constants.texi
+
+@ifnottex
+@node Top
+@top @value{title}
+
+@insertcopying
+@end ifnottex
+
+@comment This is the Chapter Menu!
+@menu
+* Unorganized Notes::               TEMPLATE
+* Index::                           Topics Covered by this Manual
+@end menu
+
+@node Unorganized Notes
+@chapter TEMPLATE Chapter
+@cindex notes, unorganized
+@noindent
+Put your document here.
+
+@node Index
+@unnumbered Index
+@printindex cp
+
+@bye

@@ -1,0 +1,61 @@
+\input texinfo   @c -*-texinfo-*-
+
+@set title __TITLE__
+@set subtitle __SUBTITLE__
+@set splash __FILENAME__-splash.texi
+@set author __AUTHOR__
+@set category __CATEGORY__
+@set filename __FILENAME__
+
+@comment %**start of header
+@setfilename @value{filename}.info
+@settitle @value{title}
+@finalout
+@comment %**end of header
+
+@include @value{filename}.texi.updated
+@include copying.texi
+
+@titlepage
+@title @value{title}
+@subtitle @value{subtitle}
+@include @value{splash}
+@author @value{author}
+
+@c Secondary title page.
+@page
+@include @value{splash}
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@comment Table of Contents
+@contents
+
+@dircategory @value{category}
+@direntry
+* Texinfo Doc Template         Template for Creating New Docs
+@end direntry
+
+@include headings.texi
+@include constants.texi
+
+@ifnottex
+@node Top
+@top @value{title}
+
+@insertcopying
+@end ifnottex
+
+@comment This is a starting point.
+@node Template Chapter
+@chapter Customize This and Add More of Your Own
+@cindex template, chapter
+@noindent
+Put your document here.
+
+@node Index
+@unnumbered Index
+@printindex cp
+
+@bye

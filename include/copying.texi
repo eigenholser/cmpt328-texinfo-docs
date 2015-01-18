@@ -1,0 +1,6 @@
+@copying
+
+This document may be copied freely.
+
+Last Modified: @value{UPDATED}
+@end copying

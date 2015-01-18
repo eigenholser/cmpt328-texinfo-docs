@@ -1,0 +1,93 @@
+#!/usr/bin/perl 
+#
+# updatestamp
+#
+# updatestamp generates a date/time stamp. find the subversion date property
+# in the texinfo source file and make it all pretty. if that is not possible,
+# fall back and use the current date and time to construct a date/timestamp.
+#
+#   Original Author: Scott Overholser
+#   Last Changed By: $Author: scotto $
+# Last Changed Date: $Date: 2007-11-17 11:22:57 -0700 (Sat, 17 Nov 2007) $
+#          Revision: $Rev: 89 $
+##
+##
+
+use strict;
+use Date::Calc qw(Today Today_and_Now Day_of_Week Day_of_Week_Abbreviation Month_to_Text);
+use Getopt::Long;
+
+my $srcfile;    # command-line option
+my $updfile;
+my $dateprop;
+my $updated;
+
+# gotta have the source file to scan
+GetOptions('srcfile=s' => \$srcfile);
+
+# insist on it
+unless (defined $srcfile) {
+    die "need --srcfile={source.texi}";
+}
+
+# munge filename - change it to end in 'updated'
+$updfile = $srcfile;
+$updfile =~ s/^(.+?)\.texi$/$1\.updated/;
+
+# open source file and new file to contain date/time stamp
+open(TEXI,"<$srcfile") or die "Can't open $srcfile: $!";
+open(UPDATED,">$updfile") or die "Can't open $updfile: $!";
+
+# This is what our target looks like ...
+# LAST_CHANGED_DATE $Date: 2007-11-17 11:22:57 -0700 (Sat, 17 Nov 2007) $
+while(<TEXI>) {
+    $dateprop = $1 if (/\$Date:\s+(.+)\$$/);
+}
+
+# we're done with source file
+close TEXI;
+
+my $year;
+my $mon;
+my $dom;
+my $hr;
+my $min;
+my $sec;
+
+if (defined $dateprop) {
+    # regex the subversion date property looking for the right peices.
+    $dateprop =~ /^(\S+)\s+(\d.+?)\s+\((.*)\).*$/;
+
+    my $yyyymmdd  = $1;
+    my $timestamp = $2;
+    my $fulldate  = $3;
+
+    $yyyymmdd =~ /^(\d\d\d\d)-(\d\d)-(\d\d)$/;
+    $year = $1;
+    $mon  = $2;
+    $dom  = $3;
+
+    $timestamp =~ /^(\d\d):(\d\d):(\d\d).+$/;
+    $hr  = $1;
+    $min = $2;
+    $sec = $3;
+} else {
+    # generate current date/time in case we can't find one inside source file
+    ($year,$mon,$dom,$hr,$min,$sec) = Today_and_Now();
+}
+
+$dom =~ s/^(\d)$/0$1/;
+$hr  =~ s/^(\d)$/0$1/;
+$min =~ s/^(\d)$/0$1/;
+$sec =~ s/^(\d)$/0$1/;
+
+my $dow_name = Day_of_Week_Abbreviation(Day_of_Week($year,$mon,$dom));
+my $mon_name = Month_to_Text($mon);
+
+$updated = qq{$dow_name, $dom $mon_name $year $hr:$min:$sec};
+
+# write it to file in texinfo style
+print UPDATED qq{\@set UPDATED $updated\n};
+
+# we're done
+close UPDATED;

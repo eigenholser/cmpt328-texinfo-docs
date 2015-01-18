@@ -1,0 +1,4 @@
+@headings off
+@everyheading @thischapter @| @| @thispage
+@everyfooting @value{UPDATED} @| @| Westminster College
+@c headings on

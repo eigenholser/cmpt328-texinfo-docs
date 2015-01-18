@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!DOCTYPE texinfo PUBLIC "-//GNU//DTD TexinfoML V5.0//EN" "http://www.gnu.org/software/texinfo/dtd/5.0/texinfo.dtd">
+<texinfo xml:lang="en">
+<filename file="iar_workbench_setup.xml"></filename>
+<preamble>\input texinfo   @c -*-texinfo-*-
+
+</preamble><set name="title" line=" title IAR Workbench Setup">IAR Workbench Setup</set>
+<set name="subtitle" line=" subtitle CMPT 328-01 Computer Architecture">CMPT 328-01 Computer Architecture</set>
+<set name="splash" line=" splash westminster-splash.texi">westminster-splash.texi</set>
+<set name="author" line=" author Scott Overholser">Scott Overholser</set>
+<set name="category" line=" category Computer Science">Computer Science</set>
+<set name="filename" line=" filename iar_workbench_setup">iar_workbench_setup</set>
+
+<!-- comment %**start of header -->
+<setfilename file="iar_workbench_setup.info" spaces=" ">iar_workbench_setup.info</setfilename>
+<settitle spaces=" ">IAR Workbench Setup</settitle>
+<finalout></finalout>
+<!-- comment %**end of header -->
+
+<set name="UPDATED" line=" UPDATED No Timestamp Available">No Timestamp Available</set>
+<copying endspaces=" ">
+
+<para>This document may be copied freely.
+</para>
+<para>Last Modified: No Timestamp Available
+</para></copying>
+
+<titlepage endspaces=" ">
+<title spaces=" ">IAR Workbench Setup</title>
+<subtitle spaces=" ">CMPT 328-01 Computer Architecture</subtitle>
+<!-- comment -->
+<!-- comment Default splash image for title page. -->
+<!-- comment -->
+<sp value="3" line=" 3"></sp>
+<center spaces=" "><image where="inline"><imagefile>../include/westminster_logo</imagefile><imagewidth>5in</imagewidth><imageextension>jpg</imageextension></image></center>
+<author spaces=" ">Scott Overholser</author>
+<page></page>
+<vskip> 0pt plus 1filll</vskip>
+<insertcopying></insertcopying>
+</titlepage>
+
+<!-- comment Table of Contents -->
+<contents></contents>
+
+<dircategory spaces=" ">Computer Science</dircategory>
+<direntry endspaces=" ">
+<menuentry leadingtext="* "><menutitle separator=": ">Texinfo Doc Template</menutitle><menunode separator=".                   ">(TMP)</menunode><menudescription><pre xml:space="preserve">Template for Creating New Docs
+</pre></menudescription></menuentry></direntry>
+
+<headings value="off" line=" off"></headings>
+<everyheading> @thischapter @| @| @thispage</everyheading>
+<everyfooting> @value{UPDATED} @| @| Westminster College</everyfooting>
+<!-- c headings on -->
+<!-- comment Some useful constants -->
+<set name="OOTB" line=" OOTB @sc{out-of-the-box}">@sc{out-of-the-box}</set>
+
+
+<node name="Top" spaces=" "><nodename>Top</nodename><nodenext automatic="on">Unorganized Notes</nodenext><nodeup automatic="on">(dir)</nodeup></node>
+<top spaces=" "><sectiontitle>IAR Workbench Setup</sectiontitle>
+
+<insertcopying></insertcopying>
+
+<!-- comment This is the Chapter Menu! -->
+<menu endspaces=" ">
+<menuentry leadingtext="* "><menunode separator="::               ">Unorganized Notes</menunode><menudescription><pre xml:space="preserve">TEMPLATE
+</pre></menudescription></menuentry><menuentry leadingtext="* "><menunode separator="::                           ">Index</menunode><menudescription><pre xml:space="preserve">Topics Covered by this Manual
+</pre></menudescription></menuentry></menu>
+
+</top>
+<node name="Unorganized-Notes" spaces=" "><nodename>Unorganized Notes</nodename><nodenext automatic="on">Index</nodenext><nodeprev automatic="on">Top</nodeprev><nodeup automatic="on">Top</nodeup></node>
+<chapter spaces=" "><sectiontitle>TEMPLATE Chapter</sectiontitle>
+<cindex index="cp" spaces=" "><indexterm index="cp" number="1">notes, unorganized</indexterm></cindex>
+<noindent></noindent>
+<para>Put your document here.
+</para>
+</chapter>
+<node name="Index" spaces=" "><nodename>Index</nodename><nodeprev automatic="on">Unorganized Notes</nodeprev><nodeup automatic="on">Top</nodeup></node>
+<unnumbered spaces=" "><sectiontitle>Index</sectiontitle>
+<printindex value="cp" line=" cp"></printindex>
+
+</unnumbered>
+<bye></bye>
+</texinfo>
