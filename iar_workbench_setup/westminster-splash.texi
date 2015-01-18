@@ -1,5 +1,5 @@
 @comment
 @comment Default splash image for title page.
 @comment
-@sp 3
-@center @image{../include/westminster_logo,5in,,,jpg}
+@sp 4
+@center @image{westminster_logo,5in,,,jpg}
