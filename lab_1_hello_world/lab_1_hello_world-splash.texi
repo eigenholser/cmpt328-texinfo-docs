@@ -1,0 +1,5 @@
+@comment
+@comment Default splash image for title page.
+@comment
+@sp 4
+@center @image{../images/ek-tm4c123gxl_tivalp_angle_new,5in,,,jpg}
