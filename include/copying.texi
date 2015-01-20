@@ -1,6 +1,7 @@
 @copying
 
-This document may be copied freely.
+This lab was written for the Westminster College Computer Architecture course
+Spring 2015 semester.
 
 Last Modified: @value{UPDATED}
 @end copying
