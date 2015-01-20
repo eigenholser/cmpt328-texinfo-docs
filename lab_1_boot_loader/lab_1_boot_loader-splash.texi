@@ -3,4 +3,4 @@
 @comment want to customize this.
 @comment
 @sp 7
-@center @image{../include/yinyang,3in,,,}
+@center @image{../images/ek-tm4c123gxl_tivalp_angle_new,3in,,,}
