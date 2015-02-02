@@ -52,8 +52,8 @@
 @comment This is the Chapter Menu
 @menu
 * Lab Objective::               Lab Objective
-* Reference Material::          Reference Material
-* Simple Program::              Simple Program
+* Notes::                       Notes
+* Experiments::                 Experiments
 * Lab Report::                  Lab Report
 @end menu
 
@@ -64,24 +64,34 @@ The primary objective of this lab exercise is to understand the sequence by
 which the TM4C begins program execution from a power on reset.
 
 @noindent
-Practice looking up technical information in the product data sheet.
+Secondary objectives include the following:
 
-@noindent
-Introduce the IAR Embedded Workbench for writing and debugging assembly
+@itemize
+@item Introduce the Stack Pointer, Program Counter, and the IPSR.
+@item Get hands-on experience working with a microprocessor at the lowest level.
+@item Practice looking up technical information in the product data sheet.
+@item Introduce the IAR Embedded Workbench for writing and debugging assembly
 language programs.
+@item Introduce the ARM Cortex M4F assembly language.
+@end itemize
 
+
+@node Notes
+@chapter Notes
 @noindent
-Introduce the ARM Cortex M4F assembly language.
+You will see memory locations written in the form @code{0x0000.0000} in this
+lab exercise because it is easy to read accurately. But that is not a valid
+representation of a memory location. In the code you will see this represented
+as @code{0x00000000U} with the @code{U} meaning @emph{unsigned}. Specifying
+unsigned in your code is not always necessary but it is a good habit.
 
-
-@node Reference Material
-@chapter Reference Material
+@anchor{Reference Material}
+@section Reference Material
 @noindent
-@uref{https://westminster.instructure.com/files/62246649/download?download_frd=1&verifier=hkiu21FqwDA10ZbhaXkJGY4SDvWC55QpRD9xEpo7, Tiva TTM4C123GH6PM Microcontroller Data Sheet}
-will be referenced often in this
-and future labs. It is in the Canvas Files area filed under Tiva C Series
-Microcontroller. The filename is @file{tm4c123gh6pm.pdf}. Please download this
-file to your computer.
+@uref{https://westminster.instructure.com/files/62246649/download?download_frd=1&verifier=hkiu21FqwDA10ZbhaXkJGY4SDvWC55QpRD9xEpo7, Tiva TM4C123GH6PM Microcontroller Data Sheet}
+will be referenced often in this and future labs. It is in the Canvas Files
+area filed under Tiva C Series Microcontroller. The filename is
+@file{tm4c123gh6pm.pdf}.
 
 @noindent
 Refer to the following on the TM4C data sheet:
@@ -90,6 +100,7 @@ Refer to the following on the TM4C data sheet:
 @item @cite{Register 14: Stack Pointer (SP)} on page 78.
 @item @cite{Register 16: Program Counter (PC)} on page 80.
 @item @cite{Register 17: Program Status Register (PSR)} on page 82.
+@item @cite{2.4 Memory Model} on page 91.
 @item @cite{2.5.2 Exception Types} on page 102.
 @item @cite{5.2.2.2 Power-On Reset (POR)} on page 214.
 @item @cite{8.2.2 ROM} on page 526.
@@ -98,49 +109,49 @@ Refer to the following on the TM4C data sheet:
 @end itemize
 
 
-@node Simple Program
-@chapter Simple Program
+@node Experiments
+@chapter Experiments
 
 @c SECTION
 @section Create A New Project
 @noindent
-Begin by selecting @code{Project->Create New Project...}. Expand @code{asm},
-select the second @code{asm} for @emph{Empty pure assembler project.}. Navigate
-to where you want the project to be saved, including creating a folder for it.
-Perhaps you should name the folder Lab_1. Then name the project. I suggest
-that you name the project @file{project.ewp}.
+Begin by selecting @code{Project->Create New Project...} Expand @code{asm},
+select the second @code{asm} for @emph{Empty pure assembler project.} Navigate
+to where you want the project to be saved. Create a folder as needed.
+Perhaps you should name the folder @file{Lab_1}. Then name the project. I suggest
+that you name the project @file{project.ewp}. Similarly, when it comes time
+to save your workspace, I suggest you use the name @file{workspace.eww}.
 
 @noindent
-If you are using a VirtualBox virtual machine, please use shared folders to
+If you are using a VirtualBox virtual machine, consider using shared folders to
 select a location on your @emph{host} operating system so that you do not lose
-all of your work if your virtual machine has problems.
-
-@noindent
-Similarly, when it comes time to save your workspace, I suggest you use the
-name @file{workspace.eww}.
+your work if your virtual machine has problems.
 
 @c SECTION
-@section Enter Your Program
+@section An Infinite Loop
 @noindent
 Begin this lab exercise by transcribing the following assembly language
 program into the IAR Embedded Workbench.
 
 @verbatim
+        NAME    main
+
         PUBLIC  __iar_program_start
 
+        ; Interrupt Vector Table
         SECTION .intvec:CODE (2)
         DATA
-        DC32    0x20008000
-        DC32    __iar_program_start
+        DC32    0x20008000U             ; Stack Pointer
+        DC32    __iar_program_start     ; Reset Vector
 
         SECTION LAB1:CODE (2)
         THUMB
 
 __iar_program_start
-        B        main
+        B        main                   ; Just branch to main
 
 main    NOP
-        B        main
+        B        main                   ; Loop forever.
 
         END
 @end verbatim
@@ -164,20 +175,31 @@ will be remembered.
 @noindent
 The initial @emph{program counter} is known as the reset vector. This is the
 4-byte value located at memory location @code{0x0000.0004}. This tells the
-processor where to begin executing code. The value there is loaded into the
-@code{PC} register.
+processor where to begin executing code. The value found at that location is
+loaded into the @code{PC} register.
 
 @noindent
 In our first program, we used @code{__iar_program_start}. This symbol is
-replaced by the IAR Embedded Workbench with the location of our code in
+replaced by the IAR Embedded Workbench linker with the location of our code in
 memory.
 
 @c SUBSECTION
-@subsection Experiment 1
+@subsection Modify Initial PC 1
 @noindent
-As an experiment, try replacing @code{__iar_program_start} with the location
-of the ROM boot loader @code{0x0100.0000}. Rebuild the program and then
-download and debug.
+As an experiment, replace the reset vector location @code{__iar_program_start}
+with the location of the ROM boot loader @code{0x0100.0000}. In other words,
+replace the first line below with the second in your program.
+
+@verbatim
+        DC32    __iar_program_start
+@end verbatim
+
+@verbatim
+        DC32    0x01000000U
+@end verbatim
+
+@noindent
+Rebuild the program and then download and debug.
 
 @noindent
 The IAR Embedded Workbench will display a warning message about the
@@ -190,15 +212,33 @@ Expand @code{IPSR}. What is the value of @code{IPSR}? What is the value of
 @code{Exception Number} under @code{IPSR}?
 
 @c SUBSECTION
-@subsection Experiment 2
+@subsection Modify Initial PC 2
 @noindent
 Now try replacing @code{__iar_program_start} with @code{0xFFFF.FFFF}. Rebuild
 the program. Then download and debug. Your program should be stopped at the
 correct breakpoint on @code{main} now.
 
 @c SUBSECTION
-@subsection Experiment 2
+@subsection Relocate Your Program
 @noindent
+See @cite{2.4 Memory Model} in @ref{Reference Material} for
+details on RAM.
+
+@noindent
+Return now to the first program. Rebuild, then download and debug. Locate your
+program in the Memory View. It should be very small. Locate a suitable section
+of RAM and copy your program there. Should it start on an even word boundary?
+Once you copy your program, enter the new memory location into the @code{PC}
+register. Single step through your program in it's new location.
+
+@noindent
+Are the instructions executed as before? Describe what happens in the @code{PC}
+register.
+
+@c SECTION
+@section Minimum Viable Executable
+@noindent
+We can strip down the previous program as follows:
 
 @verbatim
         PUBLIC  __iar_program_start
@@ -207,13 +247,15 @@ correct breakpoint on @code{main} now.
         THUMB
 
 __iar_program_start
-        B        main
-
-main    NOP
-        B        main
+        B        .
 
         END
 @end verbatim
+
+@noindent
+Replace your previous code with the code listing above. Compile and begin
+debugging. You will again see the @code{__vector_table} warning. Just click
+through. What is your program doing?
 
 @c CHAPTER
 @node Lab Report
@@ -223,19 +265,40 @@ Write a report of your experience with this lab exercise. Include meaningful
 observations that you have made. As you do so, keep in mind that the focus of
 this course is @emph{Computer Architecture}.
 
-@c SECTION
-@section Questions To Address
+@noindent
+The primary objective of this lab exercise is to demonstrate the Stellaris
+LaunchPad boot loading process. Explain the process.
 
 @noindent
-What happened when the executable instructions were located at @code{0x0000.0000}
+In your reports, consider each of the experiments. What was the experiment
+intended to illustrate? How did it work for you? Did you have any trouble?
+How large was each program in bytes?
+
+@noindent
+As you write your report, channel
+@uref{http://www.joelonsoftware.com/articles/GuerrillaInterviewing3.html,Joel Spolsky}
+and explain your ideas in terms a non-CS student can understand. Write
+your report so that it flows naturally. Do not simply enumerate a list of
+answers to the questions below. Address some of your own observations that
+do not appear in the list.
+
+@noindent
+Questions that you should be answered in your report:
+
+@enumerate
+@item What is a register?
+@item What is the Program Counter and what is the PC register?
+@item What is the Stack Pointer and what is the SP register?
+@item What is an IPSR? What is the IPSR register?
+@item What is a fault?
+@item What is the correct approach to handling a fault condition?
+@item Can you make the processor stop executing instructions? Explain?
+@item What happened when the executable instructions were located at @code{0x0000.0000}
 where the Stack Pointer is expected to be found.
-
-@noindent
-When the flash memory at @code{0x0000.0004} contained @code{0xFFFF.FFFF},
+@item When the flash memory at @code{0x0000.0004} contained @code{0xFFFF.FFFF},
 the TM4C did not behave as the data sheet describes. Speculate on why.
-
-@noindent
-Relate your experience with this exercise to the subject of Computer
+@item Relate your experience with this exercise to the subject of Computer
 Architecture.
+@end enumerate
 
 @bye
