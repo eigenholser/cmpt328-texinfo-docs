@@ -247,7 +247,7 @@ We can strip down the previous program as follows:
         THUMB
 
 __iar_program_start
-        B        .
+        B        .          ; Loop forever
 
         END
 @end verbatim
