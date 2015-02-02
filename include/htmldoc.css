@@ -46,8 +46,8 @@ a:link {
   color: #47156A;
 }
 a:visited {
-  #color: #be9c6e;
-  color: #47156A;
+  color: #be9c6e;
+  #color: #47156A;
 }
 a:active { color: red; }
 pre.display { font-size: 115% }
