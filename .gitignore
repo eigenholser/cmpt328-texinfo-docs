@@ -1,0 +1,20 @@
+# Artifacts from the doc make process
+*.aux
+*.cp
+*.db
+*.fn
+*.html
+*.info
+*.ky
+*.log
+*.pdf
+*.pg
+*.texi.updated
+*.toc
+*.tp
+*.txt
+*.vr
+*.xml
+
+# Vim
+*.swp
