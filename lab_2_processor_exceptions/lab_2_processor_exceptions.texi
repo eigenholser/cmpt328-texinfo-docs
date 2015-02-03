@@ -51,33 +51,74 @@
 
 @comment This is the Chapter Menu
 @menu
+* Introduction::            Introduction
 * Lab Objective::           Lab Objective
 * Notes::                   Notes
 * Experiments::             Experiments
 * Lab Report::              Lab Report
 @end menu
 
+@node Introduction
+@chapter Introduction
+@noindent
+Lab 2 will build on your familiarity with the development environment and
+first experience programming the LaunchPad in @uref{https://westminster.instructure.com/courses/1487106/files/folder/Labs?preview=63874338, Lab 1}. It will expand the
+complexity and functionality of the programming project.
+
 @node Lab Objective
 @chapter Lab Objective
 @noindent
-In this lab we will learn what processor exceptions are and how to handle them.
+In this lab you will learn what processor exceptions are and how they are
+handled. The scope will include the following:
+
+@itemize
+@item How the processor handles fault conditions.
+@item How the processor manages the stack.
+@item Understanding vector table in more detail than in @uref{https://westminster.instructure.com/courses/1487106/files/folder/Labs?preview=63874338,Lab 1}.
+@item Understanding context switching.
+@end itemize
+
+@noindent
+You will also understand that the data sheet is an indispensable resource for
+understanding the functionality of the LaunchPad.
 
 @node Notes
 @chapter Notes
 @noindent
+At this point you should be getting familiar with your development environment.
+This should mean less technical support problems and more focus on the
+experiments.
+
+@noindent
+Be sure to connect your USB cable to the debug port on the LaunchPad. Also
+confirm that the switch is in the debug position.
+
+@section Reference Material
+@noindent
+@uref{https://westminster.instructure.com/files/62246649/download?download_frd=1&verifier=hkiu21FqwDA10ZbhaXkJGY4SDvWC55QpRD9xEpo7, Tiva TM4C123GH6PM Microcontroller Data Sheet}
+will be referenced often in this and future labs. It is in the Canvas Files
+area filed under Tiva C Series Microcontroller. The filename is
+@file{tm4c123gh6pm.pdf}. Please download this file to your computer.
+
+@noindent
+Refer to the following in the TM4C data sheet.
 @itemize
-@item Reference processor interrupts table in the data sheet.
+@item @cite{2.3.2 Stacks} on page 74.
+@item @cite{2.5.4 Vector Table} on page 107.
+@item @cite{2.5.7.1 Exception Entry} on page 109.
 @end itemize
 
 @node Experiments
 @chapter Experiments
 @noindent
-Download the @uref{https://westminster.instructure.com/files/63918170/download?download_frd=1&verifier=F9hNR6hKu5bcFRjpuKXZ3SHnzheig9S6qDRtE3Ev, Lab 2 Project}. It is a zip file that will extract
-into it's own directory. It is an IAR Embedded Workbench project. Start the
-IAR Embedded Workbench by double-clicking on the @file{workspace.eww} file.
+Download the
+@uref{https://westminster.instructure.com/files/63918170/download?download_frd=1&verifier=F9hNR6hKu5bcFRjpuKXZ3SHnzheig9S6qDRtE3Ev, Lab 2 Project}.
+It is a zip file that will extract into it's own directory. It is an IAR
+Embedded Workbench project. Choose a location and extract the project.
 
 @noindent
-Review the code. It is well commented. Notice the familiar parts from Lab 1.
+Review the code. It is well commented. Notice the familiar parts from
+@uref{https://westminster.instructure.com/courses/1487106/files/folder/Labs?preview=63874338,Lab 1}.
 You should recognize the first two items in the vector table from the project
 in lab 1. The stack pointer is now set just a bit differently but it is still
 the same value.
@@ -88,8 +129,94 @@ of processor exceptions. Each of the symbols is resolved to a memory location
 by the linker at compile time. Each one of the fault handlers is attached to a
 single instruction @code{B .} that loops forever.
 
+@section Run The Code
+@noindent
+Start the IAR Embedded Workbench by double-clicking on the @file{workspace.eww}
+file. Build the executable and then download and debug. Execution will stop at
+the location of @code{main}.
+
+@noindent
+Carefully review the data sheet @cite{2.5.7.1 Exception Entry} section to
+familiarize yourself with the process of context switching on interrupt
+handling. Note the contents of your registers in the register view.
+
+@noindent
+Single step through the code until the processor exception is triggered. Step
+into the fault handler. Again note the contents of your registers in the
+register view. In particular, note the value of the @code{SP} register.
+
+@noindent
+In the memory view, click into the @emph{Go To} field and enter the value of
+the @code{SP} register. This is known as the top of the stack. Compare the
+contents of the stack in RAM with the register contents of your registers
+you noted prior to the processor exception being triggered.
+
+@noindent
+Read the data sheet @cite{2.3.2 Stacks} section to understand how the processor
+uses the stack.
+
+@section Create HardFault Handler
+@noindent
+If you are not still running your code in the debugger, again select Download
+and Debug. Execution will stop at @code{main}. Leave it there.
+
+@noindent
+Carefully review @cite{2.5.4 Vector Table} on page 107 of the data sheet. In
+the memory view, click into the @emph{Go To} field and enter @code{0x0} to
+view the beginning of flash memory. You will be looking for the vector table.
+Make a note of each 4-byte value in the vector table that corresponds to the
+vector table in your source code. You will begin with the Stack Pointer at
+@code{0x0000}, Reset at @code{0x0004}, etc@dots{}
+
+@noindent
+Note at this point that each of the entries in the vector table that correspond
+to fault handlers are pointing to the same location in memory. We will change
+that. Stop debugging.
+
+@noindent
+To illustrate how the processor handles interrupts using the vector table,
+break out @code{HardFault_Handler} from the other fault handlers that are
+all grouped together. The following diff shows how it is done:
+
+@verbatim
+--- a/lab_2-processor_exceptions/main.s
++++ b/lab_2-processor_exceptions/main.s
+@@ -35,7 +35,6 @@ __iar_program_start
+
+ ; Processor Exception Handlers. Attach them all to this loop.
+ NMI_Handler
+-HardFault_Handler
+ MemManage_Handler
+ BusFault_Handler
+ UsageFault_Handler
+@@ -46,6 +45,9 @@ SysTick_Handler
+         B       .               ; Loop here forever.
+                                 ; Now look at the stack!
+
++HardFault_Handler
++        B       .               ; Handle this separately
++
+ ; The main loop.
+ main    NOP                     ; Just for ease of editing.
+         BL      CauseMemFault   ; Note the SP register
+@end verbatim
+@c New experiment. Break out the Hard Fault handler from the rest. Do it again.
+
+@noindent
+Rebuild your code. Then download and debug. Single-step through the code in the
+disassembly window until the hard fault is once again triggered. The new
+@code{HardFault_Handler} code should now be executing.
+
 @node Lab Report
 @chapter Lab Report
 @noindent
+Write a lab report that explains what you did and learned. Explain how the
+processor is designed to handle fault conditions. Explain the vector table.
+How does the stack work. What is context switching? What does the point and
+how does it work?
+
+@noindent
+And, as always, let's keep the focus on the subject of Computer Architecture.
+How does this lab relate to Computer Architecture?
 
 @bye
