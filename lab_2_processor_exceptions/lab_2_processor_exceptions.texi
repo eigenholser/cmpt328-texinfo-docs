@@ -65,10 +65,28 @@ In this lab we will learn what processor exceptions are and how to handle them.
 @node Notes
 @chapter Notes
 @noindent
+@itemize
+@item Reference processor interrupts table in the data sheet.
+@end itemize
 
 @node Experiments
 @chapter Experiments
 @noindent
+Download the @uref{https://westminster.instructure.com/files/63918170/download?download_frd=1&verifier=F9hNR6hKu5bcFRjpuKXZ3SHnzheig9S6qDRtE3Ev, Lab 2 Project}. It is a zip file that will extract
+into it's own directory. It is an IAR Embedded Workbench project. Start the
+IAR Embedded Workbench by double-clicking on the @file{workspace.eww} file.
+
+@noindent
+Review the code. It is well commented. Notice the familiar parts from Lab 1.
+You should recognize the first two items in the vector table from the project
+in lab 1. The stack pointer is now set just a bit differently but it is still
+the same value.
+
+@noindent
+Notice the new entries in the vector table. Refer to the data sheet for a list
+of processor exceptions. Each of the symbols is resolved to a memory location
+by the linker at compile time. Each one of the fault handlers is attached to a
+single instruction @code{B .} that loops forever.
 
 @node Lab Report
 @chapter Lab Report
