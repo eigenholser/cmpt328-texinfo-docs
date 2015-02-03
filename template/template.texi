@@ -9,6 +9,7 @@
 @set filename __FILENAME__
 
 @comment %**start of header
+@setchapternewpage off
 @setfilename @value{filename}.info
 @settitle @value{title}
 @finalout
