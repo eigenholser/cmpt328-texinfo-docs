@@ -1,6 +1,6 @@
 @copying
 
-This lab was written for the Westminster College Computer Architecture course
+This lab was written for the Westminster College CMPT 328 Computer Architecture course
 Spring 2015 semester.
 
 Last Modified: @value{UPDATED}
