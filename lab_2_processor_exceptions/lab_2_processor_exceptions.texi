@@ -1,7 +1,7 @@
 \input texinfo   @c -*-texinfo-*-
 
 @set title Lab 2: Processor Exceptions
-@set subtitle Computer Architecture
+@set subtitle CMPT 328 Computer Architecture
 @set splash1 lab_2_processor_exceptions-splash.texi
 @set splash2 westminster-splash.texi
 @set author Scott Overholser
