@@ -76,6 +76,7 @@ handled. The scope will include the following:
 @item How the processor manages the stack.
 @item Understanding vector table in more detail than in @uref{https://westminster.instructure.com/courses/1487106/files/folder/Labs?preview=63874338,Lab 1}.
 @item Understanding context switching.
+@item Introduce clock gating.
 @end itemize
 
 @noindent
@@ -93,6 +94,10 @@ experiments.
 Be sure to connect your USB cable to the debug port on the LaunchPad. Also
 confirm that the switch is in the debug position.
 
+@noindent
+Take notes of your results and observations as you proceed. These notes should
+be used as you write your lab report.
+
 @section Reference Material
 @noindent
 @uref{https://westminster.instructure.com/files/62246649/download?download_frd=1&verifier=hkiu21FqwDA10ZbhaXkJGY4SDvWC55QpRD9xEpo7, Tiva TM4C123GH6PM Microcontroller Data Sheet}
@@ -106,6 +111,7 @@ Refer to the following in the TM4C data sheet.
 @item @cite{2.3.2 Stacks} on page 74.
 @item @cite{2.5.4 Vector Table} on page 107.
 @item @cite{2.5.7.1 Exception Entry} on page 109.
+@item @cite{Register 60: General-Purpose Input/Output Run Mode Clock Gating Control (RCGCGPIO), offset 0x608} on page 340.
 @end itemize
 
 @node Experiments
@@ -200,12 +206,80 @@ all grouped together. The following diff shows how it is done:
  main    NOP                     ; Just for ease of editing.
          BL      CauseMemFault   ; Note the SP register
 @end verbatim
-@c New experiment. Break out the Hard Fault handler from the rest. Do it again.
 
 @noindent
 Rebuild your code. Then download and debug. Single-step through the code in the
 disassembly window until the hard fault is once again triggered. The new
-@code{HardFault_Handler} code should now be executing.
+@code{HardFault_Handler} code should now be executing. Does this confirm the
+function of the vector table?
+
+@noindent
+Exit IAR Embedded Workbench. Delete your lab 2 project directory and extract
+again from the zip file you downloaded earlier.
+
+@section Run Mode Clock Gating
+@noindent
+Double click on the @file{workspace.eww} file in the lab 2 project you
+extracted at the end of the last experiment. Apply the changes described
+in the following diff:
+
+@verbatim
+--- a/lab_2-processor_exceptions/main.s
++++ b/lab_2-processor_exceptions/main.s
+@@ -48,6 +48,7 @@ SysTick_Handler
+
+ ; The main loop.
+ main    NOP                     ; Just for ease of editing.
++        BL      GPIOF_Enable
+         BL      CauseMemFault   ; Note the SP register
+         B       main
+
+@@ -60,7 +61,15 @@ CauseMemFault
+         NOP                     ; Pause, wait for it...!
+         BX      LR              ; Return to caller
+
++GPIOF_Enable
++        LDR     R0, rcgcgpio
++        MOVS    R1, #0x00U      ; Replace this with the correct value
++        STR     R1, [R0]        ; In memory view, goto 0x40025000 before execute
++        BX      LR
++
+         DATA
+ datF    DC32    0x400253FCU     ; GPIOF data all bits
++rcgcgpio
++        DC32    0x400FE608U     ; GPIO Run Mode Clock Gating Register
+
+         END
+@end verbatim
+
+@noindent
+Carefully review the new code that you have just added to @file{main.s} in
+your lab 2 project. Note the instruction that is commented with ``Replace
+this with the correct value.'' You will be reading the data sheet and
+determining the value to use in that @code{MOVS} operand.
+
+@noindent
+Study the RCGCGPIO register description On page 340 of the TM4C data sheet.
+This describes how to enable GPIO Port F. Once you understand how to program
+the RCGCGPIO register to enable GPIO Port F, return to your program and enter
+that value in place of @code{0x00} on the line referenced above.
+
+@noindent
+Rebuild your code. Then download and debug. Single-step through the code in the
+disassembly window until you reach the @code{STR} instruction with the comment
+``In memory view, goto 0x40025000 before execute.'' Before continuing in
+the debugger, go to the memory view, click inside the @emph{Go To} field and
+enter @code{0x40025000}.
+
+@noindent
+Now click step-into and execute the @code{STR R1, [R0]} instruction while
+observing the memory view window. What happens?
+
+@noindent
+Continue single stepping through your code in the disassembly view until you
+return to the @code{CauseMemFault} section of code. Watch carefully as you
+single step through the code. What happens?
+
 
 @node Lab Report
 @chapter Lab Report
@@ -214,6 +288,11 @@ Write a lab report that explains what you did and learned. Explain how the
 processor is designed to handle fault conditions. Explain the vector table.
 How does the stack work. What is context switching? What does the point and
 how does it work?
+
+@noindent
+Finishing off with clock gating sets the stage for the next lab. You should
+now understand why the hard fault was caused in the first two experiments
+but not in the last. Explain this in your lab report.
 
 @noindent
 And, as always, let's keep the focus on the subject of Computer Architecture.
