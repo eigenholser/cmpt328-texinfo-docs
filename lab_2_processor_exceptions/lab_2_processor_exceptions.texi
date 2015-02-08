@@ -117,10 +117,11 @@ Refer to the following in the TM4C data sheet.
 @node Experiments
 @chapter Experiments
 @noindent
-Download the
-@uref{https://westminster.instructure.com/files/63918170/download?download_frd=1&verifier=F9hNR6hKu5bcFRjpuKXZ3SHnzheig9S6qDRtE3Ev, Lab 2 Project}.
-It is a zip file that will extract into it's own directory. It is an IAR
-Embedded Workbench project. Choose a location and extract the project.
+Download the three lab 2 zip files Canvas files area in the Labs folder.
+@comment @uref{https://westminster.instructure.com/files/63918170/download?download_frd=1&verifier=F9hNR6hKu5bcFRjpuKXZ3SHnzheig9S6qDRtE3Ev, Lab 2 Project}.
+They are zip files that will extract into their own directories. Each is an IAR
+Embedded Workbench project. They have only minor differences.
+Choose a location and extract the projects.
 
 @noindent
 Review the code. It is well commented. Notice the familiar parts from
@@ -135,7 +136,7 @@ of processor exceptions. Each of the symbols is resolved to a memory location
 by the linker at compile time. Each one of the fault handlers is attached to a
 single instruction @code{B .} that loops forever.
 
-@section Run The Code
+@section Generic Fault Handler
 @noindent
 Start the IAR Embedded Workbench by double-clicking on the @file{workspace.eww}
 file. Build the executable and then download and debug. Execution will stop at
@@ -164,8 +165,8 @@ uses the stack.
 
 @section Create HardFault Handler
 @noindent
-If you are not still running your code in the debugger, again select Download
-and Debug. Execution will stop at @code{main}. Leave it there.
+Switch to the Lab 2-02 project. Compile the project. Then download and debug.
+Execution will stop at @code{main}. Leave it there for now.
 
 @noindent
 Carefully review @cite{2.5.4 Vector Table} on page 107 of the data sheet. In
@@ -187,29 +188,6 @@ To illustrate how the processor handles interrupts using the vector table,
 break out @code{HardFault_Handler} from the other fault handlers that are
 all grouped together. The following diff shows how it is done:
 
-@verbatim
---- a/main.s
-+++ b/main.s
-@@ -35,7 +35,6 @@ __iar_program_start
-
- ; Processor Exception Handlers. Attach them all to this loop.
- NMI_Handler
--HardFault_Handler
- MemManage_Handler
- BusFault_Handler
- UsageFault_Handler
-@@ -46,6 +45,9 @@ SysTick_Handler
-         B       .               ; Loop here forever.
-                                 ; Now look at the stack!
-
-+HardFault_Handler
-+        B       .               ; Handle this separately
-+
- ; The main loop.
- main    NOP                     ; Just for ease of editing.
-         BL      CauseMemFault   ; Note the SP register
-@end verbatim
-
 @noindent
 Rebuild your code. Then download and debug. Single-step through the code in the
 disassembly window until the hard fault is once again triggered. The new
@@ -217,45 +195,16 @@ disassembly window until the hard fault is once again triggered. The new
 function of the vector table?}
 
 @noindent
-Stop debugging. Continue with the experiment in the next section.
+Stop debugging. Close IAR Embedded Workbench.
 
 @section Run Mode Clock Gating
 @noindent
-This experiment applies changes that are based on the changes you made in the
-last section. Apply the new changes described in the following diff:
-
-@verbatim
---- a/main.s
-+++ b/main.s
-@@ -50,6 +50,7 @@ HardFault_Handler
-
- ; The main loop.
- main    NOP                     ; Just for ease of editing.
-+        BL      GPIOF_Enable    ; Enable GPIOF first
-         BL      CauseMemFault   ; Note the SP register
-         B       main
-
-@@ -62,7 +63,14 @@ CauseMemFault
-         NOP                     ; Pause, wait for it...!
-         BX      LR              ; Return to caller
-
-+GPIOF_Enable
-+        LDR     R0, SYSCTL_RCGCGPIO_R   ; Clock gating register
-+        MOVS    R1, #0x00U              ; Replace this with the correct value
-+        STR     R1, [R0]                ; In memory view, goto 0x40025000
-+        BX      LR                      ; before execute
-+
-         DATA
-+SYSCTL_RCGCGPIO_R         DC32    0x400FE608U     ; Run mode clock gating
- GPIO_PORTF_DATA_BITS_R    DC32    0x400253FCU     ; GPIOF data all bits
-
-         END
-@end verbatim
+Switch to the lab 2-03 project. Compile the project. Then download and debug.
+Execution will stop at @code{main}. Leave it there for now.
 
 @noindent
-Carefully review the new code that you have just added to @file{main.s} in
-your lab 2 project. Note the instruction that is commented with ``Replace
-this with the correct value.'' You will be reading the data sheet and
+Carefully review the new code. Note the instruction that is commented with
+``Replace this with the correct value.'' You will be reading the data sheet and
 determining the value to use in that @code{MOVS} operand.
 
 @noindent
