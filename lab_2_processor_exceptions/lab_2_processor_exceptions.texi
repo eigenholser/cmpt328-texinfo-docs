@@ -155,7 +155,8 @@ register view. In particular, note the value of the @code{SP} register.
 In the memory view, click into the @emph{Go To} field and enter the value of
 the @code{SP} register. This is known as the top of the stack. Compare the
 contents of the stack in RAM with the register contents of your registers
-you noted prior to the processor exception being triggered.
+you noted prior to the processor exception being triggered. @emph{Report
+what you learned here in your lab report. Include your observations.}
 
 @noindent
 Read the data sheet @cite{2.3.2 Stacks} section to understand how the processor
@@ -173,8 +174,8 @@ looking for the vector table. The IAR Embedded Workbench will helpfully have
 put each of the labels next to the value in each 4-byte location.
 Make a note of each 4-byte value in the vector table that corresponds to the
 vector table in your source code. You will begin with the Stack Pointer at
-@code{0x0000}, Reset at @code{0x0004}, etc@dots{} Include this table in your
-lab report.
+@code{0x0000}, Reset at @code{0x0004}, etc@dots{} @emph{Include this table in your
+lab report.}
 
 @noindent
 Note at this point that each of the entries in the vector table that correspond
@@ -187,8 +188,8 @@ break out @code{HardFault_Handler} from the other fault handlers that are
 all grouped together. The following diff shows how it is done:
 
 @verbatim
---- a/lab_2-processor_exceptions/main.s
-+++ b/lab_2-processor_exceptions/main.s
+--- a/main.s
++++ b/main.s
 @@ -35,7 +35,6 @@ __iar_program_start
 
  ; Processor Exception Handlers. Attach them all to this loop.
@@ -212,44 +213,41 @@ all grouped together. The following diff shows how it is done:
 @noindent
 Rebuild your code. Then download and debug. Single-step through the code in the
 disassembly window until the hard fault is once again triggered. The new
-@code{HardFault_Handler} code should now be executing. Does this confirm the
-function of the vector table?
+@code{HardFault_Handler} code should now be executing. @emph{Does this confirm the
+function of the vector table?}
 
 @noindent
-Exit IAR Embedded Workbench. Delete your lab 2 project directory and extract
-again from the zip file you downloaded earlier.
+Stop debugging. Continue with the experiment in the next section.
 
 @section Run Mode Clock Gating
 @noindent
-Double click on the @file{workspace.eww} file in the lab 2 project you
-extracted at the end of the last experiment. Apply the changes described
-in the following diff:
+This experiment applies changes that are based on the changes you made in the
+last section. Apply the new changes described in the following diff:
 
 @verbatim
---- a/lab_2-processor_exceptions/main.s
-+++ b/lab_2-processor_exceptions/main.s
-@@ -48,6 +48,7 @@ SysTick_Handler
+--- a/main.s
++++ b/main.s
+@@ -50,6 +50,7 @@ HardFault_Handler
 
  ; The main loop.
  main    NOP                     ; Just for ease of editing.
-+        BL      GPIOF_Enable
++        BL      GPIOF_Enable    ; Enable GPIOF first
          BL      CauseMemFault   ; Note the SP register
          B       main
 
-@@ -60,7 +61,15 @@ CauseMemFault
+@@ -62,7 +63,14 @@ CauseMemFault
          NOP                     ; Pause, wait for it...!
          BX      LR              ; Return to caller
 
 +GPIOF_Enable
-+        LDR     R0, rcgcgpio
-+        MOVS    R1, #0x00U      ; Replace this with the correct value
-+        STR     R1, [R0]        ; In memory view, goto 0x40025000 before execute
-+        BX      LR
++        LDR     R0, SYSCTL_RCGCGPIO_R   ; Clock gating register
++        MOVS    R1, #0x00U              ; Replace this with the correct value
++        STR     R1, [R0]                ; In memory view, goto 0x40025000
++        BX      LR                      ; before execute
 +
          DATA
- datF    DC32    0x400253FCU     ; GPIOF data all bits
-+rcgcgpio
-+        DC32    0x400FE608U     ; GPIO Run Mode Clock Gating Register
++SYSCTL_RCGCGPIO_R         DC32    0x400FE608U     ; Run mode clock gating
+ GPIO_PORTF_DATA_BITS_R    DC32    0x400253FCU     ; GPIOF data all bits
 
          END
 @end verbatim
@@ -264,7 +262,8 @@ determining the value to use in that @code{MOVS} operand.
 Study the RCGCGPIO register description On page 340 of the TM4C data sheet.
 This describes how to enable GPIO Port F. Once you understand how to program
 the RCGCGPIO register to enable GPIO Port F, return to your program and enter
-that value in place of @code{0x00} on the line referenced above.
+that value in place of @code{0x00} on the line referenced above. @emph{Be
+sure to include a summary of this process in your lab report.}
 
 @noindent
 Rebuild your code. Then download and debug. Single-step through the code in the
@@ -275,12 +274,12 @@ enter @code{0x40025000}.
 
 @noindent
 Now click step-into and execute the @code{STR R1, [R0]} instruction while
-observing the memory view window. What happens?
+observing the memory view window. @emph{What happens?}
 
 @noindent
 Continue single stepping through your code in the disassembly view until you
 return to the @code{CauseMemFault} section of code. Watch carefully as you
-single step through the code. What happens?
+single step through the code. @emph{What happens?}
 
 
 @node Lab Report
@@ -294,8 +293,8 @@ missed anything.
 @noindent
 Write a lab report that explains what you did and learned. Explain how the
 processor is designed to handle fault conditions. Explain the vector table.
-How does the stack work. What is context switching? What does the point and
-how does it work?
+How does the stack work. What is context switching? What is the point of
+context switching and how does it work?
 
 @noindent
 Finishing off with clock gating sets the stage for the next lab. You should
