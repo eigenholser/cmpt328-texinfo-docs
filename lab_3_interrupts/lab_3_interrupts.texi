@@ -1,0 +1,190 @@
+\input texinfo   @c -*-texinfo-*-
+
+@set title Lab 3: Interrupts
+@set subtitle CMPT 328 Computer Architecture
+@set splash1 lab_3_interrupts-splash.texi
+@set splash2 westminster-splash.texi
+@set author Scott Overholser
+@set category Laboratory
+@set filename lab_3_interrupts
+
+@comment %**start of header
+@setchapternewpage off
+@setfilename @value{filename}.info
+@settitle @value{title}
+@finalout
+@comment %**end of header
+
+@include @value{filename}.texi.updated
+@include copying.texi
+
+@titlepage
+@title @value{title}
+@subtitle @value{subtitle}
+@include @value{splash1}
+@author @value{author}
+
+@c Secondary title page.
+@page
+@include @value{splash2}
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@comment Table of Contents
+@contents
+
+@dircategory @value{category}
+@direntry
+* Texinfo Doc Template         Template for Creating New Docs
+@end direntry
+
+@include headings.texi
+@include constants.texi
+
+@ifnottex
+@node Top
+@top @value{title}
+
+@insertcopying
+@end ifnottex
+
+@comment This is the Chapter Menu
+@menu
+* Introduction::            Introduction
+* Lab Objective::           Lab Objective
+* Notes::                   Notes
+* Experiments::             Experiments
+* Lab Report::              Lab Report
+@end menu
+
+@comment This is a starting point.
+@node Introduction
+@chapter Introduction
+@noindent
+In Lab 2 we learned about fault conditions, the resulting processor exceptions,
+and how to handle them. Interrupts are similar in that program execution is
+abruptly changed and the location of the Interrupt Service Routine (ISR), like
+the fault handler, is specified in the @emph{vector table}. The difference is
+that interrupts are configurable to suit our purposes.
+
+@noindent
+For Lab 3 we will examine an assembly language program that uses two different
+interrupts. An edge-triggered interrupt is configured for GPIO port F switch
+SW1. Another interrupt is configured for the SysTick timer that is used in
+debouncing the switch.
+
+@noindent
+Lab 3 also introduces the @file{startup.s} file that provides a complete
+@emph{vector table} for our program. This file will be used with only minor
+modifications in all future assembly projects. You can consider it largely
+@emph{boilerplate} code.
+
+@noindent
+Incidentally, this lab also introduces a fully functional example of how to
+work with the GPIO ports. We will be working with GPIO port F. Even though
+each GPIO port offers different features and has it's own configuration, they
+are all very similar in terms of usage. The LaunchPad has 6 GPIO ports, A---F.
+
+@noindent
+The program we will be working with in this lab activates one of the three
+LEDs when switch SW1 is pushed. Each push of the switch is handled by the two
+different ISRs which together cooperate to process the switch SW1 interrupt
+and rotate the active LED.
+
+@noindent
+The switch SW1 is a mechanical switch and is imperfect---it bounces one or
+more times when pressed. These bounces are very short on the 1ms time scale.
+So humans do not notice this. We experience a crisp click as we press the
+button. But the processor at a clock speed of 80MHz cycles about one hundred
+thousand times each millisecond and notices each bounce and acts on it. The
+result is multiple LED rotations for each press of switch SW1.
+
+@noindent
+The solution to this problem is to implement a debouncing algorithm. I chose
+the SysTick timer to implement debouncing. The basic idea is to have the GPIO
+port F ISR turn off interrupts on GPIO port F and initialize the SysTick timer
+with interrupts. The SysTick interrupt handler is activated and checks the
+switch SW1 value. If it is logic LOW, then the switch SW1 is pressed and the
+LED colors are rotated. If switch SW1 value is logic HIGH, then re-arm the
+GPIO port F interrupt and carry on as before. In either case, the SysTick ISR
+disables the SysTick timer.
+
+@node Lab Objective
+@chapter Lab Objective
+@noindent
+This lab will explore interrupts, what they are, and how to use them.
+Interrupts are an important part of modern processor architecture. Secondarily,
+you will learn how to use the General Purpose Input/Output (GPIO) system.
+
+@noindent
+You will be introduced to the LaunchPad schematic in the
+@uref{https://westminster.instructure.com/files/62246648/download?download_frd=1&verifier=4ckiiqMaZjgvEiJdL2KBeiKBlUvQgrtvoq1e4lkF, TM4C123G LaunchPad Evaluation Board Users Guide.}
+This will help you understand how to use the GPIO.
+You will continue learning how to use the
+@uref{https://westminster.instructure.com/files/62246649/download?download_frd=1&verifier=hkiu21FqwDA10ZbhaXkJGY4SDvWC55QpRD9xEpo7, Tiva TM4C123GH6PM Microcontroller Data Sheet}
+as a reference.
+
+@node Notes
+@chapter Notes
+@noindent
+You should now be familiar with your IAR Embedded Workbench development
+environment. You should also be understanding the @emph{boot loading} process
+and the purpose of the @emph{vector table}. You should also be comfortable
+referencing the TM4C datasheet.
+
+@section Reference Material
+@noindent
+@uref{https://westminster.instructure.com/files/62246649/download?download_frd=1&verifier=hkiu21FqwDA10ZbhaXkJGY4SDvWC55QpRD9xEpo7, Tiva TM4C123GH6PM Microcontroller Data Sheet}
+will be referenced often in this and future labs. It is in the Canvas Files
+area filed under Tiva C Series Microcontroller. The filename is
+@file{tm4c123gh6pm.pdf}.
+
+@noindent
+This lab exercise introduces the
+@uref{https://westminster.instructure.com/files/62246648/download?download_frd=1&verifier=4ckiiqMaZjgvEiJdL2KBeiKBlUvQgrtvoq1e4lkF, TM4C123G LaunchPad Evaluation Board Users Guide.}
+It is in the Canvas Files area in the Tiva C Series Microcontroller folder. The
+filename is @file{spmu296.pdf}. Download this file to your computer.
+
+@noindent
+The User's Guide  is useful primarily for the schematics at the end of the
+document. The schematics offer information about the configuration of the GPIO
+pins, switches, LEDs, and jumper blocks. You will need to reference the
+schematic for this and future labs.
+
+@noindent
+Also refer to @file{lm4f120h5qr.h} in the @file{arm/inc/TexasInstruments}
+folder on your development system. This is a C header file that contains
+useful C macro definitions for the TM4C.
+
+@itemize
+@item @cite{2.3.2 Stacks}---datasheet, p74.
+@item @cite{2.5.4 Vector Table}---datasheet, p107.
+@item @cite{2.5.7.1 Exception Entry}---datasheet, p109.
+@item @cite{Register 1: SysTick Control and Status Register (STCTRL), offset 0x010}---datasheet, p138.
+@item @cite{Register 2: SysTick Reload Value Register (STRELOAD), offset 0x014}---datasheet, p140.
+@item @cite{Register 3: SysTick Current Value Register (STCURRENT), offset 0x018}---datasheet, p141.
+@item @cite{Register 4: Interrupt 0-31 Set Enable (EN0), offset 0x100}---datasheet, p142.
+@item @cite{Register 32: Interrupt 12-15 Priority (PRI3), offset 0x40C}---datasheet, p152.
+@item @cite{Register 36: Interrupt 28-31 Priority (PRI7), offset 0x41C}---datasheet, p152.
+@item @cite{Register 9: GPIO High-Performance Bus Control (GPIOHBCTL), offset 0x06C}---datasheet, p258.
+@item @cite{Register 60: General-Purpose Input/Output Run Mode Clock Gating Control (RCGCGPIO), offset 0x608}---datasheet, p340.
+@item @cite{10.4 Register Map}---datasheet, p658.
+@item @cite{Table 10-6. GPIO Register Map}---datasheet, p660.
+@item @cite{Register 2: GPIO Direction (GPIODIR), offset 0x400}---datasheet, p663.
+@item @cite{Register 6: GPIO Interrupt Mask (GPIOIM), offset 0x410}---datasheet, p667.
+@item @cite{Register 9: GPIO Interrupt Clear (GPIOICR), offset 0x41C}---datasheet, p670.
+@item @cite{Register 15: GPIO Pull-Up Select (GPIOPUR), offset 0x510}---datasheet, p677.
+@item @cite{Register 18: GPIO Digital Enable (GPIODEN), offset 0x51C}---datasheet, p682
+@end itemize
+
+@node Experiments
+@chapter Experiments
+@noindent
+
+
+@node Lab Report
+@chapter Lab Report
+@noindent
+
+@bye
