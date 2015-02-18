@@ -119,9 +119,9 @@ Refer to the following in the TM4C data sheet.
 @noindent
 Download the three lab 2 zip files in the Canvas files area from the Labs folder.
 @itemize
-@item @uref{https://westminster.instructure.com/files/64127441/download?download_frd=1&verifier=33nKWbQZSrVa5wJUlE9ZZ20qPJ85agtaoTQa5ImZ, Lab 2 Project Part 1}.
-@item @uref{https://westminster.instructure.com/files/64127442/download?download_frd=1&verifier=9Sc0WPfuEtFmwhs8VZimqYhpOwuUoWARp1Ay4cfO, Lab 2 Project Part 2}.
-@item @uref{https://westminster.instructure.com/files/64127443/download?download_frd=1&verifier=cHfP0TrHyXmNJBET5dOo5Bn16DRmveb2a5ahpVII, Lab 2 Project Part 3}.
+@item @uref{https://westminster.instructure.com/files/64182342/download?download_frd=1&verifier=tERLn6srBkz2KQelpCFvvU17FgnLO1bUNUcxzo9P, Lab 2 Project Part 1}.
+@item @uref{https://westminster.instructure.com/files/64182346/download?download_frd=1&verifier=lkAMjxlTsFRCENwPWLutSEwKv2n4yaOyB6VulHSE, Lab 2 Project Part 2}.
+@item @uref{https://westminster.instructure.com/files/64182347/download?download_frd=1&verifier=bYgIN1a8rOCURvDR1ck5m5JmM3LpXAgcqVg7KoHv, Lab 2 Project Part 3}.
 @end itemize
 They are zip files that will extract into their own directories. Each is an IAR
 Embedded Workbench project. They have only minor differences.
