@@ -78,8 +78,8 @@ that interrupts are more configurable to suit our purposes.
 @noindent
 For Lab 3 we will examine an assembly language program that uses two different
 interrupts. An edge-triggered interrupt is configured for GPIO port F switch
-SW1. Another interrupt is configured for the SysTick timer that is used in
-debouncing the switch.
+SW1. Another interrupt is configured for the system timer (SysTick) that is
+used in debouncing the switch.
 
 @noindent
 Lab 3 also introduces the @file{startup.s} file that provides a complete
@@ -109,13 +109,13 @@ result is multiple LED rotations for each press of switch SW1.
 
 @noindent
 The solution to this problem is to implement a debouncing algorithm. I chose
-the SysTick timer to implement debouncing. The basic idea is to have the GPIO
-port F ISR turn off interrupts on GPIO port F and initialize the SysTick timer
+the system timer to implement debouncing. The basic idea is to have the GPIO
+port F ISR turn off interrupts on GPIO port F and initialize the system timer
 with interrupts. The SysTick interrupt handler is activated and checks the
 switch SW1 value. If it is logic LOW, then the switch SW1 is pressed and the
 LED colors are rotated. If switch SW1 value is logic HIGH, then re-arm the
 GPIO port F interrupt and carry on as before. In either case, the SysTick ISR
-disables the SysTick timer because we need it only once per SW1 activation.
+disables the system timer because we need it only once per SW1 activation.
 
 @noindent
 Note the many places in the code where register LR is pushed onto the stack
@@ -146,9 +146,9 @@ as a reference.
 @chapter Notes
 @noindent
 You should now be familiar with your IAR Embedded Workbench development
-environment. You should also be understanding the @emph{boot loading} process
-and the purpose of the @emph{vector table}. You should also be comfortable
-referencing the TM4C datasheet.
+environment. You should also understand the @emph{boot loading} process,
+the @emph{vector table}, and both general and special purpose registers.
+You should also be comfortable referencing the TM4C datasheet.
 
 @section Reference Material
 @noindent
@@ -165,14 +165,19 @@ filename is @file{spmu296.pdf}. Download this file to your computer.
 
 @noindent
 The User's Guide  is useful primarily for the schematics following page 19.
-The schematics offer information about the configuration of the GPIO
+The schematics provide information about the configuration of the GPIO
 pins, switches, LEDs, and jumper blocks. You will need to reference the
 schematic for this and future labs.
 
 @noindent
 Also refer to @file{lm4f120h5qr.h} in the @file{arm/inc/TexasInstruments}
 folder on your development system. This is a C header file that contains
-useful C macro definitions for the TM4C.
+useful C macro definitions for the TM4C. These macro names have been used
+in the assembly project for this lab.
+
+@noindent
+The following list of citations is relevant to the assembly project written for
+this lab exercise:
 
 @itemize
 @item @cite{Figure 1-1. Tiva™ TM4C123GH6PM Microcontroller High-Level Block Diagram}---datasheet, p48.
@@ -220,15 +225,16 @@ to program function at all.
 @noindent
 After initialization, the @code{main} function just loops forever. This is
 just to simulate other activity that the processor might be doing as interrupts
-occur. The other activity might be reading from a UART, an ethernet port, or
+occur. The other activity might be reading from a UART, writing to an ethernet port, or
 reading keyboard input.
 
 @section Start Program in Debugger
 @noindent
 Compile the program. Then Download and Debug. The debugger will break at @code{main}
-as usual. Click the "Go" button in the debug toolbar. It is the button with "+++"
-on it. The program will begin executing. Confirm program operation by pressing
-the button labeled SW1 on your LaunchPad board.
+as usual. Click the "Go" button on the debug toolbar. @footnote{It is the button with "+++"
+on it.} The program will begin executing. Confirm program operation by pressing
+the button labeled SW1 on your LaunchPad board. Press SW1 repeatedly and observe
+the active LED rotate through the colors green, blue, and red.
 
 @section GPIO Port F Interrupt Handler
 Stop debugging.
@@ -238,8 +244,8 @@ at line @value{gpiof_entry} and @value{gpiof_bx},
 
 @noindent
 Download and Debug. Click the "Go" button once again. The program will stop
-at the first breakpoint on line @value{main_loop_bp}. Single-step (click the
-"Step Into" button on the debug toolbar) through the @code{LDR} instructions
+at the first breakpoint on line @value{main_loop_bp}. Single-step @footnote{Click
+the "Step Into" button on the debug toolbar.} through the @code{LDR} instructions
 that load the @emph{junk} values into the registers. @emph{Note the register
 values as you do this.} You will see each update in turn. Stop single stepping
 when you reach the @code{B .} infinite loop.
@@ -266,7 +272,7 @@ their values are unchanged.
 At this point, note that @code{GPIOPortF_Handler} performs only three tasks:
 It clears the interrupt. If this is not done, the interrupt will assert over
 and over. Then it disables the SW1 interrupt. Finally it initializes the
-SysTick timer with interrupt. Program execution then resumes in the @code{main}
+system timer with interrupt. Program execution then resumes in the @code{main}
 infinite loop. Click the "Go" button in the debug toolbar.
 
 @noindent
@@ -282,23 +288,24 @@ because they are modified by the @code{GPIOF_PF4_Interrupt_Clear},
 Click the "Step Into" button on the debug toolbar. Program execution will now
 be stopped at the @code{B .} infinite loop instruction in @code{main}. @emph{
 Note both the general purpose and special purpose registers.} They now contain
-their original values once again. @emph{Note the memory view at the top of the
+their original values once again. @footnote{Note the memory view at the top of the
 stack. The stack frame has not been erased, only copied back to the registers.}
 
 @noindent
 You are ready to proceed with the next section.
 
 @section  SysTick Interrupt Handler
-The SysTick timer will
+The system timer will
 interrupt almost immediately as we click the "Go" button on the debug toolbar. Before
-we do that, in the @file{main.s} source view set a breakpoint in
-@code{SysTick_Handler} at line @value{systick_bp}. Now click the "Go" button.
+we do that, in the @file{main.s} source view, set a breakpoint in
+@code{SysTick_Handler} at line @value{systick_bp}. Now click the "Go" button
+on the debug toolbar.
 
 @noindent
-Program execution will be broken at line @value{systick_bp} in the
+Program execution will break at line @value{systick_bp} in the
 @code{SysTick_Handler}. Note that the first action taken by the @code{SysTick_Handler}
-is to disable the SysTick timer. We are done with with the timer. It is only
-for a SW1 debounce.
+is to disable the system timer. We are done with with the timer. It is used only
+for SW1 debounce.
 
 @noindent
 @emph{Note again the SP register.} The @emph{stack frame} has again been pushed
@@ -309,7 +316,7 @@ onto the stack. Since it is the same as before it will appear unchanged.
 This is where the real action occurs. The first step is to check the value of
 SW1. If it is still pressed, then it is a real button push. Keep in mind that
 at full speed, only a few milliseconds have elapsed since you pushed the button.
-But, the stray bounces have been avoided.
+But the switch bounces have been avoided.
 
 @noindent
 The second action will depend on whether SW1 is logic LOW or logic HIGH. See?
@@ -327,7 +334,7 @@ field. @emph{Since you downloaded this project you should already see the
 Watch window. The instructions are for completeness only.}
 
 @noindent
-The first time through register R1 will be zero. Step through the code anyway
+On the first button push, register R1 will be zero. Step through the code anyway
 to see how it is initialized with the green bit which is @code{0x8}. At this
 point you should see a single bit set in register R1 corresponding to @code{0x8}.
 
@@ -420,9 +427,10 @@ that you want to handle. In our case we are selecting the highest priority of
 0. Next, set the enable bit in the memory mapped register NVIC_EN0.
 
 @noindent
-Configuring the interrupt on SW1 is also easy. Edge-triggered interrupts are
-the default selection and that is what we want to nothing needs to be done for
-that. But we do need to select pull up on PF4 so the logic level is HIGH by
+Configuring the interrupt on SW1 is also easy. Edge-triggered interrupts
+@footnote{As opposed to level-triggered interrupts.} are
+the default.
+We need to select pull up on PF4 so the logic level is HIGH by
 default. Recall from the schematic that a SW1 press connects PF4 to GND. If
 we did not pull PF4 HIGH, there would be no logic level change on SW1 press.
 Last, we need to set the GPIO port F interrupt mask to select interrupts on
@@ -432,17 +440,17 @@ PF4.
 Now interrupts are fully configured in the NVIC and GPIO port F. Single-step
 through @code{GPIOF_Interrupt_Init} to familiarize yourself with it's operation.
 
-@section SysTick Timer Initialization
+@section System Timer Initialization
 @noindent
-The SysTick timer implements a simple countdown timer. The 24-bit countdown or
+The system timer implements a simple countdown timer. The 24-bit countdown or
 RELOAD value is loaded into the NVIC_ST_RELOAD register. Once enabled, the
-SysTick timer counts down from this value once per clock cycle. The current
+system timer counts down from this value once per clock cycle. The current
 value of the timer is stored in NVIC_ST_CURRENT. When the count down reaches
 zero, time is up. In our case, we setup an interrupt to be triggered when the
 count down reaches zero.
 
 @noindent
-The SysTick timer is useful because we do not need to implement it in our code.
+The system timer is useful because we do not need to implement it in our code.
 It is an automatic mechanism of the processor. If we want to implement a delay
 loop, we can just loop and wait until the NVIC_ST_CURRENT value reaches zero.
 Or, we can setup the interrupt and forget about it until the interrupt is
@@ -450,10 +458,10 @@ triggered. The latter is the approach taken in this project.
 
 @noindent
 Configuring the NVIC is the same as described earlier in GPIO Port F Interrupt
-Initialization. To configure the SysTick timer, we need to first disable the
+Initialization. To configure the system timer, we need to first disable the
 timer so it is not counting down as we are configuring it. Then the countdown
 value is loaded into the NVIC_ST_RELOAD register. The NVIC_ST_CURRENT register
-is cleared. Once fully configured, we enable the SysTick timer with interrupts.
+is cleared. Once fully configured, we enable the system timer with interrupts.
 
 @noindent
 In the source view clear all breakpoints. Set a breakpoint in @file{main.s} at
