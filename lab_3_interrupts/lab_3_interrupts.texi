@@ -477,4 +477,6 @@ specific use in this lab project. It will also cover the roles played by the
 vector table and the stack. Observations made during the experiments chapter
 will be integrated with the report.
 
+THIS SECTION IS INCOMPLETE. STAY TUNED!
+
 @bye
