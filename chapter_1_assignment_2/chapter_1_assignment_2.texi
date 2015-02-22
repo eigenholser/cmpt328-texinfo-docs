@@ -1,0 +1,2416 @@
+\input texinfo   @c -*-texinfo-*-
+
+@set title Chapter 1 Exercises
+@set subtitle CMPT 328 Computer Architecture
+@set splash1 chapter_1_assignment_2-splash.texi
+@set splash2 westminster-splash.texi
+@set author Scott Overholser
+@set category Laboratory
+@set filename chapter_1_assignment_2
+
+@comment %**start of header
+@setchapternewpage off
+@setfilename @value{filename}.info
+@settitle @value{title}
+@finalout
+@paragraphindent 0
+@comment %**end of header
+
+@c @include @value{filename}.texi.updated
+@c @include copying.texi
+
+@c @titlepage
+@c @title @value{title}
+@c @subtitle @value{subtitle}
+@c @include @value{splash1}
+@c @author @value{author}
+
+@c Secondary title page.
+@c @page
+@c @include @value{splash2}
+@c @vskip 1pt plus 1filll
+@c @insertcopying
+@c @end titlepage
+
+@comment Table of Contents
+@c @contents
+
+@c @dircategory @value{category}
+@direntry
+* Texinfo Doc Template         Template for Creating New Docs
+@end direntry
+
+@include headings.texi
+@c @include constants.texi
+
+@ifnottex
+@node Top
+@top @value{title}
+
+@insertcopying
+@end ifnottex
+
+@comment This is the Chapter Menu
+@menu
+* Chapter 1 Exercises::          Chapter 1 Exercises
+@end menu
+
+@comment This is a starting point.
+@node Chapter 1 Exercises
+@c @chapter Chapter 1 Exercises
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.8} What is the largest unsigned 32-bit binary number?
+
+@sc{solution}
+
+The largest 32-bit binary number would be a 32-digit number with 1 in every
+position. In decimal it's value is @math{2^{32}-1}. That number is
+
+@cartouche
+@result{} @math{2^{32}-1} = 4,294,967,295
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.10} What is the largest 32-bit binary number that can be
+represented with
+
+(a) Unsigned numbers? @*
+(b) Two's complement numbers?
+
+@sc{solution}
+
+@strong{(a)}
+
+See @sc{exercise 1.8}.
+
+@cartouche
+@result{} @math{2^{32}-1} = 4,294,967,295
+@end cartouche
+
+@strong{(b)}
+
+The range of a two's complement number is @math{-2^{N-1},2^{N-1}-1}. The
+largest 32-bit binary number would have a 0 in the @emph{msb} and the remaining
+digits would be 1. The decimal value is @math{2^{N-1}-1} or:
+
+@cartouche
+@result{} @math{2^{31}-1} = 2,197,483,647
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.12} What is the smallest 32-bit binary number that can be
+represented with
+
+(a) unsigned numbers? @*
+(b) two's complement numbers? @*
+
+@sc{solution}
+
+@strong{(a)}
+
+Axiomatically, the smallest unsigned number is zero. Every binary digit in the
+32-digit binary number is zero.
+
+@cartouche
+@result{} 0000.0000.0000.0000.0000.0000.0000.0000
+@end cartouche
+
+@strong{(b)}
+
+Two's complement binary numbers are signed. The smallest number that can be
+represented is the most negative. The @emph{most significant digit} is the
+sign digit and it is 1 for negative numbers. The most negative two's
+complement number has zeros in every digit other than the sign digit. The
+decimal value is @math{-2^{N-1}} or -2,147,483,648 for @math{N=32}.
+
+@cartouche
+@result{} 1000.0000.0000.0000.0000.0000.0000.0000
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.14} Convert the following unsigned binary numbers to decimal.
+Show your work.
+
+(a) 1110 @*
+(b) 100100 @*
+(c) 1101.0111 @*
+(d) 011.1010.1010.0100
+
+@sc{solution}
+
+In general, follow the method demonstrated in Figure 1.6 from the text.
+Break down digits into columns representing powers of two.
+
+@strong{(a) 1110}
+
+@multitable @columnfractions 0.10 0.20 0.10 0.60
+@item @math{2^3}
+@tab 8's column
+@tab 1
+@tab @math{1 x 2^3}
+@item @math{2^2}
+@tab 4's column
+@tab 1
+@tab @math{1 x 2^2}
+@item @math{2^1}
+@tab 2's column
+@tab 1
+@tab @math{1 x 2^1}
+@item @math{2^0}
+@tab 1's column
+@tab 0
+@tab @math{0 x 2^0}
+@end multitable
+
+The decimal value is the result of adding the decimal value of each column
+that correpsonds to the power of 8 it represents:
+
+@smalldisplay
+@math{(1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)}
+@math{(1 x 8) + (1 x 4) + (1 x 2) + (0 x 1)}
+@math{8 + 4 + 2 + 0}
+@math{14}
+@end smalldisplay
+
+@cartouche
+@result{} 1110 = 14
+@end cartouche
+
+@strong{(b) 10.0100}
+
+Follow the method demonstrated in Figure 1.6 from the text.
+Break down digits into columns representing powers of two.
+
+@multitable @columnfractions 0.10 0.20 0.10 0.60
+@c
+@item @math{2^5}
+@tab 32's column
+@tab 1
+@tab @math{1 x 2^5}
+@c
+@item @math{2^4}
+@tab 16's column
+@tab 0
+@tab @math{0 x 2^4}
+@c
+@item @math{2^3}
+@tab 8's column
+@tab 0
+@tab @math{0 x 2^3}
+@c
+@item @math{2^2}
+@tab 4's column
+@tab 1
+@tab @math{1 x 2^2}
+@c
+@item @math{2^1}
+@tab 2's column
+@tab 0
+@tab @math{0 x 2^1}
+@c
+@item @math{2^0}
+@tab 1's column
+@tab 0
+@tab @math{0 x 2^0}
+@c
+@end multitable
+
+The decimal value is the result of adding the decimal value of each column
+that correpsonds to the power of 8 it represents:
+
+@smalldisplay
+@math{(1 x 2^5) + (0 x 2^4) + (0 x 2^3) + (1 x 2^2) + (0 x 2^1) + (0 x 2^0)}
+@math{(1 x 32) + (0 x 16) + (0 x 8) + (1 x 4) + (0 x 2) + (0 x 1)}
+@math{32 + 0 + 0 + 4 + 0 + 0}
+@math{36}
+@end smalldisplay
+
+@cartouche
+@result{} 10.0100 = 36
+@end cartouche
+
+@strong{(c) 1101.0111}
+
+Follow the method demonstrated in Figure 1.6 from the text.
+Break down digits into columns representing powers of two.
+
+@multitable @columnfractions 0.10 0.20 0.10 0.60
+@c
+@item @math{2^7}
+@tab 128's column
+@tab 1
+@tab @math{1 x 2^7}
+@c
+@item @math{2^6}
+@tab 64's column
+@tab 1
+@tab @math{1 x 2^6}
+@c
+@item @math{2^5}
+@tab 32's column
+@tab 0
+@tab @math{0 x 2^5}
+@c
+@item @math{2^4}
+@tab 16's column
+@tab 1
+@tab @math{1 x 2^4}
+@c
+@item @math{2^3}
+@tab 8's column
+@tab 1
+@tab @math{0 x 2^3}
+@c
+@item @math{2^2}
+@tab 4's column
+@tab 1
+@tab @math{1 x 2^2}
+@c
+@item @math{2^1}
+@tab 2's column
+@tab 1
+@tab @math{1 x 2^1}
+@c
+@item @math{2^0}
+@tab 1's column
+@tab 1
+@tab @math{1 x 2^0}
+@c
+@end multitable
+
+The decimal value is the result of adding the decimal value of each column
+that correpsonds to the power of 8 it represents:
+
+@smalldisplay
+@math{(1 x 2^7) + (1 x 2^6) + (0 x 2^5) + (1 x 2^4) + (0 x 2^3) + (1 x 2^2) + (1 x 2^1) + (1 x 2^0)}
+@math{(1 x 128) + (1 x 64) + (0 x 32) + (1 x 16) + (0 x 8) + (1 x 4) + (1 x 2) + (1 x 1)}
+@math{128 + 64 + 0 + 16 + 0 + 4 + 2 + 1}
+@math{215}
+@end smalldisplay
+
+@cartouche
+@result{} 1101.0111 = 215
+@end cartouche
+
+@strong{(d) 011.1010.1010.0100}
+
+Follow the method demonstrated in Figure 1.6 from the text.
+Break down digits into columns representing powers of two.
+
+@multitable @columnfractions 0.10 0.20 0.10 0.60
+@item @math{2^{14}}
+@tab 16384's column
+@tab 0
+@tab @math{0 x 2^{14}}
+@c
+@item @math{2^{13}}
+@tab 8192's column
+@tab 1
+@tab @math{1 x 2^{13}}
+@c
+@item @math{2^{12}}
+@tab 4096's column
+@tab 1
+@tab @math{1 x 2^{12}}
+@c
+@item @math{2^{11}}
+@tab 2048's column
+@tab 1
+@tab @math{1 x 2^{11}}
+@c
+@item @math{2^{10}}
+@tab 1024's column
+@tab 0
+@tab @math{0 x 2^{10}}
+@c
+@item @math{2^9}
+@tab 512's column
+@tab 1
+@tab @math{1 x 2^9}
+@c
+@item @math{2^8}
+@tab 256's column
+@tab 0
+@tab @math{0 x 2^8}
+@c
+@item @math{2^7}
+@tab 128's column
+@tab 1
+@tab @math{1 x 2^7}
+@c
+@item @math{2^6}
+@tab 64's column
+@tab 0
+@tab @math{0 x 2^6}
+@c
+@item @math{2^5}
+@tab 32's column
+@tab 1
+@tab @math{1 x 2^5}
+@c
+@item @math{2^4}
+@tab 16's column
+@tab 0
+@tab @math{0 x 2^4}
+@c
+@item @math{2^3}
+@tab 8's column
+@tab 0
+@tab @math{0 x 2^3}
+@c
+@item @math{2^2}
+@tab 4's column
+@tab 1
+@tab @math{1 x 2^2}
+@c
+@item @math{2^1}
+@tab 2's column
+@tab 0
+@tab @math{0 x 2^1}
+@c
+@item @math{2^0}
+@tab 1's column
+@tab 0
+@tab @math{0 x 2^0}
+@end multitable
+
+The decimal value is the result of adding the decimal value of each column
+that correpsonds to the power of 8 it represents:
+
+@bullet{} @math{(0 x 2^{14}) + (1 x 2^{13}) + (1 x 2^{12}) + (1 x 2^{11}) + (0 x 2^{10}) + (1 x 2^9) + (0 x 2^8) + (1 x 2^7)
++ (0 x 2^6) + (1 x 2^5) + (0 x 2^4) + (0 x 2^3) + (1 x 2^2) + (0 x 2^1) + (0 x 2^0)} @*
+@bullet{} @math{(0 x 16384) + (1 x 8192) + (1 x 4096) + (1 x 2048) + (0 x 1024) + (1 x 512) + (0 x 256)
++ (1 x 128) + (0 x 64) + (1 x 32) + (0 x 16) + (0 x 8) + (1 x 4) + (0 x 2) + (0 x 1)} @*
+@bullet{} @math{0 + 8192 + 4096 + 2048 + 0 + 512 + 0 + 128 + 0 + 32 + 0 + 0 + 4 + 0 + 0} @*
+@bullet{} @math{15012}
+
+@cartouche
+@result{} 011.1010.1010.0100 = 15012
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.16} Repeat @sc{exercise 1.15} but convert to hexadecimal.
+
+(a) 1110 @*
+(b) 10.0100 @*
+(c) 1101.0111 @*
+(d) 011.1010.1010.0100
+
+@sc{solution}
+
+Each 4-bit nibble corresponds to a hexadecimal digit. Convert each binary number
+to a multiple of 4 bits by prefixing leading zeros in the @emph{most significant}
+positions. Then convert each 4-bit nibble to a hexadecimal digit and assemble
+in the correct order.
+
+@strong{(a) 1110}
+
+By inspection,
+
+@cartouche
+@result{} 1110 = 0xE
+@end cartouche
+
+@strong{(b) 10.0100}
+
+10.0100 = 0010.0100
+
+@display
+0010 = 0x2
+0100 = 0x4
+@end display
+
+Now assemble the hexadecimal digits that correspond to each nibble:
+
+@cartouche
+@result{} 10.0100 = 0x24
+@end cartouche
+
+@strong{(c) 1101.0111}
+
+@display
+1101 = 0xD
+0111 = 0x7
+@end display
+
+Now assemble the hexadecimal digits that correpsond to each nibble:
+
+@cartouche
+@result{} 1101.0111 = 0xD7
+@end cartouche
+
+@strong{(d) 011.1010.1010.0100}
+
+Extend this binary number to 16 bits so it is an even multiple of 4 binary
+digits @result{} 0011.1010.1010.0100.
+
+@display
+0011 = 0x3
+1010 = 0xA
+1010 = 0xA
+0100 = 0x4
+@end display
+
+Now assemble the hexadecimal digits that correspond to each nibble:
+
+@cartouche
+@result{} 011.1010.1010.0100 = 0x3AA4
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.18} Convert the following hexadecimal numbers to decimal. Show
+your work.
+
+(a) 0x4E @*
+(b) 0x7C @*
+(c) 0x4D3A @*
+(d) 0x403FB001
+
+@sc{solution}
+
+In general, the conversion approach requires taking the sum of each of the
+decimal values of each hexadecimal digit. The decimal values are represented by
+@math{16^{N-1}} where @math{N} is the digit number (column).
+
+@strong{(a) 0x4E}
+
+@multitable @columnfractions 0.15 0.20 0.15 0.50
+@c
+@item @math{16^1}
+@tab 16's column
+@tab 0x4
+@tab 4
+@c
+@item @math{16^0}
+@tab 1's column
+@tab 0xE
+@tab 14
+@end multitable
+
+@display
+@math{(4 x 16^1) + (14 x 16^0)}
+@math{(4 x 16) + (14 x 1)}
+@math{78}
+@end display
+
+@cartouche
+@result{} 0x4E = 78
+@end cartouche
+
+@strong{(b) 0x7C}
+
+@multitable @columnfractions 0.15 0.20 0.15 0.50
+@c
+@item @math{16^1}
+@tab 16's column
+@tab 0x7
+@tab 7
+@c
+@item @math{16^0}
+@tab 1's column
+@tab 0xC
+@tab 12
+@end multitable
+
+@smalldisplay
+@math{(7 x 16^1) + (12 x 16^0)}
+@math{(7 x 16) + (12 x 1)}
+@math{124}
+@end smalldisplay
+
+@cartouche
+@result{} 0x7C = 124
+@end cartouche
+
+@strong{(c) 0xED3A}
+
+@multitable @columnfractions 0.15 0.20 0.15 0.50
+@c
+@item @math{16^3}
+@tab 4096's column
+@tab 0xE
+@tab 14
+@c
+@item @math{16^2}
+@tab 256's column
+@tab 0xD
+@tab 13
+@c
+@item @math{16^1}
+@tab 16's column
+@tab 0x3
+@tab 3
+@c
+@item @math{16^0}
+@tab 1's column
+@tab 0xA
+@tab 10
+@end multitable
+
+@smalldisplay
+@math{(14 x 16^3) + (13 x 16^2) + (3 x 16^1) + (10 x 16^0)}
+@math{(14 x 4096) + (13 x 256) + (3 x 16) + (10 x 1)}
+@math{57,344 + 3,328 + 48 + 10}
+@math{60730}
+@end smalldisplay
+
+@cartouche
+@result{} 0xED3A = 60730
+@end cartouche
+
+@strong{(d) 0x403FB001}
+
+@multitable @columnfractions 0.15 0.30 0.15 0.40
+@c
+@item @math{16^7}
+@tab 268,434,456's column
+@tab 0x4
+@tab 4
+@c
+@item @math{16^6}
+@tab 16,777,216's column
+@tab 0x0
+@tab 0
+@c
+@item @math{16^5}
+@tab 1,048,576's column
+@tab 0x3
+@tab 3
+@c
+@item @math{16^4}
+@tab 65536's column
+@tab 0xF
+@tab 15
+@c
+@item @math{16^3}
+@tab 4096's column
+@tab 0xB
+@tab 11
+@c
+@item @math{16^2}
+@tab 256's column
+@tab 0x0
+@tab 0
+@c
+@item @math{16^1}
+@tab 16's column
+@tab 0x0
+@tab 0
+@c
+@item @math{16^0}
+@tab 1's column
+@tab 0x1
+@tab 1
+@c
+@end multitable
+
+@smalldisplay
+@math{(4 x 16^7) + (0 x 16^6) + (3 x 16^5) + (15 x 16^4) + (11 x 16^3) + (0 x 16^2) + (0 x 16^1) + (1 x 16^0)}
+@math{(4 x 268,435,456) + (0 x 16,777,216) + (3 x 1,048,576) (15 x 65,536) + (11 x 4096) + (0 x 256) + (0 x 16) + (1 x 1)}
+@math{1,073,741,824 + 0 + 3,145,728 + 983,040 + 45,056 + 0 + 0 + 1}
+@math{1,077,915,649}
+@end smalldisplay
+
+@cartouche
+@result{} 0x403FB001 = 1,077,915,649
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.20} Repeat @sc{exercise 1.18} but convert to unsigned binary.
+
+(a) 0x4E @*
+(b) 0x7C @*
+(c) 0xED3A @*
+(d) 0x403FB001
+
+@sc{solution}
+
+In general, convert each hexadecimal digit to it's 4-bit binary representation
+and assemble in @emph{most significant} order.
+
+@strong{(a) 0x4E}
+
+By inspection, 0x4E breaks down to the 4-bit nibbles
+
+@display
+0x4 = 0100
+0xE = 1110
+@end display
+
+So the unsigned binary representation is:
+
+@cartouche
+@result{} 0x4E = 0100.1110
+@end cartouche
+
+@strong{(b) 0x7C}
+
+By inspection, 0x7C breaks down to the 4-bit nibbles
+
+@display
+0x7 = 0111
+0xC = 1100
+@end display
+
+So the unsigned binary representation is:
+
+@cartouche
+@result{} 0x7C = 0111.1100
+@end cartouche
+
+@strong{(c) 0xED3A}
+
+By inspection, 0xED3A breaks down to the 4-bit nibbles
+
+@display
+0xE = 1110
+0xD = 1101
+0x3 = 0011
+0xA = 1010
+@end display
+
+So the unsigned binary is
+
+@cartouche
+@result{} 0xED3A = 1110.1101.0011.1010
+@end cartouche
+
+@strong{(d) 0x403FB001}
+
+By inspection, 0x403FB001 breaks down to the 4-bit nibbles
+
+@display
+0x4 = 0100
+0x0 = 0000
+0x3 = 0011
+0xF = 1111
+0xB = 1011
+0x0 = 0000
+0x0 = 0000
+0x1 = 0001
+@end display
+
+So the unsigned binary is
+
+@cartouche
+@result{} 0x403FB001 = 0100.0000.0011.1111.1011.0000.0000.0001
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{exercise 1.22} Convert the following two's complement binary numbers to
+decimal.
+
+(a) 1110 @*
+(b) 100011 @*
+(c) 01001110 @*
+(d) 10110101
+
+@sc{solution}
+
+@strong{(a) 1110}
+
+1110 is negative. Compute it's decimal value by summing the decimal value of each
+column as demonstrated in Figure 1.6 of the text.
+
+@multitable @columnfractions 0.10 0.25 0.10 0.65
+@c
+@item @math{2^3}
+@tab 8's column
+@tab 1
+@tab @math{1 x 2^3}
+@c
+@item @math{2^2}
+@tab 4's column
+@tab 1
+@tab @math{1 x 2^2}
+@c
+@item @math{2^1}
+@tab 2's column
+@tab 1
+@tab @math{1 x 2^1}
+@c
+@item @math{2^0}
+@tab 1's column
+@tab 0
+@tab @math{0 x 2^0}
+@c
+@end multitable
+
+@smalldisplay
+@math{(-1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)}
+@math{(-1 x 8) + (1 x 4) + (1 x 2) + (0 x 1)}
+@math{-8 + 4 + 2 + 0}
+@math{-2}
+@end smalldisplay
+
+@cartouche
+@result{} 1110 signed = -2
+@end cartouche
+
+Alternatively, find it's magnitude by converting to unsigned binary. Take the
+two's complement by inverting the bits and adding 1.
+
+Invert the bits: 1110 @result{} 0001. @*
+Add 1: @math{0001 + 0001} = 0010.
+
+Again, summing the columns in the table above@enddots{}
+
+@smalldisplay
+@math{(0 x 2^3) + (0 x 2^2) + (1 x 2^1) + (0 x 2^0)}
+@math{(0 x 8) + (0 x 4) + (1 x 2) + (0 x 1)}
+@math{0 + 0 + 2 + 0}
+@math{2}
+@end smalldisplay
+
+But since the signed binary number 1110 is negative, we apply the sign to the
+magnitude 2.
+
+@cartouche
+@result{} 1110 signed = -2
+@end cartouche
+
+@strong{(b) 100011}
+
+100011 is negative. Compute it's decimal value by summing the decimal value of
+each column.
+
+@multitable @columnfractions 0.10 0.25 0.10 0.65
+@c
+@item @math{2^5}
+@tab 32's column
+@tab 1
+@tab @math{1 x 2^5}
+@c
+@item @math{2^4}
+@tab 16's column
+@tab 0
+@tab @math{0 x 2^4}
+@c
+@item @math{2^3}
+@tab 8's column
+@tab 0
+@tab @math{0 x 2^3}
+@c
+@item @math{2^2}
+@tab 4's column
+@tab 0
+@tab @math{0 x 2^2}
+@c
+@item @math{2^1}
+@tab 2's column
+@tab 1
+@tab @math{1 x 2^1}
+@c
+@item @math{2^0}
+@tab 1's column
+@tab 1
+@tab @math{1 x 2^0}
+@c
+@end multitable
+
+@smalldisplay
+@math{(-1 x 2^5) + (0 x 2^4) + (0 x 2^3) + (0 x 2^2) + (1 + 2^1) + (1 + 2^0)}
+@math{(-1 x 32) + (0 x 16) + (0 x 8) + (0 x 4) + (1 + 2) + (1 + 1)}
+@math{-32 + 0 + 0 + 0 + 2 + 1}
+@math{-29}
+@end smalldisplay
+
+@cartouche
+@result{} 100011 = -29
+@end cartouche
+
+Alternatively, find it's magnitude by taking the two's complement and apply the
+sign to the decimal result.
+
+Invert the bits: 100011 @result{} 011100. @*
+Add 1: @math{011100 + 000001} = 011101.
+
+Again, summing the columns in the table above@enddots{}
+
+@smalldisplay
+@math{(0 x 2^5) + (1 x 2^4) + (1 x 2^3) + (1 x 2^2) + (0 x 2^1) + (1 x 2^0)}
+@math{(0 x 32) + (1 x 16) + (1 x 8) + (1 x 4) + (0 x 2) + (1 x 1)}
+@math{0 + 16 + 8 + 4 + 0 + 1}
+@math{29}
+@end smalldisplay
+
+Apply the sign @result{} @math{-29}.
+
+@cartouche
+@result{} 100011 = -29
+@end cartouche
+
+@strong{(d) 10110101}
+
+10110101 is negative. Compute it's decimal value by summing the decimal value
+of each column.
+
+@multitable @columnfractions 0.10 0.25 0.10 0.65
+@c
+@item @math{2^7}
+@tab 128's column
+@tab 1
+@tab @math{1 x 2^7}
+@c
+@item @math{2^6}
+@tab 64's column
+@tab 0
+@tab @math{0 x 2^6}
+@c
+@item @math{2^5}
+@tab 32's column
+@tab 1
+@tab @math{1 x 2^5}
+@c
+@item @math{2^4}
+@tab 16's column
+@tab 1
+@tab @math{1 x 2^4}
+@c
+@item @math{2^3}
+@tab 8's column
+@tab 0
+@tab @math{0 x 2^3}
+@c
+@item @math{2^2}
+@tab 4's column
+@tab 1
+@tab @math{1 x 2^2}
+@c
+@item @math{2^1}
+@tab 2's column
+@tab 0
+@tab @math{0 x 2^1}
+@c
+@item @math{2^0}
+@tab 1's column
+@tab 1
+@tab @math{1 x 2^0}
+@c
+@end multitable
+
+@smalldisplay
+@math{(-1 x 2^7) + (0 x 2^6) + (1 x 2^5) + (1 + 2^4) + (0 x 2^3) + (1 x 2^2) + (0 x 2^1) + (1 x 2^0)}
+@math{(-1 x 128) + (0 x 64) + (1 x 32) + (1 + 16) + (0 x 8) + (1 x 4) + (0 x 2) + (1 x 1)}
+@math{-128 + 0 + 32 + 16 + 0 + 4 + 0 + 1}
+@math{-75}
+@end smalldisplay
+
+Alternatively, find it's magnitude by taking the two's complement and applying
+the sign.
+
+Invert the bits: 1011.0101 @result{} 0100.1010. @*
+Add 1: @math{0100.1010 + 00000001} = 0100.1011.
+
+Again, summing the columns in the table above@enddots{}
+
+@smalldisplay
+@math{(0 x 2^7) + (1 x 2^6) + (0 x 2^5) + (0 x 2^4) + (1 x 2^3) + (0 x 2^2) + (1 x 2^1) + (1 x 2^0)}
+@math{(0 x 128) + (1 x 64) + (0 x 32) + (0 x 16) + (1 x 8) + (0 x 4) + (1 x 2) + (1 x 1)}
+@math{0 + 64 + 0 + 0 + 8 + 0 + 2 + 1}
+@math{75}
+@end smalldisplay
+
+Now apply the sign.
+
+@cartouche
+@result{} 1011.0101 = -75
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{exercise 1.26} Convert the following decimal numbers to unsigned binary
+numbers.
+
+(a) 14 @*
+(b) 52 @*
+(c) 339 @*
+(d) 711 @*
+
+@sc{solution}
+
+In general we can choose from one of the two methods demonstrated in Example 1.5
+from the text.
+
+@strong{(a) 14}
+
+Divide by the highest power of 2. The quotient will be the binary digit. Repeat
+the process with the remainder for each power of 2.
+
+@smalldisplay
+14/8 = @math{1 r 6}
+6/4 = @math{1 r 2}
+2/2 = @math{1 r 0}
+0/1 = @math{0 r 0}
+@end smalldisplay
+
+The binary number is derived by using the quotient in the column for each power
+of 2. The result corresponds to the value of columns 8, 4, 2, 1.
+
+@cartouche
+@result{} 14 = 1110
+@end cartouche
+
+@strong{(b) 52}
+
+Solve by repeating the process used in @strong{(a)}. The highest power of 2
+that is less than or equal to 52 is @math{2^5 = 32}.
+
+@smalldisplay
+52/32 = @math{1 r 20}
+20/16 = @math{1 r 4}
+4/8 = @math{0 r 4}
+4/4 = @math{1 r 0}
+0/2 = @math{0 r 0}
+0/1 = @math{0}
+@end smalldisplay
+
+Now assemble each digit from the quotients in the columns corresponding to the
+respective powers of two in @emph{most significant} order.
+
+@cartouche
+@result{} 52 = 11.0110
+@end cartouche
+
+@strong{(c) 339}
+
+Solve by repeating the process used in @strong{(a)}. The highest power of 2 that
+is less than or equal to 339 is @math{2^8 = 256}.
+
+@smalldisplay
+339/256 = @math{1 r 83}
+83/128 = @math{0 r 83}
+83/64 = @math{1 r 19}
+19/32 = @math{0 r 19}
+19/16 = @math{1 r 3}
+3/8 = @math{0 r 3}
+3/4 = @math{0 r 3}
+3/2 = @math{0 r 1}
+1/1 = @math{1 r 0}
+@end smalldisplay
+
+Now assemble each digit from the quotients in the columns corresponding to the
+respective powers of two in @emph{most significant} order.
+
+@cartouche
+@result{} 339 = 1.0101.0011
+@end cartouche
+
+@strong{(d) 711}
+
+Solve by repeating the process used in previous steps. The highest power of 2
+that is less than or equal to 711 is @math{2^9 = 512}.
+
+@smalldisplay
+711/512 = @math{1 r 199}
+199/256 = @math{0 r 199}
+199/128 = @math{1 r 71}
+71/64 = @math{1 r 7}
+7/32 = @math{0 r 7}
+7/16 = @math{0 r 7}
+7/8 = @math{0 r 7}
+7/4 = @math{1 r 3}
+3/2 = @math{1 r 1}
+1/1 = @math{1 r 0}
+@end smalldisplay
+
+Now assemble each digit from the quotients in the columns corresponding to the
+respective powers of two in @emph{most significant} order.
+
+@cartouche
+@result{} 711 = 10.1100.0111
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{exercise 1.28} Repeat @sc{exercise 1.26} but convert to hexadecimal.
+
+(a) 14 @*
+(b) 52 @*
+(c) 339 @*
+(d) 711
+
+@sc{solution}
+
+In general choose from one of the methods demonstrated in Example 1.5 from the
+text.
+
+@strong{(a) 14}
+
+The highest power of 16 less than or equal to 14 is @math{16^0 = 1}.
+
+@display
+14/1 = @math{14 r 0}
+@end display
+
+By inspection, the result is
+
+@cartouche
+@result{} 14 = 0xE
+@end cartouche
+
+@strong{(b) 52}
+
+The highest power of 16 less than or equal to 52 is @math{16^1 = 16}.
+
+@display
+52/16 = @math{3 r 4}
+4/1 = @math{4 r 0}
+@end display
+
+Combine the hexadecimal digits on @emph{most significant} order:
+
+@cartouche
+@result{} 52 = 0x34
+@end cartouche
+
+@strong{(c) 339}
+
+The highest power of 16 less than or equal to 339 is @math{16^2 = 256}.
+
+@display
+339/256 = @math{1 r 83}
+83/16 = @math{5 r 3}
+3/1 = @math{3 r 0}
+@end display
+
+Combine the hexadecimal digits in @emph{most significant} order.
+
+@cartouche
+@result{} 339 = 0x153
+@end cartouche
+
+@strong{(d) 711}
+
+The highest power of 16 less than or equal to 711 is @math{16^2 = 256}.
+
+@display
+711/256 = @math{2 r 199}
+199/16 = @math{12 r 7}
+7/1 = @math{7 r 0}
+@end display
+
+Combine the hexadecimal digits in @emph{most significant} order.
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{exercise 1.30} Convert the following decimal numbers to 8-bit two's complement
+numbers or indicate that the decimal number would overflow the range.
+
+(a) 24 @*
+(b) -59 @*
+(c) 128 @*
+(d) -150 @*
+(e) 127
+
+@sc{solution}
+
+In general, choose from one of the methods demonstrated in Example 1.5 from the
+text to convert the decimal number to unsigned binary. Then take the two's
+complement by inverting each binary digit and adding 1.
+
+The range of a signed binary number is, in general, (@math{-2^{N-1},2^{N-1}-1}).
+In this case with 8-bit binary numbers as a given, the range is (-128,127).
+
+@strong{(a) 24}
+
+The highest power of 2 less than or equal to 24 is @math{2^4 = 16}.
+
+@smalldisplay
+24/16 = @math{1 r 8}
+8/8 = @math{1 r 0}
+0/4 = @math{0 r 0}
+0/2 = @math{0 r 0}
+0/1 = @math{0}
+@end smalldisplay
+
+Assemble the digits to yield the unsigned binary result:
+
+@result{} 11000
+
+Now perform sign extension to get the 8-bit result. Since 24 is a positive number,
+the sign digit is 0. The result is:
+
+@cartouche
+@result{} 24 = 0001.1000
+@end cartouche
+
+@strong{(b) -59}
+
+Repeatedly divide the magnitude by the highest divisible power of 2 to convert
+to unsigned binary. The highest power of 2 less than or equal to 59 is
+@math{2^5 = 32}.
+
+@smalldisplay
+59/32 = @math{1 r 27}
+27/16 = @math{1 r 11}
+11/8 = @math{1 r 3}
+3/4 = @math{0 r 3}
+3/2 = @math{1 r 1}
+1/1 = @math{1}
+@end smalldisplay
+
+Now assemble the digits in order to get the unsigned binary result @result{}
+111011.
+
+Next we can proceed in one of two ways:
+
+@enumerate 1
+@item Unsigned sign extension, then take two's complement.
+@item Take two's complement, then sign extension.
+@end enumerate
+
+@strong{(1)}
+
+Perform sign extension of unsigned result @result{} 0011.1011. Then invert
+to yield @result{} 1100.0100 and add 1. This yields the result:
+
+@cartouche
+@result{} -59 = 1100.0101
+@end cartouche
+
+@strong{(2)}
+
+Take the two's complement of 11101. Invert to yield @result{} 000101 and add
+1 to yield @result{} 000101. Now extending to 8 digits using 1 as the sign bit
+yields:
+
+@cartouche
+@result{} -59 = 1100.0101
+@end cartouche
+
+@strong{(c) 128}
+
+The range as stated earlier is (-128,127). This number is outside the range of
+an 8-bit two's complement signed binary number. It overflows.
+
+@strong{(d) -150}
+
+The range as stated earlier is (-128,127). This number is outside the range of
+an 8-bit two's complement signed binary number. It overflows.
+
+@strong{(e) 127}
+
+This number is inside the range of an 8-bit two's complement signed binary
+number. It does not overflow. The number is positive so the unsigned result
+of converting to binary will be correct.
+
+Divide repeatedly by the highest power of 2 less than or equal to 127. The
+highest power of 2 is @math{2^6 = 64}.
+
+@smalldisplay
+127/64 = @math{1 r 63}
+63/32 = @math{1 r 31}
+31/16 = @math{1 r 15}
+15/8 = @math{1 r 7}
+7/4 = @math{1 r 3}
+3/2 = @math{1 r 1}
+1/1 = @math{1}
+@end smalldisplay
+
+Assemble the digits in column order to get the unsigned binary result
+@result{} 111.1111. Now perform sign extension to get the 8-bit binary
+number. The sign bit is zero:
+
+@cartouche
+@result{} 127 = 0111.1111
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.34} Convert the following 4-bit two's complement numbers to 8-bit
+two's complement numbers.
+
+(a) 0111 @*
+(b) 1001
+
+Use sign extension---copy the sign bit to the @emph{most significant bit}
+positions.
+
+@strong{(a) 0111}
+
+The sign bit is 0. Therefore, copy the 0 to the four @emph{most significant
+bit} positions to yield:
+
+@cartouche
+@result{} 0111 = 0000.0111
+@end cartouche
+
+@strong{(b) 1001}
+
+The sign bit is 1. Therefore copy 1 to the four @emph{most significant bit}
+positions to yield:
+
+@cartouche
+@result{} 1001 = 1111.1001
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.36} Repeat @sc{Exercise 1.34} if the numbers are unsigned rather
+than two's complement.
+
+(a) 0111 @*
+(b) 1001
+
+@sc{solution}
+
+In this case, we simply copy 0 into the 4 @emph{most significant bit} positions.
+
+By inspection,
+
+@cartouche
+@result{} 0111 = 0000.0111 @*
+@result{} 1001 = 0000.1001
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.38} Base 8 is referred to as octal. Convert each of the numbers
+from @sc{Exercise 1.26} to octal.
+
+(a) 14 @*
+(b) 52 @*
+(c) 339 @*
+(d) 711
+
+@sc{solution}
+
+In general, repeatedly divide the number to be converted by the largest power
+of 8 that is less than or equal to the number. Each division will yield a
+whole number quotient and a remainder. Each successive division will
+operate on the remainder of the previous division. This requires the next
+lower power of 8 to be used. The quotients will then be
+assembled in @emph{most significant} order to form the converted number. This
+is the first method demonstrated in Example 1.5 of the text.
+
+@strong{(a) 14}
+
+The highest power of 8 less than or equal to 14 is @math{8^1 = 8}.
+
+@display
+14/8 = @math{1 r 6}
+6/1 = @math{6 r 0}
+@end display
+
+Now assemble the digits and epress the answer in octal format.
+
+@cartouche
+@result{} 14 = 016
+@end cartouche
+
+@strong{(b) 52}
+
+The highest power of 8 less than or equal to 52 is @math{8^1 = 8}.
+
+@display
+52/8 = @math{6 r 4}
+4/1 = @math{4 r 0}
+@end display
+
+Now assemble the digits in octal format.
+
+@cartouche
+@result{} 52 = 064
+@end cartouche
+
+@strong{(c) 339}
+
+The highest power of 8 less than or equal to 339 is @math{8^2 = 64}.
+
+@display
+339/64 = @math{5 r 19}
+19/8 = @math{2 r 3}
+3/1 = @math{3 r 0}
+@end display
+
+Now assemble the digits in octal format.
+
+@cartouche
+@result{} 339 = 0523
+@end cartouche
+
+@strong{(d) 711}
+
+The highest power of 8 lelss than or equal to 711 is @math{8^3 = 512}.
+
+@smalldisplay
+711/512 = @math{1 r 199}
+199/64 = @math{3 r 7}
+7/8 = @math{0 r 7}
+7/1 = @math{7 r 0}
+@end smalldisplay
+
+Now assemble the digits in octal format.
+
+@cartouche
+@result{} 711 = 01307
+@end cartouche
+
+
+@c
+@c EXERCISE 1.40
+@c
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.40} Convert each of the following octal numbers to binary, hexadecimal, and decimal.
+
+(a) 023 @*
+(b) 045 @*
+(c) 0371 @*
+(d) 02560@*
+
+@sc{solution}
+
+Each octal digit represents a 3-digit binary number. By inspection, substitute
+the binary number for the octal digit to convert to binary.
+
+The binary result from the previous step should be extended to an 8-bin binary
+number. Each 4-bit nibble represents a single hexadecimal digit. Combine the
+digits to find the result.
+
+Convert the octal to decimal by multiplying the octal digit by the power of 8
+for that column.
+
+@strong{a) 023}
+
+Convert to binary: By inspection, 02 = 010 and 03 = 011. The binary
+result is the combination of the binary numbers in the proper order.
+
+@cartouche
+@result{} 023 = 010.011
+@end cartouche
+
+Convert to hexadecimal: Extend the previous result from 6 binary digits to 8
+binary digits by prefixing zeros in the @emph{most significant bit} positions.
+This yields 0001.0011.
+
+Each 4-bit nibble represents a single hexadecimal digit. By inspection, we can
+write:
+
+@display
+0001 = 0x1
+0011 = 0x3
+@end display
+
+The hexadecimal result is the combination of the two hexadecimal digits in
+@emph{most significant digit} order.
+
+@cartouche
+@result{} 023 = 0x13
+@end cartouche
+
+To convert the octal value to decimal, use the method demonstrated in Figure 1.6
+from the text:
+
+@smalldisplay
+023 = @math{(2 x 8^1) + (3 x 8^0)}
+023 = @math{(2 x 8) + (3 x 1)}
+023 = @math{16 + 3}
+023 = @math{19}
+@end smalldisplay
+
+@cartouche
+@result{} 023 = 19
+@end cartouche
+
+@strong{b) 045}
+
+Convert to binary: By inspection, 04 = 100 and 05 = 101. The binary
+result is the combination of the binary numbers in the proper order.
+
+@cartouche
+@result{} 045 = 100.101
+@end cartouche
+
+Convert to hexadecimal: Extend the previous result from 6 binary digits to 8
+binary digits by prefixing zeros in the @emph{most significant bit} positions.
+This yields 0010.0101.
+
+Each 4-bit nibble represents a single hexadecimal digit. By inspection, we can
+write:
+
+@display
+0010 = 0x2
+0101 = 0x5
+@end display
+
+The hexadecimal result is the combination of the two hexadecimal digits in
+@emph{most significant digit} order.
+
+@cartouche
+@result{} 045 = 0x25
+@end cartouche
+
+To convert the octal value to decimal, use the method demonstrated in Figure 1.6
+from the text:
+
+@smalldisplay
+045 = @math{(4 x 8^1) + (5 x 8^0)}
+045 = @math{(4 x 8) + (5 x 1)}
+045 = @math{32 + 5}
+045 = @math{37}
+@end smalldisplay
+
+@cartouche
+@result{} 045 = 37
+@end cartouche
+
+@c *******************************************
+
+@strong{c) 0371}
+
+Convert to binary: By inspection, 03 = 011, 07 = 111, and 01 = 001. The binary
+result is the combination of the binary numbers in @emph{most significant}
+order.
+
+@cartouche
+@result{} 0371 = 011.111.001
+@end cartouche
+
+Convert to hexadecimal: The previous result was represented as 9 binary digits
+with a leading 0 in the @emph{most significant bit} position just for clarity.
+Removing that and reformatting gives us the binary number 1111.1001. Each
+4-bit nibble represents a single hexadecimal digit. By inspection, we can write:
+
+@display
+1111 = 0xF
+1001 = 0x9
+@end display
+
+The hexadecimal result is the combination of the two hexadecimal digits in
+@emph{most significant digit} order.
+
+@cartouche
+@result{} 0xF9
+@end cartouche
+
+To convert the octal value to decimal, use the method demonstrated in Figure 1.6
+of the text:
+
+@smalldisplay
+0371 = @math{(3 x 8^2) + (7 x 8^1) + (1 x 8^0)}
+0371 = @math{(3 x 64) + (7 x 8) + (1 x 1)}
+0371 = @math{192 + 56 + 1}
+0371 = @math{249}
+@end smalldisplay
+
+@cartouche
+@result{} 0371 = 249
+@end cartouche
+
+@c *******************************************
+
+@strong{d) 02560}
+
+Convert to binary: By inspection:
+
+@display
+02 = 010
+05 = 101
+06 = 110
+00 = 000
+@end display
+
+The binary result is the combination of the binary numbers in @emph{most
+significant} order.
+
+@cartouche
+@result{} 010.101.110.000
+@end cartouche
+
+Convert to hexadecimal: The previous result is represented in groupings of
+three binary digits only to illustrate the relationship to the original
+octal digits. Represented in groups of 4-bit nibbles to represent hexadecimal
+digits yields 0101.0111.0000. By inspection, we can write:
+
+@display
+0101 = 0x5
+0111 = 0x7
+0000 = 0x0
+@end display
+
+The hexadecimal result is the combination of the three hexadecimal digits in
+@emph{most significant digit} order.
+
+@cartouche
+@result{} 0x570
+@end cartouche
+
+To convert the octal value to decimal, use the method demonstrated in Figure 1.6
+of the text:
+
+@smalldisplay
+02560 = @math{(2 x 8^3) + (5 x 8^2) + (6 x 8^1) + (0 x 8^0)}
+02560 = @math{(2 x 512) + (5 x 64) + (6 x 8) + (0 x 1)}
+02560 = @math{1024 + 320 + 48 + 0}
+02560 = @math{1392}
+@end smalldisplay
+
+@cartouche
+@result{} 02560 = 1392
+@end cartouche
+
+@c @tex
+@c \hrule width 6in
+@c @end tex
+
+@c *******************************************
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.42} How many 7-bit two's complement numbers are greater than
+0? How many are less than 0?
+
+@sc{Solution}
+
+@cartouche
+The range of a two's complement number giving @math{N} binary digits can be
+stated generally as @math{-2^{N-1},2^{N-1}-1}. Given that @math{N = 7}, the
+largest positive number is @math{2^{N-1}-1 = 63}. The largest negative number
+is @math{2^{N-1}} = 64.
+@end cartouche
+
+@c *******************************************
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.44} How many bytes are in a 64-bit word?
+
+@sc{Solution}
+
+@cartouche
+Axiomatically, a byte is an 8-bit group of binary digits. A 64-bit word
+therefore contains 64/8 = 8 bytes.
+@end cartouche
+
+@c *******************************************
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.50} Draw a number line analogous to Figure 1.11 for 3-bit
+unsigned and two's complement numbers.
+
+@sc{Solution}
+
+@center @image{number_line-1.50,6in,,,png}
+@c *******************************************
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.52} Perform the following additions of unsigned binary numbers.
+Indicate whether or not the sum overflows a 4-bit result.
+
+(a) 1001 + 0100 @*
+(b) 1101 + 1011
+
+@sc{Solution}
+
+@strong{(a) 1001 + 0100}
+
+@cartouche
+@math{1001 + 0100 = 1101}. The sum does not overflow a 4-bit result.
+@end cartouche
+
+@strong{(b) 1101 + 1011}
+
+@cartouche
+@math{1101 + 1011 = 11000}. The sum does overflow a 4-bit result.
+@end cartouche
+
+@c *******************************************
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.54} Repeat @sc{Exercise 1.52}, assuming that the binary numbers
+are in two's complement form.
+
+(a) 1001 + 0100 @*
+(b) 1101 + 1011
+
+@sc{Solution}
+
+@strong{(a) 1001 + 0100}
+
+@cartouche
+@math{1001 + 0100 = 1101}. The sum does not overflow a 4-bit two's complement
+signed binary number.
+@end cartouche
+
+@strong{(b) 1101 + 1011}
+
+@cartouche
+@math{1101 + 1011 = 1000}. The sum does not overflow a 4-bit two's complement
+signed binary number.
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.56} Convert the following decimal numbers to 6-bit two's
+complement binary numbers and add them. Indicate whether or not the sum
+overflows a 6-bit result.
+
+(a) 16 + 9 @*
+(b) 27 + 31 @*
+(c) -4 + 19 @*
+(d) 3 + -32 @*
+(e) -16 + -9 @*
+(f) -27 + -31 @*
+
+@sc{Solution}
+
+The range of 6-bit signed two's complement numbers is (-32,31).
+
+@strong{(a) 16 + 9}
+
+Convert 16 and 9 to unsigned 6-bit binary numbers. Both are positive so we
+do not need to take the two's complement.
+
+@smalldisplay
+16/16 = @math{1 r 0}
+0/8 = @math{0 r 0}
+0/4 = @math{0 r 0}
+0/2 = @math{0 r 0}
+0/1 = @math{0 r 0}
+@end smalldisplay
+
+@result{} 16 = 010000 implicitly sign extending.
+
+@smalldisplay
+9/8 = @math{1 r 1}
+1/4 = @math{0 r 1}
+1/2 = @math{0 r 1}
+1/1 = @math{0 r 0}
+@end smalldisplay
+
+@result{} 9 = 001000 implicitly sign extending.
+
+Adding the two binary numbers
+
+@display
+@math{16 + 9 = 010000 + 001000}
+@math{16 + 9 = 011000}
+@end display
+
+@cartouche
+@result{} @math{16 + 9 = 011000} and does not overflow a 6-bit result.
+@end cartouche
+
+@strong{(b) 27 + 31}
+
+Convert 27 and 31 to unsigned 6-bit binary numbers. Both are positive so we
+do not need to take the two's complement.
+
+@smalldisplay
+27/16 = @math{1 r 11}
+11/8 = @math{1 r 3}
+3/4 = @math{0 r 3}
+3/2 = @math{1 r 1}
+1/1 = @math{1 r 0}
+@end smalldisplay
+
+@result{} 27 = 011011 implicitly sign extending.
+
+@smalldisplay
+31/16 = @math{1 r 15}
+15/8 = @math{1 r 7}
+7/4 = @math{1 r 3}
+3/2 = @math{1 r 1}
+1/1 = @math{1 r 0}
+@end smalldisplay
+
+@result{} 31 = 011111 implicitly sign extending.
+
+Adding the two binary numbers
+
+@smalldisplay
+@math{27 + 31 = 011011 + 011111}
+@math{27 + 31 = 111010}
+@end smalldisplay
+
+@cartouche
+@result{} The result 111011 has a negative sign bit and is outside the range of
+6-bit two's complement signed numbers.
+@end cartouche
+
+@strong{(c) -4 + 19}
+
+Convert the magnitude of -4 and 19 to unsigned 6-bit binary numbers. -4 is
+negative so we need to take the two's complement. We do not need to take the
+two's complement of 19.
+
+@smalldisplay
+4/4 = @math{1 r 0}
+0/2 = @math{0 r 0}
+0/1 = @math{0 r 0}
+@end smalldisplay
+
+@result{} 000100 implicitly sign extending.
+
+Taking two's complement:
+
+@display
+Invert 000100 @result{} 111011
+Add 1 @math{111011 + 000001 = 111100}
+@end display
+
+@smalldisplay
+19/16 = @math{1 r 3}
+3/8 = @math{0 r 3}
+3/4 = @math{0 r 3}
+3/2 = @math{1 r 1}
+1/1 = @math{1 r 0}
+@end smalldisplay
+
+@result{} 010011 implicitly sign extending.
+
+Adding the two binary numbers
+
+@display
+@math{-4 + 19 = 111100 + 010011}
+@math{-4 + 19 = 001111}
+@end display
+
+@cartouche
+@result{} @math{-4 + 19 = 001111} and does not overflow a 6-bit two's
+complement signed binary number.
+@end cartouche
+
+@strong{(d) 3 + -32}
+
+Convert 3 to 6-bit unsigned binary. Convert the magnitude of -32 to 6-bit
+unsigned binary, then take the two's complement.
+
+By inspection, 3 = 000011. Also by inspection, 32 = 100000.
+
+Take the two's complement of 100000 by inverting and adding 1:
+
+@display
+Invert 100000 @result{} 011111
+Add 1 @math{011111 + 000001 = 100000}
+@end display
+
+Add the two numbers:
+
+@display
+@math{3 - 32 = 000011 + 100000}
+@math{3 - 32 = 100011}
+@end display
+
+@cartouche
+@result{} @math{3 - 32 = 100011} and does not overflow a 6-bit two's complement
+signed binary number.
+@end cartouche
+
+@strong{(e) -16 + -9}
+
+Mix it up a bit in this one. Rather than sign extending the magnitude while
+unsigned, take two's complement first, then do sign extension of the signed
+binary number.
+
+Convert the magnitude of @math{-16} and @math{-9} to unsigned binary. Then take
+the two's complement. Perform sign extension and then add the 6-bit two's complement
+signed binary numbers to find the result.
+
+@smalldisplay
+16/16 = @math{1 r 0}
+0/8 = @math{0 r 0}
+0/4 = @math{0 r 0}
+0/2 = @math{0 r 0}
+0/1 = @math{0 r 0}
+@end smalldisplay
+
+@result{} 16 = 10000. No implicit extension.
+
+@smalldisplay
+9/8 = @math{1 r 1}
+1/4 = @math{0 r 1}
+1/2 = @math{0 r 1}
+1/1 = @math{1 r 0}
+@end smalldisplay
+
+@result{} 9 = 1001. No implicit extension.
+
+Take two's complement of 10000 (16):
+
+@smalldisplay
+Invert 10000: @result{} 01111
+Add 1: @math{01111 + 00001 = 10000}
+@end smalldisplay
+
+Take two's complement of 1001 (9):
+
+@smalldisplay
+Invert 1001: @result{} 0110
+Add 1: @math{0110 + 0001 = 0111}
+@end smalldisplay
+
+Sign extend both terms:
+
+@math{-16 = 110000}
+@math{-9 = 110111}
+
+Add both terms:
+
+@math{-16 + -9 = 110000 + 110111}
+
+@cartouche
+@result{} @math{-16 + -9 = 110111} and does not overflow a 6-bit two's complement
+signed binary number.
+@end cartouche
+
+@strong{(f) -27 + -31}
+
+Convert the magnitude of @math{-27} and @math{-31} to unsigned binary. Then take
+the two's complement. Perform sign extension and then add the 6-bit two's
+complement signed binary numbers to find the result.
+
+Convert magnitude 27 to unsigned binary.
+
+@smalldisplay
+27/16 = @math{1 r 11}
+11/8 = @math{1 r 3}
+3/4 = @math{0 r 3}
+3/2 = @math{1 r 1}
+1/1 = @math{1 r 0}
+@end smalldisplay
+
+@result{} 27 = 11011. No implicit extension.
+
+Convert magnitude 31 to unsigned binary.
+
+@smalldisplay
+31/16 = @math{1 r 15}
+15/8 = @math{1 r 7}
+7/4 = @math{1 r 3}
+3/2 = @math{1 r 1}
+1/1 = @math{1 r 0}
+@end smalldisplay
+
+@result{} 31 = 11111. No implicit extension.
+
+Take two's complement of 11011 (27).
+
+@smalldisplay
+Invert 11011: @result{} 00100
+Add 1: @math{00100 + 00001 = 00101}
+@end smalldisplay
+
+Take two's complement of 11111 (31).
+
+@smalldisplay
+Invert 11111: @result{} 00000
+Add 1: @math{00000 + 00001 = 00001}
+@end smalldisplay
+
+Sign extend both terms.
+
+@display
+@math{-27 = 100101}
+@math{-31 = 100001}
+@end display
+
+@display
+@math{-27 + -31 = 100101 + 100001}
+@math{-27 + -31 = 000110}
+@end display
+
+From the text, page 18:
+
+@display
+Adding a positive number to a negative number never causes an overflow. Unlike
+unsigned numbers, a carry out of the most significant column does not
+indicate overflow. Instead, @emph{overflow occurs if the two numbers being
+added have the same sign bit and the result has the opposite sign bit.}
+@end display
+
+@cartouche
+@result{} @math{-27 + -31 = 000110} and the result overflows for the reason
+cited above.
+@end cartouche
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.58} Perform the following additions of unsigned hexadecimal
+numbers. Indicate whether or not the sum overflows an 8-bit (two hex digit)
+result.
+
+(a) 0x7 + 0x9 @*
+(b) 0x13 + 0x28 @*
+(c) 0xAB + 0x3E @*
+(d) 0x8F + 0xAD @*
+
+@sc{Solution}
+
+@strong{(a) 0x7 + 0x9}
+
+By inspection, convert 0x7 and 0x9 to binary. Since each hexadecimal digit
+is represented by a 4-bit binary number, we can convert each number to it's
+4-bit binary representation and substitute.
+
+@display
+0x7 = 0111
+0x9 = 1001
+@end display
+
+Adding the two numbers yields
+
+@display
+0x7 + 0x9 = 0111 + 1001
+0x7 + 0x9 = 10000
+@end display
+
+@cartouche
+@result{} 0x7 + 0x9 = 0x10 (10000) and does not overflow an 8-bit result.
+@end cartouche
+
+@strong{(b) 0x13 + 0x28}
+
+By inspection, convert 0x13 and 0x28 to binary. Since each hexadecimal digit is
+represented by a 4-bit binary number, we can convert each number to it's
+4-bit binary representation and substitute.
+
+@display
+0x13 = 0001.0011
+0x28 = 0010.1000
+@end display
+
+Adding the two numbers yields
+
+@display
+0x13 + 0x28 = 0001.0011 + 0010.1000
+0x13 + 0x28 = 0011.1011
+@end display
+
+Converting the binary result back to hexadecimal
+
+@display
+0011.1011 = 0x3.0xB
+0011.1011 = 0x3B
+@end display
+
+@cartouche
+@result{} 0x13 + 0x28 = 0x3B (0011.1011) and does not overflow an 8-bit result.
+@end cartouche
+
+@strong{(c) 0xAB + 0x3E}
+
+By inspection, convert 0xAB and 0x28 to binary. Since each hexadecimal digit is
+represented by a 4-bit binary number, we can convert each number to it's 4-bit
+binary representation and substitute.
+
+@display
+0xAB = 1010.1011
+0x3E = 0011.1110
+@end display
+
+Adding the two numbers yields
+
+@display
+0xAB + 0x3E = 1010.1011 + 0011.1110
+0xAB + 0x3E = 1110.1001
+@end display
+
+Converting the binary result back to hexadecimal
+
+@display
+1110.1001 = 0xE.0x9
+1110.1001 = 0xE9
+@end display
+
+@cartouche
+@result{} 0xAB + 0x3E = 0xE9 (1110.1001) and does not overflow an 8-bit result.
+@end cartouche
+
+@strong{(d) 0x8F + 0xAD}
+
+By inspection, convert 0x8F and 0xAD to binary. Since each hexadecimal digit is
+represented by a 4-bit binary number, we can convert each number to it's 4-bit
+binary representation and substitute.
+
+@display
+0x8F = 1000.1111
+0xAD = 1010.1101
+@end display
+
+Adding the two numbers yields
+
+@display
+0x8F + 0xAD = 1000.1111 + 1010.1101
+0x8F + 0xAD = 0001.0011.1100
+@end display
+
+Converting the binary result back to hexadecimal
+
+@display
+0001.0011.1100 = 0x1.0x3.0xC
+0001.0011.1100 = 0x13C
+@end display
+
+@cartouche
+@result{} 0x8F + 0xAD = 0x13C (0001.0011.1100) and does overflow an 8-bit result.
+@end cartouche
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.60} Convert the following decimal numbers to 5-bit two's
+complement binary numbers and subtract them. Indicate whether or not the
+difference overflows a 5-bit result.
+
+(a) 9 - 7 @*
+(b) 12 - 15 @*
+(c) -6 - 11 @*
+(d) 4 - -8 @*
+
+@sc{Solution}
+
+Subtraction is performed by taking the two' complement and adding.
+
+Overflow works differently for signed numbers than unsigned numbers. From page
+18 of the text:
+
+@display
+Adding a positive number to a negative number never causes an overflow. Unlike
+unsigned numbers, a carry out of the most significant column does not
+indicate overflow. Instead, @emph{overflow occurs if the two numbers being
+added have the same sign bit and the result has the opposite sign bit.}
+@end display
+
+@strong{(a) 9 - 7}
+
+By inspection, 9 is binary 01001 and 7 is binary 00111. Subtraction is
+accomplished by taking the two's complement and adding. We do not need to
+take the two's complement of 9 since it is already a valid signed number.
+
+Take the two's complement of 7 by inverting and adding 1. Inverting yields
+@result{} 11000. Adding 1 yields @result{} 11001.
+
+Now add the two numbers using normal binary addition, carrying as necessary:
+
+@display
+@math{9 - 7} = @math{01001 + 11001}
+@math{9 - 7} = @math{00010}
+@end display
+
+There was a carry out of the @emph{most significant column} but that does not
+indicate an overflow. It is not possible to overflow by adding a positive and
+a negative number. Therefore, the result is:
+
+@cartouche
+@result{} @math{9 - 7 = 00010}, or 2
+@end cartouche
+
+@strong{(b) 12 - 15}
+
+By inspection, 12 is binary 01100 and 15 is binary 01111. Subtraction is
+accomplished by taking the two's complement and adding. We do not need to
+take the two's complement of 12 since it is already a valid signed number.
+
+Take the two's complement of 15 by inverting and adding 1. Inverting yields
+@result{} 10000. Adding 1 yields @result{} 10001.
+
+Now add the two numbers using normal binary addition, carrying as necessary:
+
+@display
+@math{12 - 15} = @math{01100 + 10001}
+@math{12 - 15} = @math{11101}
+@end display
+
+The result is:
+
+@cartouche
+@result{} @math{12 - 15 = 11101}, or -3
+@end cartouche
+
+@strong{(c) -6 - 11}
+
+By inspection, the 5-bit magnitude of -6 and -11 is 00110 and 01011,
+respectively. Since both are negative, we must take the two's complement of
+each.
+
+Invert both:
+
+@display
+00110 @result{} 11001
+01011 @result{} 10100
+@end display
+
+Adding 1 yields:
+
+@display
+@math{11001 + 00001 = 11010}
+@math{10100 + 00001 = 10101}
+@end display
+
+Now add both numbers:
+
+@display
+@math{-6 -11 = 11010 + 10101}
+@math{-6 -11 = 01111}
+@end display
+
+@cartouche
+There was a carry out of the @emph{most significant digit}. Both numbers being
+added have the same sign bit and the result has an opposite sign bit.
+Therefore, the result overflows.
+@end cartouche
+
+@strong{(d) 4 - -8}
+
+By inspection, the 5-bit magnitude of 4 and -8 is 00100 and, 01000
+respectively. Since we are subtracting a negative number, the net result is
+positive. Therefore we do not need to take the two's complement of either
+number.
+
+Now add both numbers:
+
+@display
+@math{00100 + 01000 = 01100}
+@end display
+
+@cartouche
+@result{} @math{4 - -8 = 01100}, or 12
+@end cartouche
+
+
+@tex
+$$ \bowtie $$
+@end tex
+
+@c ###################################################
+@c ###################################################
+@c ###################################################
+
+@sc{Exercise 1.65} Answer the following questions related to BCD systems (see
+@sc{Exercise 1.64} for a definition of BCD).
+
+(a) Write 371 in BCD @*
+(b) Convert @math{000110000111_{BCD}} to decimal @*
+(c) Convert @math{10010101_{BCD}} to binary @*
+(d) Explain the disadvantages of BCD when compared to binary representations of
+numbers @*
+
+@sc{Solution}
+
+@strong{(a) Write 371 in BCD}
+
+Each decimal digit is represented by it's 4-digit binary equivalent. By
+inspection, we can write:
+
+@display
+3 = 0011
+7 = 0111
+1 = 0001
+@end display
+
+Combining the binary representations in the proper order yields the BCD result:
+
+@cartouche
+@result{} 371 = @math{0011.0111.0001_{BCD}}
+@end cartouche
+
+@strong{Convert @math{000110000111_{BCD}} to decimal}
+
+Each 4-bit grouping in the 12-bit BCD number represents a decimal digit.
+We can more clearly write the number as @math{0001.1000.0111_{BCD}}. By
+inspection, we can write:
+
+@display
+0001 = 1
+1000 = 8
+0111 = 7
+@end display
+
+Combining the BCD representations in proper order yields the decimal result:
+
+@cartouche
+@result{} @math{0001.1000.0111_{BCD}} = 187
+@end cartouche
+
+@strong{(c) Convert @math{10010101_{BCD}} to binary}
+
+The BCD number must first be converted to decimal. Then it can be converted to
+binary.
+
+Each 4-bit grouping in the 8-bit BCD number represents a decimal digit. By
+inspection, we can write:
+
+@display
+1001 = 9
+0101 = 5
+@end display
+
+Therefore, the BCD number correpsonds to 95. This may be converted to binary
+by using method 1 demonstrated in Example 1.5.
+
+@smalldisplay
+95/64 = @math{1 r 31}
+31/32 = @math{0 r 31}
+31/16 = @math{1 r 15}
+15/8 = @math{1 r 7}
+7/4 = @math{1 r 3}
+3/2 = @math{1 r 1}
+1/1 = @math{1 r 1}
+@end smalldisplay
+
+Assemble the quotients in @emph{significant} digit order to yield the result:
+
+@cartouche
+@result{} @math{10010101_{BCD}} = 101.1111
+@end cartouche
+
+@strong{(d) Explain the disadvantages of BCD when compared to binary representations of
+numbers}
+
+@cartouche
+Addition of BCD numbers doesn't work directly. Also, the representation
+doesn't maximize the amount of information that can be stored; for example
+2 BCD digits requires 8 bits and can store up to 100 values (0-99) - unsigned 8-
+bit binary can store 28 (256) values.
+@end cartouche
+
+
+@bye
