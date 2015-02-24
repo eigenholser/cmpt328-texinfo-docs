@@ -16,7 +16,7 @@
 @paragraphindent 0
 @comment %**end of header
 
-@c @include @value{filename}.texi.updated
+@include @value{filename}.texi.updated
 @c @include copying.texi
 
 @c @titlepage
@@ -35,7 +35,7 @@
 @comment Table of Contents
 @c @contents
 
-@c @dircategory @value{category}
+@dircategory @value{category}
 @direntry
 * Texinfo Doc Template         Template for Creating New Docs
 @end direntry

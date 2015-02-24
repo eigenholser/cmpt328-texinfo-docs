@@ -2,5 +2,5 @@
 @comment Default splash image for title page. Chances are good that you will
 @comment want to customize this.
 @comment
-@sp 7
-@center @image{../include/yinyang,3in,,,}
+@sp 2
+@center @image{deadlines,5.5in,,,jpg}
