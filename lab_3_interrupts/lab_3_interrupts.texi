@@ -9,17 +9,21 @@
 @set filename lab_3_interrupts
 
 @c lab constants
-@set main_reg 72
-@set main_loop_bp 77
-@set gpiof_entry 242
-@set gpiof_bx 247
-@set systick_bp 263
+@set check_call1 122
+@set check_call2 127
+@set check_r1 84
+@set main_reg 70
+@set main_loop_bp 75
+@set gpiof_entry 257
+@set gpiof_bx 262
+@set systick_bp 281
 
 @comment %**start of header
 @setchapternewpage off
 @setfilename @value{filename}.info
 @settitle @value{title}
 @finalout
+@paragraphindent 0
 @comment %**end of header
 
 @include @value{filename}.texi.updated
@@ -68,38 +72,32 @@
 @comment This is a starting point.
 @node Introduction
 @chapter Introduction
-@noindent
 In Lab 2 we learned about fault conditions, the resulting processor exceptions,
 and how to handle them. Interrupts are similar in that program execution is
 abruptly changed and the location of the Interrupt Service Routine (ISR), like
 the fault handler, is specified in the @emph{vector table}. The difference is
 that interrupts are more configurable to suit our purposes.
 
-@noindent
 For Lab 3 we will examine an assembly language program that uses two different
 interrupts. An edge-triggered interrupt is configured for GPIO port F switch
 SW1. Another interrupt is configured for the system timer (SysTick) that is
 used in debouncing the switch.
 
-@noindent
 Lab 3 also introduces the @file{startup.s} file that provides a complete
 @emph{vector table} for our program. This file will be used with only minor
 modifications in all future assembly projects. You can consider it largely
 @emph{boilerplate} code.
 
-@noindent
 This lab also introduces a fully functional example of how to
 work with the GPIO ports. We will be working with GPIO port F. Even though
 each GPIO port offers different features and has it's own configuration, they
 are all very similar in terms of usage. The LaunchPad has 6 GPIO ports, A-F.
 
-@noindent
 The program we will be working with in this lab activates one of the three
 LEDs when switch SW1 is pushed. Each push of the switch is handled by the two
 different ISRs which together cooperate to process the switch SW1 interrupt
 and rotate the active LED.
 
-@noindent
 The switch SW1 is a mechanical switch and is imperfect---it bounces one or
 more times when pressed. These bounces are very short on the 1ms time scale.
 So humans do not notice this. We experience a crisp click as we press the
@@ -107,7 +105,6 @@ button. But the processor at a clock speed of 80MHz cycles about one hundred
 thousand times each millisecond and notices each bounce and acts on it. The
 result is multiple LED rotations for each press of switch SW1.
 
-@noindent
 The solution to this problem is to implement a debouncing algorithm. I chose
 the system timer to implement debouncing. The basic idea is to have the GPIO
 port F ISR turn off interrupts on GPIO port F and initialize the system timer
@@ -117,24 +114,20 @@ LED colors are rotated. If switch SW1 value is logic HIGH, then re-arm the
 GPIO port F interrupt and carry on as before. In either case, the SysTick ISR
 disables the system timer because we need it only once per SW1 activation.
 
-@noindent
 Note the many places in the code where register LR is pushed onto the stack
 prior to branching. This saves the LR value so the code can return from a
 previous branch using @code{BX LR}.
 
 @node Lab Objective
 @chapter Lab Objective
-@noindent
 This lab will explore interrupts, what they are, and how to use them.
 Interrupts are an important part of modern processor architecture. Secondarily,
 you will learn how to use the General Purpose Input/Output (GPIO) system.
 
-@noindent
 The project you will be working with is much larger than previous lab projects.
 Don't let that bother you---the objective is to learn about interrupts and the
 GPIO system.
 
-@noindent
 You will be introduced to the LaunchPad schematic in the
 @uref{https://westminster.instructure.com/files/62246648/download?download_frd=1&verifier=4ckiiqMaZjgvEiJdL2KBeiKBlUvQgrtvoq1e4lkF, TM4C123G LaunchPad Evaluation Board Users Guide.}
 This will help you understand how to use the GPIO.
@@ -144,43 +137,38 @@ as a reference.
 
 @node Notes
 @chapter Notes
-@noindent
 You should now be familiar with your IAR Embedded Workbench development
 environment. You should also understand the @emph{boot loading} process,
 the @emph{vector table}, and both general and special purpose registers.
 You should also be comfortable referencing the TM4C datasheet.
 
 @section Reference Material
-@noindent
 @uref{https://westminster.instructure.com/files/62246649/download?download_frd=1&verifier=hkiu21FqwDA10ZbhaXkJGY4SDvWC55QpRD9xEpo7, Tiva TM4C123GH6PM Microcontroller Data Sheet}
 will be referenced often in this and future labs. It is in the Canvas Files
 area filed under Tiva C Series Microcontroller. The filename is
 @file{tm4c123gh6pm.pdf}.
 
-@noindent
 This lab exercise introduces the
 @uref{https://westminster.instructure.com/files/62246648/download?download_frd=1&verifier=4ckiiqMaZjgvEiJdL2KBeiKBlUvQgrtvoq1e4lkF, TM4C123G LaunchPad Evaluation Board Users Guide.}
 It is in the Canvas Files area in the Tiva C Series Microcontroller folder. The
 filename is @file{spmu296.pdf}. Download this file to your computer.
 
-@noindent
 The User's Guide  is useful primarily for the schematics following page 19.
 The schematics provide information about the configuration of the GPIO
 pins, switches, LEDs, and jumper blocks. You will need to reference the
 schematic for this and future labs.
 
-@noindent
 Also refer to @file{lm4f120h5qr.h} in the @file{arm/inc/TexasInstruments}
 folder on your development system. This is a C header file that contains
 useful C macro definitions for the TM4C. These macro names have been used
 in the assembly project for this lab.
 
-@noindent
 The following list of citations is relevant to the assembly project written for
 this lab exercise:
 
 @itemize
-@item @cite{Figure 1-1. Tiva™ TM4C123GH6PM Microcontroller High-Level Block Diagram}---datasheet, p48.
+@item @cite{Schematic Sheet 1 of 3}---user's guide, p20.
+@item @cite{Figure 1-1. Tiva TM4C123GH6PM Microcontroller High-Level Block Diagram}---datasheet, p48.
 @item @cite{2.3.2 Stacks}---datasheet, p74.
 @item @cite{2.5.4 Vector Table}---datasheet, p106.
 @item @cite{2.5.7.1 Exception Entry}---datasheet, p109.
@@ -205,16 +193,13 @@ this lab exercise:
 
 @node Experiments
 @chapter Experiments
-@noindent
 Download and extract the Lab 3 project zip file. Double-click on
 @file{workspace.eww} to start IAR Embedded Workbench.
 
-@noindent
 Review the code. Look at @file{startup.s}. The complete @emph{vector table} is
 implemented there. The only exceptions are @code{GPIOPortF_Handler} and
 @code{SysTick_Handler}. They are included in @file{main.s}.
 
-@noindent
 All of the logic for this project is implemented in @file{main.s}. The @code{main}
 function simply initializes GPIO Port F and GPIO Port F pin 4 (SW1) interrupts.
 Incidentally, it also loads some junk data into registers @code{R0}, @code{R1},
@@ -222,14 +207,12 @@ Incidentally, it also loads some junk data into registers @code{R0}, @code{R1},
 see. But this step is for purposes of illustration only. It does not contribute
 to program function at all.
 
-@noindent
 After initialization, the @code{main} function just loops forever. This is
 just to simulate other activity that the processor might be doing as interrupts
 occur. The other activity might be reading from a UART, writing to an ethernet port, or
 reading keyboard input.
 
 @section Start Program in Debugger
-@noindent
 Compile the program. Then Download and Debug. The debugger will break at @code{main}
 as usual. Click the "Go" button on the debug toolbar. @footnote{It is the button with "+++"
 on it.} The program will begin executing. Confirm program operation by pressing
@@ -239,24 +222,46 @@ the active LED rotate through the colors green, blue, and red.
 @section GPIO Port F Interrupt Handler
 Stop debugging.
 In the @file{main.s} source view, set breakpoints @code{main} at line
-@value{main_reg}, and in @code{GPIOPortF_Handler}
-at line @value{gpiof_entry} and @value{gpiof_bx},
+@value{main_reg}, line @value{check_r1} in CheckSW1Value, and in
+@code{GPIOPortF_Handler} at lines @value{gpiof_entry} and @value{gpiof_bx},
 
-@noindent
-Download and Debug. Click the "Go" button once again. The program will stop
-at the first breakpoint on line @value{main_loop_bp}. Single-step @footnote{Click
+Download and Debug. The first observation you will make is the value of switch
+SW1 before and after the pull-up resistor is configured. Click the "Go" button
+to run the program. It will break in the @code{CheckSW1Value} function at line
+@value{check_r1} that is
+called from the @code{GPIOF_Init} function @footnote{See lines @value{check_call1}
+and @value{check_call2}.}. Make sure you have selected @emph{Binary Format}
+by right clicking the value of register @code{R1} in the Watch window.
+
+Single-step through the next few instructions until you reach the @code{LDR R1, [R0]}
+instruction. Execute that and inspect register @code{R1} in the watch window.
+Observe that every bit position is 0 or logic LOW. The pull-up resistor is not yet
+configured. @emph{Make a note of this observation.}
+
+Click the "Go" button again. The program will again break. Repeat the steps
+from the last paragraph. This time you will notice that bit 4 @footnote{Counting
+from 0.} position of R1 is 1.
+This is because the pull-up resistor is configured and is pulling up the
+value of SW1 to logic HIGH. @emph{Make a note of this observation.}
+
+See the LaunchPad schematic sheet 1 of 3 for details on SW1. The switch circuit
+is in the middle of the sheet. It shows that SW1 connects GPIO port F pin 4 to
+GND. The pull-up resistor must be configured in order to arrange for a logic
+level change. Otherwise, SW1 would do nothing. @emph{This is significant.
+You should discuss this in your lab report.}
+
+Click the "Go" button once again. The program will stop
+at the first breakpoint on line @value{main_reg}. Single-step @footnote{Click
 the "Step Into" button on the debug toolbar.} through the @code{LDR} instructions
 that load the @emph{junk} values into the registers. @emph{Note the register
 values as you do this.} You will see each update in turn. Stop single stepping
 when you reach the @code{B .} infinite loop.
 
-@noindent
 Click the "Go" button in the debug toolbar. The program will run freely.
 Then push the button SW1 on the LaunchPad board. The program will stop
 at the breakpoint set on line @value{gpiof_bx}. The GPIO Port F SW1 interrupt
 was triggered by the button push.
 
-@noindent
 @emph{Note the value of the SP register.} In the memory view click in the
 "Go to" field and enter the SP register value using the @code{0x} hexadecimal
 notation. Compare the 4-byte words on the stack with the register values noted
@@ -265,17 +270,18 @@ datasheet. @emph{Note the contents of the general purpose registers R0-R3, R12.}
 They are the same as before. Even though they have been pushed onto the stack,
 their values are unchanged.
 
-@noindent
-@emph{Note the value of register IPSR.}
+@emph{Note the value of register IPSR.} The value in register @code{IPSR} will
+indicate the interrupt number being processed. This will correspond to the
+address contained in the @emph{vector table} at the location corresponding
+to the specific interrupt number. @emph{Examine the vector table and find the
+decimal value of the interrupt number in register IPSR.}
 
-@noindent
 At this point, note that @code{GPIOPortF_Handler} performs only three tasks:
 It clears the interrupt. If this is not done, the interrupt will assert over
 and over. Then it disables the SW1 interrupt. Finally it initializes the
 system timer with interrupt. Program execution then resumes in the @code{main}
 infinite loop. Click the "Go" button in the debug toolbar.
 
-@noindent
 Program execution will stop at the breakpoint set on line @value{gpiof_bx}.
 @c Now set another breakpoint in @code{main} at line @value{main_loop_bp}. We
 @c could not do this before because the program will not loop at a breakpoint
@@ -284,14 +290,12 @@ Program execution will stop at the breakpoint set on line @value{gpiof_bx}.
 because they are modified by the @code{GPIOF_PF4_Interrupt_Clear},
 @code{GPIOF_PF4_Interrupt_Disable}, and @code{SysTick_Init} functions.
 
-@noindent
 Click the "Step Into" button on the debug toolbar. Program execution will now
-be stopped at the @code{B .} infinite loop instruction in @code{main}. @emph{
-Note both the general purpose and special purpose registers.} They now contain
+be stopped at the @code{B .} infinite loop instruction in @code{main}.
+@emph{Note both the general purpose and special purpose registers.} They now contain
 their original values once again. @footnote{Note the memory view at the top of the
 stack. The stack frame has not been erased, only copied back to the registers.}
 
-@noindent
 You are ready to proceed with the next section.
 
 @section  SysTick Interrupt Handler
@@ -301,30 +305,31 @@ we do that, in the @file{main.s} source view, set a breakpoint in
 @code{SysTick_Handler} at line @value{systick_bp}. Now click the "Go" button
 on the debug toolbar.
 
-@noindent
 Program execution will break at line @value{systick_bp} in the
 @code{SysTick_Handler}. Note that the first action taken by the @code{SysTick_Handler}
 is to disable the system timer. We are done with with the timer. It is used only
 for SW1 debounce.
 
-@noindent
 @emph{Note again the SP register.} The @emph{stack frame} has again been pushed
-onto the stack. Since it is the same as before it will appear unchanged.
-@emph{Note the value of register IPSR.}
+onto the stack. Since the @emph{stack frame} it is the same as before it will
+appear unchanged. @emph{Note the value of register IPSR.}
 
-@noindent
+The value in register @code{IPSR} will
+indicate the interrupt number being processed. This will correspond to the
+address contained in the @emph{vector table} at the location corresponding
+to the specific interrupt number. @emph{Examine the vector table and find the
+decimal value of the interrupt number in register IPSR.}
+
 This is where the real action occurs. The first step is to check the value of
 SW1. If it is still pressed, then it is a real button push. Keep in mind that
 at full speed, only a few milliseconds have elapsed since you pushed the button.
 But the switch bounces have been avoided.
 
-@noindent
 The second action will depend on whether SW1 is logic LOW or logic HIGH. See?
 Binary. If SW1 is logic LOW, it is a button push and the LED bit will be shifted
 into the next position. If SW1 is logic HIGH, the LED bit rotation will be
 skipped. In both cases the GPIO port F SW1 interrupt will be re-enabled
 
-@noindent
 Since we did push the button, single-step through the code and follow what
 happens. On the @emph{View} menu select @emph{Watch->Watch 1.} Arrange the
 Watch window conveniently. In the @emph{Expression} field enter "R1". In the
@@ -333,59 +338,51 @@ Make the field wide enough to view all 32 binary digits in the @emph{Value}
 field. @emph{Since you downloaded this project you should already see the
 Watch window. The instructions are for completeness only.}
 
-@noindent
 On the first button push, register R1 will be zero. Step through the code anyway
 to see how it is initialized with the green bit which is @code{0x8}. At this
 point you should see a single bit set in register R1 corresponding to @code{0x8}.
 
-@noindent
 Clear all breakpoints except the one in @code{SysTick_Handler} at line
 @value{systick_bp}. Click the "Go" button on the debug toolbar. Now each time
-you press SW1 program execution will break in @code{SysTick_Handler}.
+you press SW1, program execution will break in @code{SysTick_Handler}.
 
-@noindent
 Press the SW1 button repeatedly. Each time program execution breaks in
 @code{SysTick_Handler}, single-step through the code. Make note of the @emph{Watch}
-window and the binary value of register R1. Watch when the @code{LSRS} instruction
+window and the binary value of register R1. Watch when the @code{LSR} instruction
 is executed. This instruction is Logical Shift Right. Bit position 0 is for
 SW2. After the red LED is set, the bit will be shifted into the SW2 position.
 But we do not have any interest in SW2 and we do have an interest in testing
 for end of rotation. So on each bit shift,  a @code{BIC} or bit clear
-instruction is used to clear bit position 0. Then if register R1 is nonzero,
-@code{CBNZ} Compare Branch Non Zero is done to @code{SetLED} to set the
+instruction is used to clear bit position 0. Then if register R1 is non-zero,
+@code{CBNZ}, Compare Branch Non-Zero, is done to @code{SetLED} to set the
 shifted bit value. Otherwise, register R1 is zero and is reinitialized with
 @code{0x8}.
 
 @comment read-modify-write issues
 
 @section GPIO Port F Initialization
-@noindent
-Review page 1 of the LaunchPad schematics in the LaunchPad User's Guide. The
+Review sheet 1 of the LaunchPad schematics in the LaunchPad User's Guide. The
 physical GPIO pins are presented in detail there. In the upper left is a
 partial representation of chip U1 labeled U1-A. Each GPIO pin is labeled
 with it's port designator and a pin number. For example, USR SW1 is labeled
 PF4 to indicate Port F pin 4. Similarly, the LEDs are labeled PF1, PF2, and
-PF3.
+PF3 respectively for green, blue, and red.
 
-@noindent
 Note also the representation of SW1 in the middle of page 1 of the schematic.
 It shows a switch that will short to GND when pressed. In the lower left on
 the same page see LED_R, LED_G, and LED_B.
 
-@noindent
 Review the High-Level Block Diagram listed in the References section. It is on
 page 48 of the datasheet. Note that there are two busses used for communicating
 with the peripherals. The Advanced Peripheral Bus (APB) is the legacy bus and is
 used for compatability. It is the default. We will be using the faster
 Advanced High Performance Bus (AHB).
 
-@noindent
 Turn your attention now to the code in the IAR Embedded Workbench. See the
 function @code{GPIOF_Init}. This section of code initializes GPIO port F and
 the specific GPIO port F pins we want to use. This is done very simply by
 writing to various control registers.
 
-@noindent
 @code{GPIOF_Init} takes 4 steps:
 @itemize
 @item Select the AHB.
@@ -395,7 +392,6 @@ input.
 @item Set PF1-4 as digital.
 @end itemize
 
-@noindent
 Note how the register values are set. First, the register address is loaded into
 register R0. Then the value of the register is loaded into register R1. Then
 the @code{ORR} instruction is used to toggle only 1 bit. Recall from the
@@ -403,30 +399,25 @@ Boolean Null Element theorem (T2') @code{B + 1 = 1} that any binary digit OR
 1 is equal to 1. The resulting value is stored back into the register at the
 address in register R0.
 
-@noindent
 This is an important approach. Using the @code{ORR} instruction does not
 disturb any other bits in the register that are already set and we do not need
 to test them individually. Nor do we stomp on them by using
 @code{LDR R1, 0x20} that would set bit 5 but would also @emph{clear} every
 other bit!
 
-@noindent
 Single-step through @code{GPIOF_Init} to familiarize yourself with it's
 operation.
 
 @section GPIO Port F Interrupt Initialization
-@noindent
 The code in @code{GPIOF_Interrupt_Init} configures the interrupt on SW1.
 GPIO interrupts must be configured in two steps. First, configure the Nested
 Vector Interrupt Controller (NVIC) to process the interrupt. Second, configure
 the GPIO interrupt.
 
-@noindent
 Configuring the NVIC is easy. Just set the priority of the specific interrupt
 that you want to handle. In our case we are selecting the highest priority of
 0. Next, set the enable bit in the memory mapped register NVIC_EN0.
 
-@noindent
 Configuring the interrupt on SW1 is also easy. Edge-triggered interrupts
 @footnote{As opposed to level-triggered interrupts.} are
 the default.
@@ -436,12 +427,10 @@ we did not pull PF4 HIGH, there would be no logic level change on SW1 press.
 Last, we need to set the GPIO port F interrupt mask to select interrupts on
 PF4.
 
-@noindent
 Now interrupts are fully configured in the NVIC and GPIO port F. Single-step
 through @code{GPIOF_Interrupt_Init} to familiarize yourself with it's operation.
 
 @section System Timer Initialization
-@noindent
 The system timer implements a simple countdown timer. The 24-bit countdown or
 RELOAD value is loaded into the NVIC_ST_RELOAD register. Once enabled, the
 system timer counts down from this value once per clock cycle. The current
@@ -449,21 +438,18 @@ value of the timer is stored in NVIC_ST_CURRENT. When the count down reaches
 zero, time is up. In our case, we setup an interrupt to be triggered when the
 count down reaches zero.
 
-@noindent
 The system timer is useful because we do not need to implement it in our code.
 It is an automatic mechanism of the processor. If we want to implement a delay
 loop, we can just loop and wait until the NVIC_ST_CURRENT value reaches zero.
 Or, we can setup the interrupt and forget about it until the interrupt is
 triggered. The latter is the approach taken in this project.
 
-@noindent
 Configuring the NVIC is the same as described earlier in GPIO Port F Interrupt
 Initialization. To configure the system timer, we need to first disable the
 timer so it is not counting down as we are configuring it. Then the countdown
 value is loaded into the NVIC_ST_RELOAD register. The NVIC_ST_CURRENT register
 is cleared. Once fully configured, we enable the system timer with interrupts.
 
-@noindent
 In the source view clear all breakpoints. Set a breakpoint in @file{main.s} at
 line 187. Click the "Go" button on the debug toolbar. Press button SW1 on the
 LaunchPad. Program execution will stop at your breakpoint. Single-step through
@@ -471,7 +457,6 @@ the @code{SysTick_Init} code to familiarize yourself with it's operation.
 
 @node Lab Report
 @chapter Lab Report
-@noindent
 Lab report will focus on the general purpose of interrupts as well as their
 specific use in this lab project. It will also cover the roles played by the
 vector table and the stack. Observations made during the experiments chapter
