@@ -17,6 +17,7 @@
 @set gpiof_entry 257
 @set gpiof_bx 262
 @set systick_bp 281
+@set systick_init_bp 201
 
 @comment %**start of header
 @setchapternewpage off
@@ -120,13 +121,12 @@ previous branch using @code{BX LR}.
 
 @node Lab Objective
 @chapter Lab Objective
-This lab will explore interrupts, what they are, and how to use them.
-Interrupts are an important part of modern processor architecture. Secondarily,
-you will learn how to use the General Purpose Input/Output (GPIO) system.
+This lab will explore interrupts, what they are, and how the processor handles
+them. This encompases the @emph{vector table}, @emph{interrupt service routines},
+and @emph{context switching}.
 
-The project you will be working with is much larger than previous lab projects.
-Don't let that bother you---the objective is to learn about interrupts and the
-GPIO system.
+Secondarily, you will learn how to use the General Purpose Input/Output (GPIO)
+system.
 
 You will be introduced to the LaunchPad schematic in the
 @uref{https://westminster.instructure.com/files/62246648/download?download_frd=1&verifier=4ckiiqMaZjgvEiJdL2KBeiKBlUvQgrtvoq1e4lkF, TM4C123G LaunchPad Evaluation Board Users Guide.}
@@ -225,7 +225,10 @@ In the @file{main.s} source view, set breakpoints @code{main} at line
 @value{main_reg}, line @value{check_r1} in CheckSW1Value, and in
 @code{GPIOPortF_Handler} at lines @value{gpiof_entry} and @value{gpiof_bx},
 
-Download and Debug. The first observation you will make is the value of switch
+Download and Debug.
+
+@subsection SW1 Pull-up Resistor
+The first observation you will make is the value of switch
 SW1 before and after the pull-up resistor is configured. Click the "Go" button
 to run the program. It will break in the @code{CheckSW1Value} function at line
 @value{check_r1} that is
@@ -250,6 +253,7 @@ GND. The pull-up resistor must be configured in order to arrange for a logic
 level change. Otherwise, SW1 would do nothing. @emph{This is significant.
 You should discuss this in your lab report.}
 
+@subsection Load Conspicuous Values in Registers
 Click the "Go" button once again. The program will stop
 at the first breakpoint on line @value{main_reg}. Single-step @footnote{Click
 the "Step Into" button on the debug toolbar.} through the @code{LDR} instructions
@@ -257,6 +261,7 @@ that load the @emph{junk} values into the registers. @emph{Note the register
 values as you do this.} You will see each update in turn. Stop single stepping
 when you reach the @code{B .} infinite loop.
 
+@subsection SW1 Interrupt
 Click the "Go" button in the debug toolbar. The program will run freely.
 Then push the button SW1 on the LaunchPad board. The program will stop
 at the breakpoint set on line @value{gpiof_bx}. The GPIO Port F SW1 interrupt
@@ -276,11 +281,17 @@ address contained in the @emph{vector table} at the location corresponding
 to the specific interrupt number. @emph{Examine the vector table and find the
 decimal value of the interrupt number in register IPSR.}
 
+The memory address in the @emph{vector table} corresponding to the interrupt
+number in register @code{IPSR} is the location of the executable code the
+processor is to execute---it is the @emph{interrupt service routine} or
+ISR. In the disassembly window, compare the memory address in the
+@emph{vector table} and the beginning of the @code{GPIOPortF_Handler}.
+
 At this point, note that @code{GPIOPortF_Handler} performs only three tasks:
 It clears the interrupt. If this is not done, the interrupt will assert over
-and over. Then it disables the SW1 interrupt. Finally it initializes the
-system timer with interrupt. Program execution then resumes in the @code{main}
-infinite loop. Click the "Go" button in the debug toolbar.
+and over @emph{ad infinitum}. Then it disables the SW1 interrupt. Finally it
+initializes the system timer with interrupt. Program execution then resumes in
+the @code{main} infinite loop. Click the "Go" button in the debug toolbar.
 
 Program execution will stop at the breakpoint set on line @value{gpiof_bx}.
 @c Now set another breakpoint in @code{main} at line @value{main_loop_bp}. We
@@ -290,6 +301,7 @@ Program execution will stop at the breakpoint set on line @value{gpiof_bx}.
 because they are modified by the @code{GPIOF_PF4_Interrupt_Clear},
 @code{GPIOF_PF4_Interrupt_Disable}, and @code{SysTick_Init} functions.
 
+@subsection Return From Interrupt Handler
 Click the "Step Into" button on the debug toolbar. Program execution will now
 be stopped at the @code{B .} infinite loop instruction in @code{main}.
 @emph{Note both the general purpose and special purpose registers.} They now contain
@@ -305,6 +317,7 @@ we do that, in the @file{main.s} source view, set a breakpoint in
 @code{SysTick_Handler} at line @value{systick_bp}. Now click the "Go" button
 on the debug toolbar.
 
+@subsection SysTick Interrupt
 Program execution will break at line @value{systick_bp} in the
 @code{SysTick_Handler}. Note that the first action taken by the @code{SysTick_Handler}
 is to disable the system timer. We are done with with the timer. It is used only
@@ -320,6 +333,7 @@ address contained in the @emph{vector table} at the location corresponding
 to the specific interrupt number. @emph{Examine the vector table and find the
 decimal value of the interrupt number in register IPSR.}
 
+@subsection Check SW1 Value
 This is where the real action occurs. The first step is to check the value of
 SW1. If it is still pressed, then it is a real button push. Keep in mind that
 at full speed, only a few milliseconds have elapsed since you pushed the button.
@@ -330,6 +344,7 @@ Binary. If SW1 is logic LOW, it is a button push and the LED bit will be shifted
 into the next position. If SW1 is logic HIGH, the LED bit rotation will be
 skipped. In both cases the GPIO port F SW1 interrupt will be re-enabled
 
+@subsection Rotate the LED Bit
 Since we did push the button, single-step through the code and follow what
 happens. On the @emph{View} menu select @emph{Watch->Watch 1.} Arrange the
 Watch window conveniently. In the @emph{Expression} field enter "R1". In the
@@ -451,7 +466,8 @@ value is loaded into the NVIC_ST_RELOAD register. The NVIC_ST_CURRENT register
 is cleared. Once fully configured, we enable the system timer with interrupts.
 
 In the source view clear all breakpoints. Set a breakpoint in @file{main.s} at
-line 187. Click the "Go" button on the debug toolbar. Press button SW1 on the
+line @value{systick_init_bp}. Click the "Go" button on the debug toolbar.
+Press button SW1 on the
 LaunchPad. Program execution will stop at your breakpoint. Single-step through
 the @code{SysTick_Init} code to familiarize yourself with it's operation.
 

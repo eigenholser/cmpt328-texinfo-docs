@@ -893,7 +893,70 @@ Apply the sign @result{} @math{-29}.
 @result{} 100011 = -29
 @end cartouche
 
-@strong{(d) 10110101}
+@strong{(c) 0100.1110}
+
+0100.1110 is positive. Positive two's complement binary is equivalent to
+unsigned binary. Convert to decimal by summing the decimal values  of each
+column:
+
+@multitable @columnfractions 0.10 0.25 0.10 0.65
+@c
+@item @math{2^7}
+@tab 128's column
+@tab 0
+@tab @math{0 x 2^5}
+@c
+@item @math{2^6}
+@tab 64's column
+@tab 1
+@tab @math{1 x 2^5}
+@c
+@item @math{2^5}
+@tab 32's column
+@tab 0
+@tab @math{0 x 2^5}
+@c
+@item @math{2^4}
+@tab 16's column
+@tab 0
+@tab @math{0 x 2^4}
+@c
+@item @math{2^3}
+@tab 8's column
+@tab 1
+@tab @math{1 x 2^3}
+@c
+@item @math{2^2}
+@tab 4's column
+@tab 1
+@tab @math{1 x 2^2}
+@c
+@item @math{2^1}
+@tab 2's column
+@tab 1
+@tab @math{1 x 2^1}
+@c
+@item @math{2^0}
+@tab 1's column
+@tab 0
+@tab @math{0 x 2^0}
+@c
+@end multitable
+
+
+@smalldisplay
+@math{(0 x 2^7) + (1 x 2^6) + (0 x 2^5) + (0 x 2^4) + (1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)}
+@math{(0 x 128) + (1 x 64) + (0 x 32) + (0 x 16) + (1 x 8) + (1 x 4) + (1 x 2) + (0 x 1)}
+@math{0 + 64 + 0 + 0 + 8 + 4 + 2 + 0}
+@math{78}
+@end smalldisplay
+
+@cartouche
+@result{} 0100.1110 = 78
+@end cartouche
+
+
+@strong{(d) 1011.0101}
 
 10110101 is negative. Compute it's decimal value by summing the decimal value
 of each column.
@@ -1028,7 +1091,7 @@ Now assemble each digit from the quotients in the columns corresponding to the
 respective powers of two in @emph{most significant} order.
 
 @cartouche
-@result{} 52 = 11.0110
+@result{} 52 = 11.0100
 @end cartouche
 
 @strong{(c) 339}
@@ -1151,11 +1214,15 @@ The highest power of 16 less than or equal to 711 is @math{16^2 = 256}.
 
 @display
 711/256 = @math{2 r 199}
-199/16 = @math{12 r 7}
+199/16 = @math{12 r 7}, 0xC by inspection.
 7/1 = @math{7 r 0}
 @end display
 
 Combine the hexadecimal digits in @emph{most significant} order.
+
+@cartouche
+@result{} 711 = 0x2C7
+@end cartouche
 
 @tex
 $$ \bowtie $$
@@ -1812,20 +1879,20 @@ do not need to take the two's complement.
 9/8 = @math{1 r 1}
 1/4 = @math{0 r 1}
 1/2 = @math{0 r 1}
-1/1 = @math{0 r 0}
+1/1 = @math{1 r 0}
 @end smalldisplay
 
-@result{} 9 = 001000 implicitly sign extending.
+@result{} 9 = 001001 implicitly sign extending.
 
 Adding the two binary numbers
 
 @display
-@math{16 + 9 = 010000 + 001000}
-@math{16 + 9 = 011000}
+@math{16 + 9 = 010000 + 001001}
+@math{16 + 9 = 011001}
 @end display
 
 @cartouche
-@result{} @math{16 + 9 = 011000} and does not overflow a 6-bit result.
+@result{} @math{16 + 9 = 011001} and does not overflow a 6-bit result.
 @end cartouche
 
 @strong{(b) 27 + 31}
@@ -1861,7 +1928,7 @@ Adding the two binary numbers
 @end smalldisplay
 
 @cartouche
-@result{} The result 111011 has a negative sign bit and is outside the range of
+@result{} The result 111010 has a negative sign bit and is outside the range of
 6-bit two's complement signed numbers.
 @end cartouche
 
@@ -1987,7 +2054,7 @@ Add both terms:
 @math{-16 + -9 = 110000 + 110111}
 
 @cartouche
-@result{} @math{-16 + -9 = 110111} and does not overflow a 6-bit two's complement
+@result{} @math{-16 + -9 = 100111} and does not overflow a 6-bit two's complement
 signed binary number.
 @end cartouche
 
