@@ -669,11 +669,15 @@ decimal values of each hexadecimal digit. The decimal values are represented by
 @tab 14
 @end multitable
 
-@smalldisplay
-@math{(4 x 16^1) + (14 x 16^0)}
-@math{(4 x 16) + (14 x 1)}
-@math{78}
-@end smalldisplay
+@tex
+$$
+\eqalign{
+\hbox{0x4E} &= (4 x 16^1) + (14 x 16^0)\cr
+    &= (4 x 16) + (14 x 1)\cr
+\hbox{0x4E} &= 78
+}
+$$
+@end tex
 
 @cartouche
 @result{} 0x4E = 78
@@ -694,11 +698,13 @@ decimal values of each hexadecimal digit. The decimal values are represented by
 @tab 12
 @end multitable
 
-@smalldisplay
-@math{(7 x 16^1) + (12 x 16^0)}
-@math{(7 x 16) + (12 x 1)}
-@math{124}
-@end smalldisplay
+@tex
+$$
+\eqalign{
+\hbox{0x7C} &= (7 x 16^1) + (12 x 16^0)\cr
+            &= (7 x 16) + (12 x 1)\cr
+\hbox{0x7C} &= 124}$$
+@end tex
 
 @cartouche
 @result{} 0x7C = 124
@@ -729,12 +735,16 @@ decimal values of each hexadecimal digit. The decimal values are represented by
 @tab 10
 @end multitable
 
-@smalldisplay
-@math{(14 x 16^3) + (13 x 16^2) + (3 x 16^1) + (10 x 16^0)}
-@math{(14 x 4096) + (13 x 256) + (3 x 16) + (10 x 1)}
-@math{57,344 + 3,328 + 48 + 10}
-@math{60,730}
-@end smalldisplay
+@tex
+$$
+\eqalign{
+\hbox{0xED3A} &= (14 x 16^3) + (13 x 16^2) + (3 x 16^1) + (10 x 16^0)\cr
+              &= (14 x 4096) + (13 x 256) + (3 x 16) + (10 x 1)\cr
+              &= 57,344 + 3,328 + 48 + 10\cr
+\hbox{0xED3A} &= 60,730
+}
+$$
+@end tex
 
 @cartouche
 @result{} 0xED3A = 60,730
@@ -786,12 +796,17 @@ decimal values of each hexadecimal digit. The decimal values are represented by
 @c
 @end multitable
 
-@smalldisplay
-@math{(4 x 16^7) + (0 x 16^6) + (3 x 16^5) + (15 x 16^4) + (11 x 16^3) + (0 x 16^2) + (0 x 16^1) + (1 x 16^0)}
-@math{(4 x 268,435,456) + (0 x 16,777,216) + (3 x 1,048,576) (15 x 65,536) + (11 x 4096) + (0 x 256) + (0 x 16) + (1 x 1)}
-@math{1,073,741,824 + 0 + 3,145,728 + 983,040 + 45,056 + 0 + 0 + 1}
-@math{1,077,915,649}
-@end smalldisplay
+@tex
+$$
+\eqalign{
+\hbox{0x403FB001} &= (4 x 16^7) + (0 x 16^6) + (3 x 16^5) + (15 x 16^4) + (11 x 16^3) + (0 x 16^2) + (0 x 16^1)\cr
+                  &\hskip1em + (1 x 16^0)\cr
+                  &= (4 x 268,435,456) + (0 x 16,777,216) + (3 x 1,048,576) (15 x 65,536) + (11 x 4096)\cr
+                  &\hskip1em + (0 x 256) + (0 x 16) + (1 x 1)\cr
+                  &= 1,073,741,824 + 0 + 3,145,728 + 983,040 + 45,056 + 0 + 0 + 1\cr
+\hbox{0x403FB001} &= 1,077,915,649
+}$$
+@end tex
 
 @cartouche
 @result{} 0x403FB001 = 1,077,915,649
@@ -821,10 +836,12 @@ and assemble in @emph{most significant} order.
 
 By inspection, 0x4E breaks down to the 4-bit nibbles
 
-@display
-0x4 = 0100
-0xE = 1110
-@end display
+@tex
+$$\eqalign{
+\hbox{0x4} &= 0100\cr
+\hbox{0xE} &= 1110
+}$$
+@end tex
 
 So the unsigned binary representation is:
 
@@ -836,10 +853,12 @@ So the unsigned binary representation is:
 
 By inspection, 0x7C breaks down to the 4-bit nibbles
 
-@display
-0x7 = 0111
-0xC = 1100
-@end display
+@tex
+$$\eqalign{
+\hbox{0x7} &= 0111\cr
+\hbox{0xC} &= 1100
+}$$
+@end tex
 
 So the unsigned binary representation is:
 
@@ -851,12 +870,14 @@ So the unsigned binary representation is:
 
 By inspection, 0xED3A breaks down to the 4-bit nibbles
 
-@display
-0xE = 1110
-0xD = 1101
-0x3 = 0011
-0xA = 1010
-@end display
+@tex
+$$\eqalign{
+\hbox{0xE} &= 1110\cr
+\hbox{0xD} &= 1101\cr
+\hbox{0x3} &= 0011\cr
+\hbox{0xA} &= 1010
+}$$
+@end tex
 
 So the unsigned binary is
 
@@ -868,16 +889,18 @@ So the unsigned binary is
 
 By inspection, 0x403FB001 breaks down to the 4-bit nibbles
 
-@display
-0x4 = 0100
-0x0 = 0000
-0x3 = 0011
-0xF = 1111
-0xB = 1011
-0x0 = 0000
-0x0 = 0000
-0x1 = 0001
-@end display
+@tex
+$$\eqalign{
+\hbox{0x4} &= 0100\cr
+\hbox{0x0} &= 0000\cr
+\hbox{0x3} &= 0011\cr
+\hbox{0xF} &= 1111\cr
+\hbox{0xB} &= 1011\cr
+\hbox{0x0} &= 0000\cr
+\hbox{0x0} &= 0000\cr
+\hbox{0x1} &= 0001
+}$$
+@end tex
 
 So the unsigned binary is
 
@@ -932,12 +955,14 @@ column as demonstrated in Figure 1.6 of the text.
 @c
 @end multitable
 
-@smalldisplay
-@math{(-1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)}
-@math{(-1 x 8) + (1 x 4) + (1 x 2) + (0 x 1)}
-@math{-8 + 4 + 2 + 0}
-@math{-2}
-@end smalldisplay
+@tex
+$$\eqalign{
+1110 &= (-1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)\cr
+     &= (-1 x 8) + (1 x 4) + (1 x 2) + (0 x 1)\cr
+     &= -8 + 4 + 2 + 0\cr
+1110 &= -2
+}$$
+@end tex
 
 @cartouche
 @result{} 1110 signed = -2
@@ -951,12 +976,14 @@ Add 1: @math{0001 + 0001} = 0010
 
 Again, summing the columns in the table above@enddots{}
 
-@smalldisplay
-@math{(0 x 2^3) + (0 x 2^2) + (1 x 2^1) + (0 x 2^0)}
-@math{(0 x 8) + (0 x 4) + (1 x 2) + (0 x 1)}
-@math{0 + 0 + 2 + 0}
-@math{2}
-@end smalldisplay
+@tex
+$$\eqalign{
+0010 &= (0 x 2^3) + (0 x 2^2) + (1 x 2^1) + (0 x 2^0)\cr
+     &= (0 x 8) + (0 x 4) + (1 x 2) + (0 x 1)\cr
+     &= 0 + 0 + 2 + 0\cr
+0010 &= 2
+}$$
+@end tex
 
 But since the signed binary number 1110 is negative, we apply the sign to the
 magnitude 2.
@@ -1004,12 +1031,14 @@ each column.
 @c
 @end multitable
 
-@smalldisplay
-@math{(-1 x 2^5) + (0 x 2^4) + (0 x 2^3) + (0 x 2^2) + (1 + 2^1) + (1 + 2^0)}
-@math{(-1 x 32) + (0 x 16) + (0 x 8) + (0 x 4) + (1 + 2) + (1 + 1)}
-@math{-32 + 0 + 0 + 0 + 2 + 1}
-@math{-29}
-@end smalldisplay
+@tex
+$$\eqalign{
+100011 &= (-1 x 2^5) + (0 x 2^4) + (0 x 2^3) + (0 x 2^2) + (1 + 2^1) + (1 + 2^0)\cr
+       &= (-1 x 32) + (0 x 16) + (0 x 8) + (0 x 4) + (1 + 2) + (1 + 1)\cr
+       &= -32 + 0 + 0 + 0 + 2 + 1\cr
+100011 &= -29
+}$$
+@end tex
 
 @cartouche
 @result{} 100011 = -29
@@ -1018,22 +1047,30 @@ each column.
 Alternatively, find it's magnitude by taking the two's complement and apply the
 sign to the decimal result.
 
-Invert the bits: 100011 @result{} 011100 @*
-Add 1: @math{011100 + 000001} = 011101
+Take the two's complement by inverting and adding 1:
+
+@tex
+$$\eqalign{
+\neg\;10.0011 &= 01.1100\cr
+01.1100 + 00.0001 &= 01.1101
+}$$
+@end tex
 
 Again, summing the columns in the table above@enddots{}
 
-@smalldisplay
-@math{(0 x 2^5) + (1 x 2^4) + (1 x 2^3) + (1 x 2^2) + (0 x 2^1) + (1 x 2^0)}
-@math{(0 x 32) + (1 x 16) + (1 x 8) + (1 x 4) + (0 x 2) + (1 x 1)}
-@math{0 + 16 + 8 + 4 + 0 + 1}
-@math{29}
-@end smalldisplay
+@tex
+$$\eqalign{
+01.1101 &= (0 x 2^5) + (1 x 2^4) + (1 x 2^3) + (1 x 2^2) + (0 x 2^1) + (1 x 2^0)\cr
+       &= (0 x 32) + (1 x 16) + (1 x 8) + (1 x 4) + (0 x 2) + (1 x 1)\cr
+       &= 0 + 16 + 8 + 4 + 0 + 1\cr
+01.1101 &= 29
+}$$
+@end tex
 
 Apply the sign @result{} @math{-29}.
 
 @cartouche
-@result{} 100011 = -29
+@result{} 10.0011 = -29
 @end cartouche
 
 @strong{(c) 0100.1110}
@@ -1087,12 +1124,14 @@ column:
 @end multitable
 
 
-@smalldisplay
-@math{(0 x 2^7) + (1 x 2^6) + (0 x 2^5) + (0 x 2^4) + (1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)}
-@math{(0 x 128) + (1 x 64) + (0 x 32) + (0 x 16) + (1 x 8) + (1 x 4) + (1 x 2) + (0 x 1)}
-@math{0 + 64 + 0 + 0 + 8 + 4 + 2 + 0}
-@math{78}
-@end smalldisplay
+@tex
+$$\eqalign{
+0100.1110 &= (0 x 2^7) + (1 x 2^6) + (0 x 2^5) + (0 x 2^4) + (1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)\cr
+          &= (0 x 128) + (1 x 64) + (0 x 32) + (0 x 16) + (1 x 8) + (1 x 4) + (1 x 2) + (0 x 1)\cr
+          &= 0 + 64 + 0 + 0 + 8 + 4 + 2 + 0\cr
+0100.1110 &= 78
+}$$
+@end tex
 
 @cartouche
 @result{} 0100.1110 = 78
@@ -1148,32 +1187,46 @@ of each column.
 @c
 @end multitable
 
-@smalldisplay
-@math{(-1 x 2^7) + (0 x 2^6) + (1 x 2^5) + (1 + 2^4) + (0 x 2^3) + (1 x 2^2) + (0 x 2^1) + (1 x 2^0)}
-@math{(-1 x 128) + (0 x 64) + (1 x 32) + (1 + 16) + (0 x 8) + (1 x 4) + (0 x 2) + (1 x 1)}
-@math{-128 + 0 + 32 + 16 + 0 + 4 + 0 + 1}
-@math{-75}
-@end smalldisplay
+@tex
+$$\eqalign{
+1011.0101 &= (-1 x 2^7) + (0 x 2^6) + (1 x 2^5) + (1 + 2^4) + (0 x 2^3) + (1 x 2^2) + (0 x 2^1) + (1 x 2^0)\cr
+          &= (-1 x 128) + (0 x 64) + (1 x 32) + (1 + 16) + (0 x 8) + (1 x 4) + (0 x 2) + (1 x 1)\cr
+          &= -128 + 0 + 32 + 16 + 0 + 4 + 0 + 1\cr
+1011.0101 &= -75
+}$$
+@end tex
+
+@cartouche
+@result{} 1011.0101 = @math{-75}
+@end cartouche
 
 Alternatively, find it's magnitude by taking the two's complement and applying
 the sign.
 
-Invert the bits: 1011.0101 @result{} 0100.1010 @*
-Add 1: @math{0100.1010 + 00000001} = 0100.1011
+Take the two’s complement by inverting and adding 1:
+
+@tex
+$$\eqalign{
+\neg1011.0101 &= 0100.1010\cr
+0100.1010 + 0000.0001 &= 0100.1011
+}$$
+@end tex
 
 Again, summing the columns in the table above@enddots{}
 
-@smalldisplay
-@math{(0 x 2^7) + (1 x 2^6) + (0 x 2^5) + (0 x 2^4) + (1 x 2^3) + (0 x 2^2) + (1 x 2^1) + (1 x 2^0)}
-@math{(0 x 128) + (1 x 64) + (0 x 32) + (0 x 16) + (1 x 8) + (0 x 4) + (1 x 2) + (1 x 1)}
-@math{0 + 64 + 0 + 0 + 8 + 0 + 2 + 1}
-@math{75}
-@end smalldisplay
+@tex
+$$\eqalign{
+0100.1011 &= (0 x 2^7) + (1 x 2^6) + (0 x 2^5) + (0 x 2^4) + (1 x 2^3) + (0 x 2^2) + (1 x 2^1) + (1 x 2^0)\cr
+          &= (0 x 128) + (1 x 64) + (0 x 32) + (0 x 16) + (1 x 8) + (0 x 4) + (1 x 2) + (1 x 1)\cr
+          &= 0 + 64 + 0 + 0 + 8 + 0 + 2 + 1\cr
+0100.1011 &= 75
+}$$
+@end tex
 
 Now apply the sign.
 
 @cartouche
-@result{} 1011.0101 = -75
+@result{} 1011.0101 = @math{-75}
 @end cartouche
 
 @tex
@@ -1202,12 +1255,14 @@ from the text.
 Divide by the highest power of 2. The quotient will be the binary digit. Repeat
 the process with the remainder for each power of 2.
 
-@smalldisplay
-14/8 = @math{1 r 6}
-6/4 = @math{1 r 2}
-2/2 = @math{1 r 0}
-0/1 = @math{0 r 0}
-@end smalldisplay
+@tex
+$$\eqalign{
+14/8 &= 1 r 6\cr
+6/4 &= 1 r 2\cr
+2/2 &= 1 r 0\cr
+0/1 &= 0 r 0
+}$$
+@end tex
 
 The binary number is derived by using the quotient in the column for each power
 of 2. The result corresponds to the value of columns 8, 4, 2, 1.
@@ -1221,14 +1276,16 @@ of 2. The result corresponds to the value of columns 8, 4, 2, 1.
 Solve by repeating the process used in @strong{(a)}. The highest power of 2
 that is less than or equal to 52 is @math{2^5 = 32}.
 
-@smalldisplay
-52/32 = @math{1 r 20}
-20/16 = @math{1 r 4}
-4/8 = @math{0 r 4}
-4/4 = @math{1 r 0}
-0/2 = @math{0 r 0}
-0/1 = @math{0}
-@end smalldisplay
+@tex
+$$\eqalign{
+52/32 &= 1 r 20\cr
+20/16 &= 1 r 4\cr
+4/8 &= 0 r 4\cr
+4/4 &= 1 r 0\cr
+0/2 &= 0 r 0\cr
+0/1 &= 0 r 0
+}$$
+@end tex
 
 Now assemble each digit from the quotients in the columns corresponding to the
 respective powers of two in @emph{most significant} order.
@@ -1242,17 +1299,19 @@ respective powers of two in @emph{most significant} order.
 Solve by repeating the process used in @strong{(a)}. The highest power of 2 that
 is less than or equal to 339 is @math{2^8 = 256}.
 
-@smalldisplay
-339/256 = @math{1 r 83}
-83/128 = @math{0 r 83}
-83/64 = @math{1 r 19}
-19/32 = @math{0 r 19}
-19/16 = @math{1 r 3}
-3/8 = @math{0 r 3}
-3/4 = @math{0 r 3}
-3/2 = @math{0 r 1}
-1/1 = @math{1 r 0}
-@end smalldisplay
+@tex
+$$\eqalign{
+339/256 &= 1 r 83\cr
+83/128 &= 0 r 83\cr
+83/64 &= 1 r 19\cr
+19/32 &= 0 r 19\cr
+19/16 &= 1 r 3\cr
+3/8 &= 0 r 3\cr
+3/4 &= 0 r 3\cr
+3/2 &= 0 r 1\cr
+1/1 &= 1 r 0
+}$$
+@end tex
 
 Now assemble each digit from the quotients in the columns corresponding to the
 respective powers of two in @emph{most significant} order.
@@ -1266,18 +1325,20 @@ respective powers of two in @emph{most significant} order.
 Solve by repeating the process used in previous steps. The highest power of 2
 that is less than or equal to 711 is @math{2^9 = 512}.
 
-@smalldisplay
-711/512 = @math{1 r 199}
-199/256 = @math{0 r 199}
-199/128 = @math{1 r 71}
-71/64 = @math{1 r 7}
-7/32 = @math{0 r 7}
-7/16 = @math{0 r 7}
-7/8 = @math{0 r 7}
-7/4 = @math{1 r 3}
-3/2 = @math{1 r 1}
-1/1 = @math{1 r 0}
-@end smalldisplay
+@tex
+$$\eqalign{
+711/512 &= 1 r 199\cr
+199/256 &= 0 r 199\cr
+199/128 &= 1 r 71\cr
+71/64 &= 1 r 7\cr
+7/32 &= 0 r 7\cr
+7/16 &= 0 r 7\cr
+7/8 &= 0 r 7\cr
+7/4 &= 1 r 3\cr
+3/2 &= 1 r 1\cr
+1/1 &= 1 r 0
+}$$
+@end tex
 
 Now assemble each digit from the quotients in the columns corresponding to the
 respective powers of two in @emph{most significant} order.
@@ -1310,9 +1371,11 @@ text.
 
 The highest power of 16 less than or equal to 14 is @math{16^0 = 1}.
 
-@display
-14/1 = @math{14 r 0}
-@end display
+@tex
+$$
+14/1 = 14 r 0
+$$
+@end tex
 
 By inspection, the result is
 
@@ -1324,10 +1387,12 @@ By inspection, the result is
 
 The highest power of 16 less than or equal to 52 is @math{16^1 = 16}.
 
-@display
-52/16 = @math{3 r 4}
-4/1 = @math{4 r 0}
-@end display
+@tex
+$$\eqalign{
+52/16 = 3 r 4\cr
+4/1 = 4 r 0
+}$$
+@end tex
 
 Combine the hexadecimal digits on @emph{most significant} order:
 
@@ -1355,11 +1420,13 @@ Combine the hexadecimal digits in @emph{most significant} order.
 
 The highest power of 16 less than or equal to 711 is @math{16^2 = 256}.
 
-@display
-711/256 = @math{2 r 199}
-199/16 = @math{12 r 7}, 0xC by inspection.
-7/1 = @math{7 r 0}
-@end display
+@tex
+$$\eqalign{
+711/256 &= 2 r 199\cr
+199/16 &= 12 r 7, \hbox{0xC by inspection.}\cr
+7/1 &= 7 r 0
+}$$
+@end tex
 
 Combine the hexadecimal digits in @emph{most significant} order.
 
@@ -1397,17 +1464,19 @@ In this case with 8-bit binary numbers as a given, the range is (-128,127).
 
 The highest power of 2 less than or equal to 24 is @math{2^4 = 16}.
 
-@smalldisplay
-24/16 = @math{1 r 8}
-8/8 = @math{1 r 0}
-0/4 = @math{0 r 0}
-0/2 = @math{0 r 0}
-0/1 = @math{0}
-@end smalldisplay
+@tex
+$$\eqalign{
+24/16 &= 1 r 8\cr
+8/8 &= 1 r 0\cr
+0/4 &= 0 r 0\cr
+0/2 &= 0 r 0\cr
+0/1 &= 0
+}$$
+@end tex
 
 Assemble the digits to yield the unsigned binary result:
 
-@result{} 11000
+@result{} 1.1000
 
 Now perform sign extension to get the 8-bit result. Since 24 is a positive number,
 the sign digit is 0. The result is:
@@ -1422,17 +1491,19 @@ Repeatedly divide the magnitude by the highest divisible power of 2 to convert
 to unsigned binary. The highest power of 2 less than or equal to 59 is
 @math{2^5 = 32}.
 
-@smalldisplay
-59/32 = @math{1 r 27}
-27/16 = @math{1 r 11}
-11/8 = @math{1 r 3}
-3/4 = @math{0 r 3}
-3/2 = @math{1 r 1}
-1/1 = @math{1}
-@end smalldisplay
+@tex
+$$\eqalign{
+59/32 &= 1 r 27\cr
+27/16 &= 1 r 11\cr
+11/8 &= 1 r 3\cr
+3/4 &= 0 r 3\cr
+3/2 &= 1 r 1\cr
+1/1 &= 1 r 0
+}$$
+@end tex
 
 Now assemble the digits in order to get the unsigned binary result @result{}
-111011.
+11.1011.
 
 Next we can proceed in one of two ways:
 
@@ -1441,20 +1512,33 @@ Next we can proceed in one of two ways:
 @item Take two's complement, then sign extension.
 @end enumerate
 
-@strong{(1)}
+@strong{(1)} Perform sign extension of unsigned result @result{} 0011.1011.
 
-Perform sign extension of unsigned result @result{} 0011.1011. Then invert
-to yield @result{} 1100.0100 and add 1. This yields the result:
+Take the two's complement by inverting and adding 1:
+
+@tex
+$$\eqalign{
+\neg\;0011.1011 &= 1100.0100\cr
+1100.0100 + 0000.0001 &= 1100.0101
+}$$
+@end tex
+
+This yields the result:
 
 @cartouche
 @result{} -59 = 1100.0101
 @end cartouche
 
-@strong{(2)}
+@strong{(2)} Take the two's complement by inverting and adding 1:
 
-Take the two's complement of 11101. Invert to yield @result{} 000101 and add
-1 to yield @result{} 000101. Now extending to 8 digits using 1 as the sign bit
-yields:
+@tex
+$$\eqalign{
+\neg\;11.1011 &= 00.0100\cr
+00.0100 + 00.0001 &= 00.0101
+}$$
+@end tex
+
+Now extending to 8 digits using 1 as the sign bit yields:
 
 @cartouche
 @result{} -59 = 1100.0101
