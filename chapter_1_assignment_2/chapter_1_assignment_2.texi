@@ -294,11 +294,12 @@ Show your work.
 @sc{solution}
 
 In general, follow the method demonstrated in Figure 1.6 from the text.
-Break down digits into columns representing powers of two.
+Break down digits into columns representing powers of 2.
 
 @strong{(a) 1110}
 
-@multitable @columnfractions 0.10 0.20 0.10 0.60
+@multitable {Power of 2} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 2 @tab Column Name @tab Digit @tab Decimal Value
 @item @math{2^3}
 @tab 8's column
 @tab 1
@@ -318,14 +319,7 @@ Break down digits into columns representing powers of two.
 @end multitable
 
 The decimal value is the result of adding the decimal value of each column
-that correpsonds to the power of 8 it represents:
-
-@comment @smalldisplay
-@comment @math{(1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)}
-@comment @math{(1 x 8) + (1 x 4) + (1 x 2) + (0 x 1)}
-@comment @math{8 + 4 + 2 + 0}
-@comment @math{14}
-@comment @end smalldisplay
+that corresponds to the power of 2 it represents:
 
 @tex
 $$\eqalign{1110&=(1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)\cr
@@ -334,6 +328,9 @@ $$\eqalign{1110&=(1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)\cr
            1110&=14\cr}$$
 @end tex
 
+@c ##########
+@c experiment
+@c ##########
 @comment @tex
 @comment $${\scriptscriptstyle\hskip1pt1\;1\;1}\atop{{\displaystyle\hfill1101\atop\displaystyle\hfill+\,0011}\over\displaystyle\hfill11000\hskip1pt\relax}$$
 @comment @end tex
@@ -345,9 +342,10 @@ $$\eqalign{1110&=(1 x 2^3) + (1 x 2^2) + (1 x 2^1) + (0 x 2^0)\cr
 @strong{(b) 10.0100}
 
 Follow the method demonstrated in Figure 1.6 from the text.
-Break down digits into columns representing powers of two.
+Break down digits into columns representing powers of 2.
 
-@multitable @columnfractions 0.10 0.20 0.10 0.60
+@multitable {Power of 2} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 2 @tab Column Name @tab Digit @tab Decimal Value
 @c
 @item @math{2^5}
 @tab 32's column
@@ -382,7 +380,7 @@ Break down digits into columns representing powers of two.
 @end multitable
 
 The decimal value is the result of adding the decimal value of each column
-that correpsonds to the power of 8 it represents:
+that corresponds to the power of 2 it represents:
 
 @tex
 $$\eqalign{
@@ -400,9 +398,10 @@ $$\eqalign{
 @strong{(c) 1101.0111}
 
 Follow the method demonstrated in Figure 1.6 from the text.
-Break down digits into columns representing powers of two.
+Break down digits into columns representing powers of 2.
 
-@multitable @columnfractions 0.10 0.20 0.10 0.60
+@multitable {Power of 2} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 2 @tab Column Name @tab Digit @tab Decimal Value
 @c
 @item @math{2^7}
 @tab 128's column
@@ -447,7 +446,7 @@ Break down digits into columns representing powers of two.
 @end multitable
 
 The decimal value is the result of adding the decimal value of each column
-that correpsonds to the power of 8 it represents:
+that corresponds to the power of 2 it represents:
 
 @tex
 $$\eqalign{
@@ -465,9 +464,10 @@ $$\eqalign{
 @strong{(d) 011.1010.1010.0100}
 
 Follow the method demonstrated in Figure 1.6 from the text.
-Break down digits into columns representing powers of two.
+Break down digits into columns representing powers of 2.
 
-@multitable @columnfractions 0.10 0.20 0.10 0.60
+@multitable {Power of 2} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 2 @tab Column Name @tab Digit @tab Decimal Value
 @item @math{2^{14}}
 @tab 16384's column
 @tab 0
@@ -545,7 +545,7 @@ Break down digits into columns representing powers of two.
 @end multitable
 
 The decimal value is the result of adding the decimal value of each column
-that correpsonds to the power of 8 it represents:
+that corresponds to the power of 2 it represents:
 
 @tex
 $$
@@ -617,7 +617,7 @@ Now assemble the hexadecimal digits that correspond to each nibble:
 0111 = 0x7
 @end display
 
-Now assemble the hexadecimal digits that correpsond to each nibble:
+Now assemble the hexadecimal digits that correspond to each nibble:
 
 @cartouche
 @result{} 1101.0111 = 0xD7
@@ -628,12 +628,14 @@ Now assemble the hexadecimal digits that correpsond to each nibble:
 Extend this binary number to 16 bits so it is an even multiple of 4 binary
 digits @result{} 0011.1010.1010.0100.
 
-@display
-0011 = 0x3
-1010 = 0xA
-1010 = 0xA
-0100 = 0x4
-@end display
+@tex
+$$\eqalign{
+0011 &= 0x3\cr
+1010 &= 0xA\cr
+1010 &= 0xA\cr
+0100 &= 0x4
+}$$
+@end tex
 
 Now assemble the hexadecimal digits that correspond to each nibble:
 
@@ -665,7 +667,8 @@ decimal values of each hexadecimal digit. The decimal values are represented by
 
 @strong{(a) 0x4E}
 
-@multitable @columnfractions 0.15 0.20 0.15 0.50
+@multitable {Power of 16} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 16 @tab Column Name @tab Digit @tab Decimal Value
 @c
 @item @math{16^1}
 @tab 16's column
@@ -694,7 +697,8 @@ $$
 
 @strong{(b) 0x7C}
 
-@multitable @columnfractions 0.15 0.20 0.15 0.50
+@multitable {Power of 16} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 16 @tab Column Name @tab Digit @tab Decimal Value
 @c
 @item @math{16^1}
 @tab 16's column
@@ -721,7 +725,8 @@ $$
 
 @strong{(c) 0xED3A}
 
-@multitable @columnfractions 0.15 0.20 0.15 0.50
+@multitable {Power of 16} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 16 @tab Column Name @tab Digit @tab Decimal Value
 @c
 @item @math{16^3}
 @tab 4096's column
@@ -761,7 +766,8 @@ $$
 
 @strong{(d) 0x403FB001}
 
-@multitable @columnfractions 0.15 0.30 0.15 0.40
+@multitable {Power of 16} {Long Column Name} {Digit} {Decimal Value}
+@headitem Power of 16 @tab Column Name @tab Digit @tab Decimal Value
 @c
 @item @math{16^7}
 @tab 268,434,456's column
@@ -940,7 +946,8 @@ decimal.
 1110 is negative. Compute it's decimal value by summing the decimal value of each
 column as demonstrated in Figure 1.6 of the text.
 
-@multitable @columnfractions 0.10 0.25 0.10 0.65
+@multitable {Power of 2} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 2 @tab Column Name @tab Digit @tab Decimal Value
 @c
 @item @math{2^3}
 @tab 8's column
@@ -1006,7 +1013,8 @@ magnitude 2.
 100011 is negative. Compute it's decimal value by summing the decimal value of
 each column.
 
-@multitable @columnfractions 0.10 0.25 0.10 0.65
+@multitable {Power of 2} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 2 @tab Column Name @tab Digit @tab Decimal Value
 @c
 @item @math{2^5}
 @tab 32's column
@@ -1088,7 +1096,8 @@ Apply the sign @result{} @math{-29}.
 unsigned binary. Convert to decimal by summing the decimal values  of each
 column:
 
-@multitable @columnfractions 0.10 0.25 0.10 0.65
+@multitable {Power of 2} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 2 @tab Column Name @tab Digit @tab Decimal Value
 @c
 @item @math{2^7}
 @tab 128's column
@@ -1149,10 +1158,11 @@ $$\eqalign{
 
 @strong{(d) 1011.0101}
 
-10110101 is negative. Compute it's decimal value by summing the decimal value
+1011.0101 is negative. Compute it's decimal value by summing the decimal value
 of each column.
 
-@multitable @columnfractions 0.10 0.25 0.10 0.65
+@multitable {Power of 2} {Column Name} {Digit} {Decimal Value}
+@headitem Power of 2 @tab Column Name @tab Digit @tab Decimal Value
 @c
 @item @math{2^7}
 @tab 128's column
@@ -1297,7 +1307,7 @@ $$\eqalign{
 @end tex
 
 Now assemble each digit from the quotients in the columns corresponding to the
-respective powers of two in @emph{most significant} order.
+respective powers of 2 in @emph{most significant} order.
 
 @cartouche
 @result{} 52 = 11.0100
@@ -1323,7 +1333,7 @@ $$\eqalign{
 @end tex
 
 Now assemble each digit from the quotients in the columns corresponding to the
-respective powers of two in @emph{most significant} order.
+respective powers of 2 in @emph{most significant} order.
 
 @cartouche
 @result{} 339 = 1.0101.0011
@@ -1350,7 +1360,7 @@ $$\eqalign{
 @end tex
 
 Now assemble each digit from the quotients in the columns corresponding to the
-respective powers of two in @emph{most significant} order.
+respective powers of 2 in @emph{most significant} order.
 
 @cartouche
 @result{} 711 = 10.1100.0111
@@ -1785,7 +1795,7 @@ for that column.
 
 @strong{a) 023}
 
-Convert to binary: By inspection, 02 = 010 and 03 = 011. The binary
+Convert to binary: By inspection, @math{02 = 010} and @math{03 = 011}. The binary
 result is the combination of the binary numbers in the proper order.
 
 @cartouche
@@ -1831,7 +1841,7 @@ $$\eqalign{
 
 @strong{b) 045}
 
-Convert to binary: By inspection, 04 = 100 and 05 = 101. The binary
+Convert to binary: By inspection, @math{04 = 100} and @math{05 = 101}. The binary
 result is the combination of the binary numbers in the proper order.
 
 @cartouche
@@ -1879,7 +1889,7 @@ $$\eqalign{
 
 @strong{c) 0371}
 
-Convert to binary: By inspection, 03 = 011, 07 = 111, and 01 = 001. The binary
+Convert to binary: By inspection, @math{03 = 011}, @math{07 = 111}, and @math{01 = 001}. The binary
 result is the combination of the binary numbers in @emph{most significant}
 order.
 
@@ -2811,7 +2821,7 @@ $$\eqalign{
 }$$
 @end tex
 
-Therefore, the BCD number correpsonds to 95. This may be converted to binary
+Therefore, the BCD number corresponds to 95. This may be converted to binary
 by using method 1 demonstrated in Example 1.5.
 
 @tex
