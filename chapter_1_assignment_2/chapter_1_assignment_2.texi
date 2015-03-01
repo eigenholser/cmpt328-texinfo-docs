@@ -63,6 +63,7 @@
 @c \hrule width \pagewidth
 @tex
 \hrule width \pagewidth
+\vskip 5pt
 @end tex
 
 Throughout these exercises, some conversions will be made between small binary,
@@ -163,6 +164,7 @@ unnecessary clutter and distraction, these tables will be implicitly referenced.
 @end multitable
 
 @tex
+\vskip 5pt
 \hrule width \pagewidth
 @end tex
 
@@ -597,12 +599,22 @@ By inspection,
 
 @strong{(b) 10.0100}
 
-10.0100 = 0010.0100
+Using sign extension convert the 6-bit binary number to an 8-bit binary number:
 
-@display
-0010 = 0x2
-0100 = 0x4
-@end display
+@tex
+$$
+10.0100 = 0010.0100
+$$
+@end tex
+
+By inspection, each 4-bit nibble is equal to a single hexadecimal digit:
+
+@tex
+$$\eqalign{
+0010 &= \hbox{0x2}\cr
+0100 &= \hbox{0x4}
+}$$
+@end tex
 
 Now assemble the hexadecimal digits that correspond to each nibble:
 
@@ -612,10 +624,12 @@ Now assemble the hexadecimal digits that correspond to each nibble:
 
 @strong{(c) 1101.0111}
 
-@display
-1101 = 0xD
-0111 = 0x7
-@end display
+@tex
+$$\eqalign{
+1101 &= \hbox{0xD}\cr
+0111 &= \hbox{0x7}
+}$$
+@end tex
 
 Now assemble the hexadecimal digits that correspond to each nibble:
 
@@ -625,15 +639,23 @@ Now assemble the hexadecimal digits that correspond to each nibble:
 
 @strong{(d) 011.1010.1010.0100}
 
-Extend this binary number to 16 bits so it is an even multiple of 4 binary
-digits @result{} 0011.1010.1010.0100.
+Using sign extension, extend this binary number to 16 bits so it is an even
+multiple of 4 binary digits:
+
+@tex
+$$
+011.1010.1010.0100 = 0011.1010.1010.0100
+$$
+@end tex
+
+By inspection, each 4-bit nibble is equal to a single hexadecimal digit:
 
 @tex
 $$\eqalign{
-0011 &= 0x3\cr
-1010 &= 0xA\cr
-1010 &= 0xA\cr
-0100 &= 0x4
+0011 &= \hbox{0x3}\cr
+1010 &= \hbox{0xA}\cr
+1010 &= \hbox{0xA}\cr
+0100 &= \hbox{0x4}
 }$$
 @end tex
 
