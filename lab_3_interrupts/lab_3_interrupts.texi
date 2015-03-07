@@ -478,6 +478,21 @@ specific use in this lab project. It will also cover the roles played by the
 vector table and the stack. Observations made during the experiments chapter
 will be integrated with the report.
 
-THIS SECTION IS INCOMPLETE. STAY TUNED!
+Explain how ARM interrupts work.
+@itemize
+@item The vector table and it's purpose.
+@item The purpose of interrupts.
+@item The Nested Vector Interrupt Controller
+@item The meaning of the value in register IPSR.
+@item The stack and how it is used when an interrupt occurs.
+@item The reason for acknowledging the interrupt from the ISR---SysTick being
+the notable exception.
+@item The process of context switching and why it matters.
+@item Why do some of the @emph{functions} @code{PUSH} register LR onto the
+stack?
+@end itemize
+
+As you write your lab report, include your observations to illustrate and
+support your explanations.
 
 @bye
