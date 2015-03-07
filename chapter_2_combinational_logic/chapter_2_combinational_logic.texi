@@ -1,0 +1,90 @@
+\input texinfo   @c -*-texinfo-*-
+
+@set title Chapter 2: Combinational Logic
+@set subtitle CMPT 328 Computer Architecture
+@set splash1 chapter_2_combinational_logic-splash.texi
+@set splash2 westminster-splash.texi
+@set author Scott Overholser
+@set category Laboratory
+@set filename chapter_2_combinational_logic
+
+@comment %**start of header
+@setchapternewpage off
+@setfilename @value{filename}.info
+@settitle @value{title}
+@finalout
+@paragraphindent 0
+@comment %**end of header
+
+@include @value{filename}.texi.updated
+@c @include copying.texi
+
+@c @titlepage
+@c @title @value{title}
+@c @subtitle @value{subtitle}
+@c @include @value{splash1}
+@c @author @value{author}
+
+@c Secondary title page.
+@c @page
+@c @include @value{splash2}
+@c @vskip 0pt plus 1filll
+@c @insertcopying
+@c @end titlepage
+
+@comment Table of Contents
+@c @contents
+
+@dircategory @value{category}
+@direntry
+* Texinfo Doc Template         Template for Creating New Docs
+@end direntry
+
+@c @include headings.texi
+@headings off
+@c @include constants.texi
+
+@ifnottex
+@node Top
+@top @value{title}
+
+@insertcopying
+@end ifnottex
+
+@comment This is the Chapter Menu
+@menu
+* Chapter 2 Exercises::          Combinational Logic
+@end menu
+@headings singleafter
+@tex
+\font\cmss=cmss12
+\font\cmssa=cmss12 scaled\magstep4
+\font\cmssb=cmss12 scaled\magstep5
+
+%title page
+\hrule depth 2pt
+\vskip 1.5pt
+\hrule depth 0.4pt
+\vskip 10pt
+\centerline{\cmssa COMPUTER\kern7ptARCHITECTURE}
+\vskip 10pt
+\centerline{\cmssa CMPT\kern7pt328}
+\vskip 3.0in
+\centerline{\cmssb \raise5pt \hbox{COMBINATIONAL LOGIC}}
+\centerline{\cmssb \raise5pt \hbox{ASSIGNMENT}}
+\vfill
+%\centerline{\cmss \raise5pt\hbox{\hss WEDNESDAY MARCH 18, 2015\hss}}
+\centerline{\cmssa \raise10pt \hbox{STUDENT:} \raise10pt\hbox{$\underline{\hbox{SCOTT OVERHOLSER\hss}}$}}
+\hrule depth 0.4pt
+\vskip 1.1pt
+\hrule depth 2pt
+\eject
+@end tex
+@everyheading @thischapter @| @| @thispage¬
+@everyfooting @value{UPDATED} @| @| Westminster College
+
+@comment This is a starting point.
+@node Chapter 2 Exercises
+Put your document here.
+
+@bye
