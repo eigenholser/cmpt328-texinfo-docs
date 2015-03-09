@@ -82,9 +82,1200 @@
 @end tex
 @everyheading @thischapter @| @| @thispage¬
 @everyfooting @value{UPDATED} @| @| Westminster College
-
-@comment This is a starting point.
 @node Chapter 2 Exercises
-Put your document here.
+@c ############################################################################
+@c                                Exercise 2.2
+@c ############################################################################
+@sc{exercise 2.2} Write a Boolean equation in sum-of-products canonical form
+for each of the truth tables in Figure 2.81. In this document, see @ref{fig281}.
+@float Figure ,fig281
+@center @image{figure_281,5in,,,png}
+@caption{Truth tables for Exercises 2.2 and 2.4}
+@end float
+@comment
+@comment Exercise 2.2 In General
+@comment
+@sc{solution} In general,
+since we are using sum-of-products form, create the minterms for each
+row of the truth table. Each minterm is a product (AND) of the inputs which
+is TRUE for that row. The Boolean equation is the sum (OR) of each minterm.
+@*@*
+@comment
+@comment Exercise 2.2 Part A
+@comment
+@sc{solution} @math{(a)}
+Create the minterms for each row of the truth table in @ref{fig281} @math{(a)}.
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$&\strut\quad$#$\quad&\vrule#&\quad$#$\quad&\vrule#&\quad#\quad&\vrule#&#\quad\cr
+    A & B && Y &&minterm&\quad name\cr
+    \noalign{\hrule}
+    &\omit&height2pt&\omit&height2pt&\omit&height2pt&\cr
+    0 & 0 && 0 && $\overline{A}\overline{B}$&\quad$m_0$\cr
+    0 & 1 && 1 && $\overline{A}B$&\quad$m_1$\cr
+    1 & 0 && 1 && $A\overline{B}$&\quad$m_2$\cr
+    1 & 1 && 1 && $AB$&\quad$m_3$\cr
+    }
+}
+$$
+@end tex
+The Boolean equation in sum-of-products form is the sum of the minterms for
+which the output @math{Y} is @math{TRUE}.
 
+This yields:
+@tex
+$$\eqalign{
+    Y &= m_1 + m_2 + m_3\cr
+    Y &= \overline{A}B + A\overline{B} + AB}
+$$
+@end tex
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.2 Part B
+@comment
+@*@*
+@sc{solution} @math{(b)}
+Create minterms for each row of the truth table in @ref{fig281} @math{(b)}.
+
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$&
+    \strut\quad$#$\quad&$#$\quad&
+    \vrule#&
+    \quad$#$\quad&
+    \vrule#&
+    \quad#\hfil&
+    \vrule#&
+    #\quad\cr
+    A & B & C && Y && minterm &\quad name\cr
+    \noalign{\hrule}
+    &\omit&\omit&height2pt&\omit&height2pt&\omit&height2pt&\cr
+    0 & 0 & 0 && 0 && $\overline{A}\,\overline{B}\,\overline{C}$ &\quad$m_0$\cr
+    0 & 0 & 1 && 1 && $\overline{A}\,\overline{B}\,C$            &\quad$m_1$\cr
+    0 & 1 & 0 && 1 && $\overline{A}\,B\,\overline{C}$            &\quad$m_2$\cr
+    0 & 1 & 1 && 1 && $\overline{A}\,B\,C$                       &\quad$m_3$\cr
+    1 & 0 & 0 && 1 && $A\,\overline{B}\,\overline{C}$            &\quad$m_4$\cr
+    1 & 0 & 1 && 0 && $A\,\overline{B}\,C$                       &\quad$m_5$\cr
+    1 & 1 & 0 && 1 && $A\,B\,\overline{C}$                       &\quad$m_6$\cr
+    1 & 1 & 1 && 0 && $A\,B\,C$                                  &\quad$m_7$\cr
+    }
+}
+$$
+@end tex
+The Boolean equation is the sum of each minterm for which @math{Y} is TRUE.
+@tex
+$$\eqalign{
+    Y &= m_1 + m_2 + m_3 + m_4 + m_6\cr
+    Y &= \overline{A}\,\overline{B}\,C +
+         \overline{A}\,B\,\overline{C} +
+         \overline{A}\,B\,C +
+         A\,\overline{B}\,\overline{C} +
+         A\,B\,\overline{C}\cr
+}$$
+@end tex
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.2 Part C
+@comment
+@*@*
+@sc{solution} @math{(c)}
+Create minterms for each row of the truth table in @ref{fig281} @math{(c)}.
+
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$&
+    \strut\quad$#$\quad&$#$\quad&
+    \vrule#&
+    \quad$#$\quad&
+    \vrule#&
+    \quad#\hfil&
+    \vrule#&
+    #\quad\cr
+    A & B & C && Y && minterm &\quad name\cr
+    \noalign{\hrule}
+    &\omit&\omit&height2pt&\omit&height2pt&\omit&height2pt&\cr
+    0 & 0 & 0 && 0 && $\overline{A}\,\overline{B}\,\overline{C}$ &\quad$m_0$\cr
+    0 & 0 & 1 && 1 && $\overline{A}\,\overline{B}\,C$            &\quad$m_1$\cr
+    0 & 1 & 0 && 0 && $\overline{A}\,B\,\overline{C}$            &\quad$m_2$\cr
+    0 & 1 & 1 && 0 && $\overline{A}\,B\,C$                       &\quad$m_3$\cr
+    1 & 0 & 0 && 0 && $A\,\overline{B}\,\overline{C}$            &\quad$m_4$\cr
+    1 & 0 & 1 && 0 && $A\,\overline{B}\,C$                       &\quad$m_5$\cr
+    1 & 1 & 0 && 1 && $A\,B\,\overline{C}$                       &\quad$m_6$\cr
+    1 & 1 & 1 && 1 && $A\,B\,C$                                  &\quad$m_7$\cr
+    }
+}
+$$
+@end tex
+The Boolean equation is the sum of each minterm for which @math{Y} is TRUE.
+@tex
+$$\eqalign{
+    Y &= m_1 + m_6 + m_7\cr
+    Y &= \overline{A}\,\overline{B}\,C +
+         A\,B\,\overline{C} +
+         A\,B\,C\cr
+}$$
+@end tex
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.2 Part D
+@comment
+@*@*
+@sc{solution} @math{(d)}
+Create minterms for each row of the truth table in @ref{fig281} @math{(d)}.
+
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$&
+    \strut\quad$#$\quad&
+    $#$\quad&
+    $#$\quad&
+    \vrule#&
+    \quad$#$\quad&
+    \vrule#&
+    \quad#\quad&
+    \vrule#&
+    #\quad\cr
+    A & B & C & D && Y && minterm &\quad name\cr
+    \noalign{\hrule}
+    &\omit&\omit&\omit&height2pt&\omit&height2pt&\omit&height2pt&\cr
+    0 & 0 & 0 & 0 && 1 && $\overline{A}\,\overline{B}\,\overline{C}\,\overline{D}$ &\quad$m_0$\cr
+    0 & 0 & 0 & 1 && 0 && $\overline{A}\,\overline{B}\,\overline{C}\,D$            &\quad$m_1$\cr
+    0 & 0 & 1 & 0 && 1 && $\overline{A}\,\overline{B}\,C\,\overline{D}$            &\quad$m_2$\cr
+    0 & 0 & 1 & 1 && 1 && $\overline{A}\,\overline{B}\,C\,D$                       &\quad$m_3$\cr
+%
+    0 & 1 & 0 & 0 && 0 && $\overline{A}\,B\,\overline{C}\,\overline{D}$            &\quad$m_4$\cr
+    0 & 1 & 0 & 1 && 0 && $\overline{A}\,B\,\overline{C}\,D$                       &\quad$m_5$\cr
+    0 & 1 & 1 & 0 && 1 && $\overline{A}\,B\,C\,\overline{D}$                       &\quad$m_6$\cr
+    0 & 1 & 1 & 1 && 1 && $\overline{A}\,B\,C\,D$                                  &\quad$m_7$\cr
+%
+    1 & 0 & 0 & 0 && 1 && $A\,\overline{B}\,\overline{C}\,\overline{D}$            &\quad$m_8$\cr
+    1 & 0 & 0 & 1 && 0 && $A\,\overline{B}\,\overline{C}\,D$                       &\quad$m_9$\cr
+    1 & 0 & 1 & 0 && 1 && $A\,\overline{B}\,C\,\overline{D}$                       &\quad$m_{10}$\cr
+    1 & 0 & 1 & 1 && 0 && $A\,\overline{B}\,C\,D$                                  &\quad$m_{11}$\cr
+%
+    1 & 1 & 0 & 0 && 0 && $A\,B\,\overline{C}\,\overline{D}$                       &\quad$m_{12}$\cr
+    1 & 1 & 0 & 1 && 0 && $A\,B\,\overline{C}\,D$                                  &\quad$m_{13}$\cr
+    1 & 1 & 1 & 0 && 0 && $A\,B\,C\,\overline{D}$                                  &\quad$m_{14}$\cr
+    1 & 1 & 1 & 1 && 0 && $A\,B\,C\,D$                                             &\quad$m_{15}$\cr
+    }
+}
+$$
+@end tex
+The Boolean equation is the sum of each minterm for which @math{Y} is TRUE.
+@tex
+$$\eqalign{
+    Y &= m_0 + m_2 + m_3 + m_6 + m_7 + m_8 + m_{10}\cr
+    Y &= \overline{A}\,\overline{B}\,\overline{C}\,\overline{D} +
+         \overline{A}\,\overline{B}\,C\overline{D} +
+         \overline{A}\,\overline{B}\,C\,D +
+         \overline{A}\,B\,C\overline{D}\cr
+      &+ \overline{A}\,B\,C\,D +
+         A\,\overline{B}\,\overline{C}\,\overline{D} +
+         A\,\overline{B}\,C\,\overline{D}
+}$$
+@end tex
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.2 Part E
+@comment
+@*@*
+@sc{solution} @math{(e)}
+Create minterms for each row of the truth table in @ref{fig281} @math{(e)}.
+
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$&
+    \strut\quad$#$\quad&
+    $#$\quad&
+    $#$\quad&
+    \vrule#&
+    \quad$#$\quad&
+    \vrule#&
+    \quad#\quad&
+    \vrule#&
+    #\quad\cr
+    A & B & C & D && Y && minterm &\quad name\cr
+    \noalign{\hrule}
+    &\omit&\omit&\omit&height2pt&\omit&height2pt&\omit&height2pt&\cr
+    0 & 0 & 0 & 0 && 0 && $\overline{A}\,\overline{B}\,\overline{C}\,\overline{D}$ &\quad$m_0$\cr
+    0 & 0 & 0 & 1 && 0 && $\overline{A}\,\overline{B}\,\overline{C}\,D$            &\quad$m_1$\cr
+    0 & 0 & 1 & 0 && 0 && $\overline{A}\,\overline{B}\,C\,\overline{D}$            &\quad$m_2$\cr
+    0 & 0 & 1 & 1 && 1 && $\overline{A}\,\overline{B}\,C\,D$                       &\quad$m_3$\cr
+%
+    0 & 1 & 0 & 0 && 0 && $\overline{A}\,B\,\overline{C}\,\overline{D}$            &\quad$m_4$\cr
+    0 & 1 & 0 & 1 && 0 && $\overline{A}\,B\,\overline{C}\,D$                       &\quad$m_5$\cr
+    0 & 1 & 1 & 0 && 1 && $\overline{A}\,B\,C\,\overline{D}$                       &\quad$m_6$\cr
+    0 & 1 & 1 & 1 && 1 && $\overline{A}\,B\,C\,D$                                  &\quad$m_7$\cr
+%
+    1 & 0 & 0 & 0 && 1 && $A\,\overline{B}\,\overline{C}\,\overline{D}$            &\quad$m_8$\cr
+    1 & 0 & 0 & 1 && 1 && $A\,\overline{B}\,\overline{C}\,D$                       &\quad$m_9$\cr
+    1 & 0 & 1 & 0 && 1 && $A\,\overline{B}\,C\,\overline{D}$                       &\quad$m_{10}$\cr
+    1 & 0 & 1 & 1 && 1 && $A\,\overline{B}\,C\,D$                                  &\quad$m_{11}$\cr
+%
+    1 & 1 & 0 & 0 && 0 && $A\,B\,\overline{C}\,\overline{D}$                       &\quad$m_{12}$\cr
+    1 & 1 & 0 & 1 && 0 && $A\,B\,\overline{C}\,D$                                  &\quad$m_{13}$\cr
+    1 & 1 & 1 & 0 && 0 && $A\,B\,C\,\overline{D}$                                  &\quad$m_{14}$\cr
+    1 & 1 & 1 & 1 && 0 && $A\,B\,C\,D$                                             &\quad$m_{15}$\cr
+    }
+}
+$$
+@end tex
+The Boolean equation is the sum of each minterm for which @math{Y} is TRUE.
+@tex
+$$\eqalign{
+    Y &= m_3 + m_6 + m_7 + m_8 + m_9 + m_{10} + m_{11}\cr
+    Y &= \overline{A}\,\overline{B}\,C\,D +
+         \overline{A}\,B\,C\overline{D} +
+         \overline{A}\,B\,C\,D +
+         A\,\overline{B}\,\overline{C}\overline{D}\cr
+      &+ A\,\overline{B}\,\overline{C}\,D +
+         A\,\overline{B}\,C\,\overline{D} +
+         A\,\overline{B}\,C\,D
+}$$
+@end tex
+@tex
+\vbox{\hrule width6in}
+@end tex
+@c ############################################################################
+@c                                Exercise 2.4
+@c ############################################################################
+@*@*
+@sc{exercise 2.4} Write a Boolean equation in product-of-sums canonical form
+for each of the truth tables in Figure 2.81. In this document, see @ref{fig281}.
+@comment
+@comment In General
+@comment
+@*@*
+@sc{solution} In general,
+since we are using product-of-sums form, create the maxterms for each
+row of the truth table. Each maxterm is a sum (OR) of the inputs which
+is FALSE for that row. The Boolean equation is the product (AND) of each
+maxterm.
+@*@*
+@comment
+@comment Exercise 2.4 Part A
+@comment
+@sc{solution} @math{(a)}
+Create the maxterms for each row of the truth table in @ref{fig281} @math{(a)}.
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$&\strut\quad$#$\quad&\vrule#&\quad$#$\quad&\vrule#&\quad#\quad&\vrule#&#\quad\cr
+    A & B && Y &&maxterm&\quad name\cr
+    \noalign{\hrule}
+    &\omit&height2pt&\omit&height2pt&\omit&height2pt&\cr
+    0 & 0 && 0 && $A + B$&\quad$M_0$\cr
+    0 & 1 && 1 && $A + \overline{B}$&\quad$M_1$\cr
+    1 & 0 && 1 && $\overline{A} + B$&\quad$M_2$\cr
+    1 & 1 && 1 && $\overline{A} + \overline{B}$&\quad$M_3$\cr
+    }
+}
+$$
+@end tex
+The Boolean equation in product-of-sums form is the product of the maxterms for
+which the output @math{Y} is FALSE.
+
+This yields:
+@tex
+$$\eqalign{
+    Y &= M_0\cr
+    Y &= A + B}
+$$
+@end tex
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.4 Part B
+@comment
+@*@*
+@sc{solution} @math{(b)}
+Create maxterms for each row of the truth table in @ref{fig281} @math{(b)}.
+
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$&
+    \strut\quad$#$\quad&$#$\quad&
+    \vrule#&
+    \quad$#$\quad&
+    \vrule#&
+    \quad#\quad&
+    \vrule#&
+    #\quad\cr
+    A & B & C && Y && minterm &\quad name\cr
+    \noalign{\hrule}
+    &\omit&\omit&height2pt&\omit&height2pt&\omit&height2pt&\cr
+    0 & 0 & 0 && 0 && $A + B + C$                                  &\quad$M_0$\cr
+    0 & 0 & 1 && 1 && $A + B + \overline{C}$                       &\quad$M_1$\cr
+    0 & 1 & 0 && 0 && $A + \overline{B} + C$                       &\quad$M_2$\cr
+    0 & 1 & 1 && 1 && $A + \overline{B} + \overline{C}$            &\quad$M_3$\cr
+    1 & 0 & 0 && 1 && $\overline{A} + B + C$                       &\quad$M_4$\cr
+    1 & 0 & 1 && 1 && $\overline{A} + B + \overline{C}$            &\quad$M_5$\cr
+    1 & 1 & 0 && 1 && $\overline{A} + \overline{B} + C$            &\quad$M_6$\cr
+    1 & 1 & 1 && 0 && $\overline{A} + \overline{B} + \overline{C}$ &\quad$M_7$\cr
+    }
+}
+$$
+@end tex
+The Boolean equation is the product of each maxterm for which @math{Y} is FALSE.
+@tex
+$$\eqalign{
+    Y &= M_0 \bullet M_5 \bullet M_7\cr
+    Y &= (A + B + C) \bullet
+         (\overline{A} + B + \overline{C}) \bullet
+         (\overline{A} + \overline{B} + \overline{C})\cr
+}$$
+@end tex
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.4 Part C
+@comment
+@*@*
+@sc{solution} @math{(c)}
+Create maxterms for each row of the truth table in @ref{fig281} @math{(c)}.
+
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$&
+    \strut\quad$#$\quad&$#$\quad&
+    \vrule#&
+    \quad$#$\quad&
+    \vrule#&
+    \quad#\quad&
+    \vrule#&
+    #\quad\cr
+    A & B & C && Y && minterm &\quad name\cr
+    \noalign{\hrule}
+    &\omit&\omit&height2pt&\omit&height2pt&\omit&height2pt&\cr
+    0 & 0 & 0 && 0 && $A + B + C$                                  &\quad$M_0$\cr
+    0 & 0 & 1 && 1 && $A + B + \overline{C}$                       &\quad$M_1$\cr
+    0 & 1 & 0 && 0 && $A + \overline{B} + C$                       &\quad$M_2$\cr
+    0 & 1 & 1 && 0 && $A + \overline{B} + \overline{C}$            &\quad$M_3$\cr
+    1 & 0 & 0 && 0 && $\overline{A} + B + C$                       &\quad$M_4$\cr
+    1 & 0 & 1 && 0 && $\overline{A} + B + \overline{C}$            &\quad$M_5$\cr
+    1 & 1 & 0 && 1 && $\overline{A} + \overline{B} + C$            &\quad$M_6$\cr
+    1 & 1 & 1 && 1 && $\overline{A} + \overline{B} + \overline{C}$ &\quad$M_7$\cr
+    }
+}
+$$
+@end tex
+The Boolean equation is the product of each maxterm for which @math{Y} is FALSE.
+@tex
+$$\eqalign{
+    Y &= M_0 \bullet M_2 \bullet M_3 \bullet M_4 \bullet M_5\cr
+    Y &= (A + B + C) \bullet
+         (A + \overline{B} + C) \bullet
+         (A + \overline{B} + \overline{C}) \bullet
+         (\overline{A} + B + C) \bullet
+         (\overline{A} + B + \overline{C})\cr
+}$$
+@end tex
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.4 Part D
+@comment
+@*@*
+@sc{solution} @math{(e)}
+Create maxterms for each row of the truth table in @ref{fig281} @math{(d)}.
+
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$&
+    \strut\quad$#$\quad&
+    $#$\quad&
+    $#$\quad&
+    \vrule#&
+    \quad$#$\quad&
+    \vrule#&
+    \quad#\quad&
+    \vrule#&
+    #\quad\cr
+    A & B & C & D && Y && minterm &\quad name\cr
+    \noalign{\hrule}
+    &\omit&\omit&\omit&height2pt&\omit&height2pt&\omit&height2pt&\cr
+    0 & 0 & 0 & 0 && 1 && $A + B + C + D$                                             &\quad$M_0$\cr
+    0 & 0 & 0 & 1 && 0 && $A + B + C + \overline{D}$                                  &\quad$M_1$\cr
+    0 & 0 & 1 & 0 && 1 && $A + B + \overline{C} + D$                                  &\quad$M_2$\cr
+    0 & 0 & 1 & 1 && 1 && $A + B + \overline{C} + \overline{D}$                       &\quad$M_3$\cr
+%
+    0 & 1 & 0 & 0 && 0 && $A + \overline{B} + C + D$                                  &\quad$M_4$\cr
+    0 & 1 & 0 & 1 && 0 && $A + \overline{B} + C + \overline{D}$                       &\quad$M_5$\cr
+    0 & 1 & 1 & 0 && 1 && $A + \overline{B} + \overline{C} + D$                       &\quad$M_6$\cr
+    0 & 1 & 1 & 1 && 1 && $A + \overline{B} + \overline{C} + \overline{D}$            &\quad$M_7$\cr
+%
+    1 & 0 & 0 & 0 && 1 && $\overline{A} + B + C + D$                                  &\quad$M_8$\cr
+    1 & 0 & 0 & 1 && 0 && $\overline{A} + B + C + \overline{D}$                       &\quad$M_9$\cr
+    1 & 0 & 1 & 0 && 1 && $\overline{A} + B + \overline{C} + D$                       &\quad$M_{10}$\cr
+    1 & 0 & 1 & 1 && 0 && $\overline{A} + B + \overline{C} + \overline{D}$            &\quad$M_{11}$\cr
+%
+    1 & 1 & 0 & 0 && 0 && $\overline{A} + \overline{B} + C + D$                       &\quad$M_{12}$\cr
+    1 & 1 & 0 & 1 && 0 && $\overline{A} + \overline{B} + C + \overline{D}$            &\quad$M_{13}$\cr
+    1 & 1 & 1 & 0 && 0 && $\overline{A} + \overline{B} + \overline{C} + D$            &\quad$M_{14}$\cr
+    1 & 1 & 1 & 1 && 0 && $\overline{A} + \overline{B} + \overline{C} + \overline{D}$ &\quad$M_{15}$\cr
+    }
+}
+$$
+@end tex
+The Boolean equation is the product of each maxterm for which @math{Y} is FALSE.
+@tex
+$$\eqalign{
+    Y &= M_1 \bullet M_4 \bullet M_5 \bullet M_9 \bullet M_{11} \bullet
+         M_{12} \bullet M_{13} \bullet M_{14} \bullet M_{15}\cr
+    Y &= (A + B + C + \overline{D}) \bullet
+         (A + \overline{B} + C + D) \bullet
+         (A + \overline{B} + C + \overline{D}) \bullet
+         (\overline{A} + B + C + \overline{D}) \bullet\cr
+      &\hskip1.5em(\overline{A} + B + \overline{C} + \overline{D}) \bullet
+         (\overline{A} + \overline{B} + C + D) \bullet
+         (\overline{A} + \overline{B} + C + \overline{D}) \bullet
+         (\overline{A} + \overline{B} + \overline{C} + D) \bullet\cr
+      &\hskip1.5em(\overline{A} + \overline{B} + \overline{C} + \overline{D})\cr
+}$$
+@end tex
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.4 Part E
+@comment
+@*@*
+@sc{solution} @math{(e)}
+Create maxterms for each row of the truth table in @ref{fig281} @math{(e)}.
+
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$&
+    \strut\quad$#$\quad&
+    $#$\quad&
+    $#$\quad&
+    \vrule#&
+    \quad$#$\quad&
+    \vrule#&
+    \quad#\quad&
+    \vrule#&
+    #\quad\cr
+    A & B & C & D && Y && minterm &\quad name\cr
+    \noalign{\hrule}
+    &\omit&\omit&\omit&height2pt&\omit&height2pt&\omit&height2pt&\cr
+    0 & 0 & 0 & 0 && 0 && $A + B + C + D$                                             &\quad$M_0$\cr
+    0 & 0 & 0 & 1 && 0 && $A + B + C + \overline{D}$                                  &\quad$M_1$\cr
+    0 & 0 & 1 & 0 && 0 && $A + B + \overline{C} + D$                                  &\quad$M_2$\cr
+    0 & 0 & 1 & 1 && 1 && $A + B + \overline{C} + \overline{D}$                       &\quad$M_3$\cr
+%
+    0 & 1 & 0 & 0 && 0 && $A + \overline{B} + C + D$                                  &\quad$M_4$\cr
+    0 & 1 & 0 & 1 && 0 && $A + \overline{B} + C + \overline{D}$                       &\quad$M_5$\cr
+    0 & 1 & 1 & 0 && 1 && $A + \overline{B} + \overline{C} + D$                       &\quad$M_6$\cr
+    0 & 1 & 1 & 1 && 1 && $A + \overline{B} + \overline{C} + \overline{D}$            &\quad$M_7$\cr
+%
+    1 & 0 & 0 & 0 && 1 && $\overline{A} + B + C + D$                                  &\quad$M_8$\cr
+    1 & 0 & 0 & 1 && 1 && $\overline{A} + B + C + \overline{D}$                       &\quad$M_9$\cr
+    1 & 0 & 1 & 0 && 1 && $\overline{A} + B + \overline{C} + D$                       &\quad$M_{10}$\cr
+    1 & 0 & 1 & 1 && 1 && $\overline{A} + B + \overline{C} + \overline{D}$            &\quad$M_{11}$\cr
+%
+    1 & 1 & 0 & 0 && 0 && $\overline{A} + \overline{B} + C + D$                       &\quad$M_{12}$\cr
+    1 & 1 & 0 & 1 && 0 && $\overline{A} + \overline{B} + C + \overline{D}$            &\quad$M_{13}$\cr
+    1 & 1 & 1 & 0 && 0 && $\overline{A} + \overline{B} + \overline{C} + D$            &\quad$M_{14}$\cr
+    1 & 1 & 1 & 1 && 0 && $\overline{A} + \overline{B} + \overline{C} + \overline{D}$ &\quad$M_{15}$\cr
+    }
+}
+$$
+@end tex
+The Boolean equation is the product of each maxterm for which @math{Y} is FALSE.
+@tex
+$$\eqalign{
+    Y &= M_0 \bullet M_1 \bullet M_2 \bullet M_4 \bullet M_5 \bullet
+         M_{12} \bullet M_{13} \bullet M_{14} \bullet M_{15}\cr
+    Y &= (A + B + C + D) \bullet
+         (A + B + C + \overline{D}) \bullet
+         (A + B + \overline{C} + D) \bullet
+         (A + \overline{B} + C + D) \bullet\cr
+      &\hskip1.5em(A + \overline{B} +  C + \overline{D}) \bullet
+         (\overline{A} + \overline{B} + C + D) \bullet
+         (\overline{A} + \overline{B} + C + \overline{D}) \bullet
+         (\overline{A} + \overline{B} + \overline{C} + D) \bullet\cr
+      &\hskip1.5em(\overline{A} + \overline{B} + \overline{C} + \overline{D})\cr
+}$$
+@end tex
+@tex
+\vbox{\hrule width6in}
+@end tex
+@c ############################################################################
+@c                                Exercise 2.6
+@c ############################################################################
+@*@*
+@sc{exercise 2.6} Minimize each of the Boolean equations from Exercise 2.2.
+@comment
+@comment In General
+@comment
+@*@*
+@sc{solution} In general, cleverly apply the Axioms of Boolean Algebra and the
+Boolean theorems of one and several variables to simplify the canonical
+sum-of-product.Boolean equations created in Exercise 2.2.
+@comment
+@comment Exercise 2.6 Part A
+@comment
+@*@*
+@sc{solution} @math{(a)}
+Minimize the equation from Exercise 2.2 @math{(a)}:
+@tex
+$$Y = \overline{A}\,B + A\,\overline{B} + A\,B$$
+@end tex
+We can see from the truth table in @ref{fig281} (a) that the Boolean function
+is an OR so we know that the result must be
+@tex
+$$Y = A + B$$
+@end tex
+Restate the equation:
+@tex
+$$\eqalign{
+Y &= \overline{A}\,B + A\,\overline{B} + A\,B\cr
+  &= \overline{A}\,B + (A\,B + A\,\overline{B})
+}$$
+@end tex
+Here we can apply T10:
+@tex
+$$\eqalign{
+Y &= \overline{A}\,B + A
+}$$
+@end tex
+But, since T10 is merely an application of theorems T8 and T5', we can also
+do this:
+@tex
+$$\eqalign{
+Y &= \overline{A}\,B + (A\,B + A\,\overline{B})\cr
+  &= \overline{A}\,B + A\bullet(\overline{B} + B)\cr
+  &= \overline{A}\,B + A\bullet1\cr
+Y &= \overline{A}\,B + A
+}$$
+@end tex
+In either approach we find the same result. Applying theorem T6':
+@tex
+$$
+Y = A + \overline{A}\,B
+$$
+@end tex
+But we know that the Boolean function is just @math{A + B} so this is not
+minimized yet. We can use the expanding trick and apply theorems T2', T1, and
+T10, Null Element, Identity, and Combining:
+@tex
+$$\eqalign{
+Y &= A\bullet(B + 1) + \overline{A}\,B\cr
+  &= A\,B + A + \overline{A}\,B\cr
+  &= A + A\,B + \overline{A}\,B\cr
+  &= A + (B\,A + B\,\overline{A})\cr
+Y &= A + B
+}$$
+@end tex
+Now the Boolean equation is fully minimized.
+
+Note this exercise. We will refer to is in later exercises that contain
+expressions of the form
+@math{\overline{A}\,B + A\,\overline{B} + A\,B}. This can be expressed as our
+own personal theorem:
+@tex
+$$A\,B + A\,\overline{B} + \overline{A}\,B = A + B$$
+@end tex
+A variation on this may also be useful to reference later:
+@tex
+$$A + \overline{A}\,B = A + B$$
+@end tex
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.6 Part B
+@comment
+@*@*
+@sc{solution} @math{(b)}
+Minimize the equation from Exercise 2.2 @math{(b)}:
+
+@tex
+$$\eqalign{
+    Y &= \overline{A}\,\overline{B}\,C +
+         \overline{A}\,B\,\overline{C} +
+         \overline{A}\,B\,C +
+         A\,\overline{B}\,\overline{C} +
+         A\,B\,\overline{C}\cr
+}$$
+@end tex
+Begin by rewriting the equation. Factor some common literals:
+@tex
+$$\eqalign{
+Y &= \overline{A}\bullet(\overline{B}\,C + B\,\overline{C} + B\,C) +
+     A\bullet(\overline{B}\,\overline{C} + B\,\overline{C})\cr
+  &= \overline{A}\bullet(B\,C + B\,\overline{C} + \overline{B}\,C) +
+     A\bullet(\overline{C}\,B + \overline{C}\,\overline{B})\cr
+}$$
+@end tex
+Recognize that the two terms in parenthesis can be minimized using the
+expression derived in Exercise 2.6 @math{(a)} and theorem T10.
+@tex
+$$\eqalign{
+B\,C + B\,\overline{C} + \overline{B}\,C &= B + C\cr
+\overline{C}\,B + \overline{C}\,\overline{B} &= \overline{C}
+}$$
+@end tex
+So we can continue by substituting these minimized expressions:
+@tex
+$$\eqalign{
+Y &= \overline{A}\bullet(B + C) + A\bullet(\overline{C})\cr
+Y &= \overline{A}\,B + \overline{A}\,C + A\,\overline{C}
+}$$
+@end tex
+There is an alternate solution. We can approach the minimization just a bit
+differently and reach a different solution that is logically equivalent.
+@tex
+$$\eqalign{
+Y &= \overline{A}\,\overline{B}\,C +
+     \overline{A}\,B\,\overline{C} +
+     \overline{A}\,B\,C +
+     A\,\overline{B}\,\overline{C} +
+     A\,B\,\overline{C}\cr
+  &= \overline{A}\bullet(\overline{B}\,C + B\,C) +
+     A\,\overline{B}\,\overline{C} +
+     B\,\overline{C}\bullet(A + \overline{A})\cr
+}$$
+@end tex
+We can apply theorems T10 and T5' to the expressions in parenthesis:
+@tex
+$$\eqalign{
+B\,C + \overline{B}\,C &= C\cr
+A + \overline{A} &= 1
+}$$
+@end tex
+Continuing@dots{}
+@tex
+$$\eqalign{
+Y &= \overline{A}\bullet(C) + A\,\overline{B}\,\overline{C} +
+     B\,\overline{C}\bullet(1)\cr
+  &= \overline{A}\,C + A\,\overline{B}\,\overline{C} + B\,\overline{C}\cr
+}$$
+@end tex
+The equation needs an additional term so we can minimize further. Using the
+Null Element theorem, T2', we can expand the expression:
+@tex
+$$\eqalign{
+Y &= \overline{A}\,C + A\,\overline{B}\,\overline{C} +
+     B\,\overline{C}\bullet(A + 1)\cr
+  &= \overline{A}\,C + A\,\overline{B}\,\overline{C} +
+     A\,B\,\overline{C} + B\,\overline{C}\cr
+  &= \overline{A}\,C + A\bullet(\overline{B}\,\overline{C} + B\,\overline{C}) +
+     B\,\overline{C}\cr
+}$$
+@end tex
+Since the Combining theorem T10 tells us that
+@math{\overline{B}\,\overline{C} + B\,\overline{C} = \overline{C}}, we can
+further simplify:
+@tex
+$$\eqalign{
+Y &= \overline{A}\,C + A\bullet(\overline{C}) + B\,\overline{C}\cr
+Y &= \overline{A}\,C + A\,\overline{C} + B\,\overline{C}
+}$$
+@end tex
+That is the alternate and logically equivalent result.
+@*
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.6 Part C
+@comment
+@*@*
+@sc{solution} @math{(c)}
+Minimize the equation from Exercise 2.2 @math{(c)}:
+@tex
+$$ Y = \overline{A}\,\overline{B}\,C + A\,B\,\overline{C} + A\,B\,C $$
+@end tex
+Apply theorems T5' and T1, Complements and Identity:
+@tex
+$$\eqalign{
+Y &= \overline{A}\,\overline{B}\,C + A\,B\,\overline{C} + A\,B\,C\cr
+  &= A\,B\,C + A\,B\,\overline{C} + \overline{A}\,\overline{B}\,C\cr
+  &= A\,B\bullet(C + \overline{C}) + \overline{A}\,\overline{B}\,C\cr
+  &= A\,B\bullet(1) + \overline{A}\,\overline{B}\,C\cr
+Y &= A\,B + \overline{A}\,\overline{B}\,C
+}$$
+@end tex
+@*
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.6 Part D
+@comment
+@*@*
+@sc{solution} @math{(d)}
+Minimize the equation from Exercise 2.2 @math{(d)}:
+@tex
+$$\eqalign{
+Y &= \overline{A}\,\overline{B}\,\overline{C}\,\overline{D} +
+     \overline{A}\,\overline{B}\,C\,\overline{D} +
+     \overline{A}\,\overline{B}\,C\,D + \overline{A}\,B\,C\,\overline{D} +
+     \overline{A}\,B\,C\,D + A\,\overline{B}\,\overline{C}\,\overline{D}\cr
+  &+ A\,\overline{B}\,C\,\overline{D}}$$
+@end tex
+Use theorems T6--T8, Commutativity, Associativity, and Distributivity to
+rewrite the equation:
+@tex
+$$\eqalign{
+Y &= \overline{B}\,\overline{C}\,\overline{D}\bullet(A + \overline{A}) +
+     C\,\overline{D}\bullet(\overline{A}\,B + A\,\overline{B} + \overline{A}\,\overline{B}) +
+     C\,D\bullet(\overline{A}\,\overline{B} + \overline{A}\,B)\cr
+}$$
+@end tex
+Use theorems T5', Complements, T10, Combining, and the relationship established
+in Exercise 2.6 @math{(a)}:
+@tex
+$$\eqalign{
+A + \overline{A} &= 1\cr
+A\,B + A\,\overline{B} + \overline{A}\,B &= A + B\cr
+B\,C + B\overline{C} &= B
+}$$
+@end tex
+Now simplify the equation:
+@tex
+$$\eqalign{
+Y &= \overline{B}\,\overline{C}\,\overline{D}\bullet(1) +
+     C\,\overline{D}(\overline{A} + \overline{B}) + C\,D\bullet(\overline{A})\cr
+  &= \overline{B}\,\overline{C}\,\overline{D} + \overline{A}\,C\,\overline{D} +
+     \overline{B}\,C\,\overline{D} + \overline{A}\,C\,D\cr
+  &= \overline{B}\,\overline{C}\,\overline{D} + \overline{B}\,C\,\overline{D} +
+     \overline{A}\,C\,\overline{D} + \overline{A}\,C\,D\cr
+}$$
+@end tex
+Again, use theorems T6--T8, and T5' to rewrite the equation:
+@tex
+$$\eqalign{
+Y &= \overline{B}\,\overline{D}\bullet(C + \overline{C}) +
+     \overline{A}\,C\bullet(D + \overline{D})\cr
+  &= \overline{B}\,\overline{D}\bullet(1) + \overline{A}\,C\bullet(1)\cr
+  &= \overline{B}\,\overline{D} + \overline{A}\,C\cr
+Y &= \overline{A}\,C + \overline{B}\,\overline{D}
+}$$
+@end tex
+Undoubtedly there are many ways to approach this. Some may be more difficult
+that others because of the expressions encountered along the way. Some are more
+difficult than others to minimize.
+
+Check the result using @emph{perfect induction} against the truth table in
+@ref{fig281} @math{(d)}. Note that this does not necessarily indicate that the
+result is fully minimized, only that there have been no algebraic erros in
+arriving at the result.
+@*
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.6 Part E
+@comment
+@*@*
+@sc{solution} @math{(e)}
+Minimize the equation from Exercise 2.2 @math{(e)}:
+@tex
+$$\eqalign{
+    Y &= \overline{A}\,\overline{B}\,C\,D +
+         \overline{A}\,B\,C\overline{D} +
+         \overline{A}\,B\,C\,D +
+         A\,\overline{B}\,\overline{C}\overline{D}\cr
+      &+ A\,\overline{B}\,\overline{C}\,D +
+         A\,\overline{B}\,C\,\overline{D} +
+         A\,\overline{B}\,C\,D
+}$$
+@end tex
+Use theorems T6--T8, Commutativity, Associativity, and Distributivity to
+rewrite the equation:
+@tex
+$$\eqalign{
+Y &= C\,D\bullet(\overline{A}\,B + \overline{A}\,\overline{B}) +
+     A\,\overline{B}\bullet(\overline{C}\,D + \overline{C}\,\overline{D}) +
+     A\,\overline{B}\bullet(C\,D + C\,\overline{D}) +
+     \overline{A}\,B\,C\,\overline{D}\cr
+}$$
+@end tex
+Apply theorems T6--T8 and T10 to rewrite:
+@tex
+$$\eqalign{
+Y &= C\,D\bullet(\overline{A}) + A\,\overline{B}\bullet(\overline{C}) +
+     A\,\overline{B}\bullet(C) + \overline{A}\,B\,C\,\overline{D}\cr
+  &= \overline{A}\,C\,D + A\,\overline{B}\,\overline{C} + A\,\overline{B}\,C +
+     \overline{A}\,B\,C\,\overline{D}\cr
+  &= \overline{A}\,C\,D + \overline{B}\bullet(A\,C + A\,\overline{C}) +
+     \overline{A}\,B\,C\,\overline{D}\cr
+  &= \overline{A}\,C\,D + \overline{B}\bullet(A) +
+     \overline{A}\,B\,C\,\overline{D}\cr
+  &= \overline{A}\,C\,D + A\,\overline{B} + \overline{A}\,B\,C\,\overline{D}\cr
+}$$
+@end tex
+At this point, none of our theorems will further minimize this without expanding
+an implicant. Use the Null Element theorem (T2') to expand an implicant
+that will be easy to factor with an additional @math{B} literal.
+@tex
+$$\eqalign{
+Y &= \overline{A}\,C\,D\bullet(B + 1) + A\,\overline{B} +
+     \overline{A}\,B\,C\,\overline{D}\cr
+  &= \overline{A}\,B\,C\,D + \overline{A}\,B\,C\,\overline{D} +
+     A\,\overline{B} + \overline{A}\,C\,D\cr
+  &= \overline{A}\,B\bullet(C\,D + C\,\overline{D}) + A\,\overline{B} +
+     \overline{A}\,C\,D\cr
+  &= \overline{A}\,B\,C + A\,\overline{B} + \overline{A}\,C\,D\cr
+Y &= A\,\overline{B} + \overline{A}\,B\,C + \overline{A}\,C\,D
+}$$
+@end tex
+@*
+@tex
+\vbox{\hrule width6in}
+@end tex
+@c ############################################################################
+@c                                Exercise 2.8
+@c ############################################################################
+@*@*
+@sc{exercise 2.8} Sketch a reasonably simple combinational circuit implementing
+each of the functions from Exercise 2.6.@*@*
+@comment
+@comment In General
+@comment
+@sc{solution} Sketch the combinational logic functions using the rules for
+arranging inputs and outputs from the text.
+@float Figure ,solution28
+@center @image{solution_28,5in,,,png}
+@caption{Circuits for functions from Exercise 2.6}
+@end float
+@*
+@tex
+\vbox{\hrule width6in}
+@end tex
+@c ############################################################################
+@c                                Exercise 2.14
+@c ############################################################################
+@*@*
+@sc{exercise 2.14} Simplify the following Boolean equations using Boolean
+theorems. Check for correctness using a truth table or K-map.
+@enumerate a
+@item @math{Y = \overline{A}\,B\,C + \overline{A}\,B\,\overline{C}}@*
+@item @math{Y = \overline{ABC} + A\,\overline{B}}@*
+@item @math{Y = A\,B\,C\,\overline{D} + A\,\overline{BCD} + (\overline{A + B + C + D)}}
+@end enumerate
+@*
+@comment
+@comment In General
+@comment
+@c @sc{solution}
+@comment
+@comment Exercise 2.14 Part A
+@comment
+@*@*
+@sc{solution} @math{(a)}
+Using theorems T6--T8 and T5', rewrite and simpllify the equation.
+@*
+@tex
+$$\eqalign{
+Y &= \overline{A}\,B\,C + \overline{A}\,B\overline{C}\cr
+  &= \overline{A}\,B\bullet(C + \overline{C})\cr
+  &= \overline{A}\,B\bullet(1)\cr
+Y &= \overline{A}\,B
+}$$
+@end tex
+The truth table for the original and simplified expression demonstrates that
+both forms produce the same logical result.
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$& \strut\quad$#$\quad& $#$\quad &
+    \vrule# &
+    \quad\hfill$#$\quad\hfill &
+    \vrule# &
+    \quad\hfill$#$\quad\hfill\cr
+%
+    A & B & C &&
+    \overline{A}\,B\,C + \overline{A}\,B\,\overline{C} &&
+    \quad \overline{A}\,B \cr
+    \noalign{\hrule}
+    & \omit & \omit & height2pt & \omit & height2pt &\cr
+%
+    0 & 0 & 0 && \hfil 0 && \hfil 0 \cr
+    0 & 0 & 1 && \hfil 0 && \hfil 0 \cr
+    0 & 1 & 0 && \hfil 1 && \hfil 1 \cr
+    0 & 1 & 1 && \hfil 1 && \hfil 1 \cr
+%
+    1 & 0 & 0 && \hfil 0 && \hfil 0 \cr
+    1 & 0 & 1 && \hfil 0 && \hfil 0 \cr
+    1 & 1 & 0 && \hfil 0 && \hfil 0 \cr
+    1 & 1 & 1 && \hfil 0 && \hfil 0 \cr
+    }
+}
+$$
+@end tex
+@*
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.14 Part B
+@comment
+@*@*
+@sc{solution} @math{(b)}
+Using theorems T2', T5', T6--T8, and T12, rewrite and simpllify the equation.
+@tex
+$$\eqalign{
+Y &= \overline{A\,B\,C} + A\,\overline{B}\cr
+  &= \overline{A} + \overline{B} + \overline{C} + A\,\overline{B}\cr
+  &= \overline{A} + \overline{C} + (\overline{B} + A\,\overline{B})\cr
+  &= \overline{A} + \overline{C} + \overline{B}\bullet(1 + A)\cr
+  &= \overline{A} + \overline{C} + \overline{B}\bullet(1)\cr
+Y &= \overline{A\,B\,C}
+}$$
+@end tex
+The truth table below demonstrates correctness of the simplification.
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{\quad$#$& \strut\quad$#$\quad& $#$\quad &
+    \vrule# &
+    \quad\hfill$#$\quad\hfill &
+    \vrule# &
+    \quad\hfill$#$\quad\hfill &
+    \vrule# &
+    \quad\hfill$#$\quad\hfill\cr
+%
+    A & B & C &&
+    \overline{A\,B\,C} &&
+    \quad A\,\overline{B} &&
+    \quad \overline{A\,B\,C} + A\,\overline{B} \cr
+    \noalign{\hrule}
+    & \omit & \omit & height2pt & \omit & height2pt & \omit & \omit &\cr
+%
+    0 & 0 & 0 && \hfil 1 && \hfil 0 && \hfil 1 \cr
+    0 & 0 & 1 && \hfil 1 && \hfil 0 && \hfil 1 \cr
+    0 & 1 & 0 && \hfil 1 && \hfil 0 && \hfil 1 \cr
+    0 & 1 & 1 && \hfil 1 && \hfil 0 && \hfil 1 \cr
+%
+    1 & 0 & 0 && \hfil 1 && \hfil 1 && \hfil 1 \cr
+    1 & 0 & 1 && \hfil 1 && \hfil 1 && \hfil 1 \cr
+    1 & 1 & 0 && \hfil 1 && \hfil 0 && \hfil 1 \cr
+    1 & 1 & 1 && \hfil 0 && \hfil 0 && \hfil 0 \cr
+    }
+}
+$$
+@end tex
+@*
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.14 Part C
+@comment
+@*@*
+@sc{solution} @math{(c)}
+Using theorems T2', T5', T6--T8, and T12, rewrite and simpllify the equation.
+@tex
+$$\eqalign{
+Y &= A\,B\,C\,\overline{D} + A\,\overline{BCD} + (\overline{A + B + C + D)}\cr
+  &= A\,B\,C\,\overline{D} + A\bullet(\overline{B} + \overline{C} + \overline{D}) +
+     \overline{A}\,\overline{B}\,\overline{C}\,\overline{D}\cr
+  &= A\,B\,C\,\overline{D} + A\,\overline{B} + A\,\overline{C} + A\,\overline{D} +
+     \overline{A}\,\overline{B}\,\overline{C}\,\overline{D}\cr
+  &= A\bullet(B\,C\,\overline{D} + \overline{B} + \overline{C} + \overline{D}) +
+     \overline{A}\,\overline{B}\,\overline{C}\,\overline{D}\cr
+  &= A\bullet(\overline{B} + \overline{C} + \overline{D}\bullet(1 + B\,C)) +
+     \overline{A}\,\overline{B}\,\overline{C}\,\overline{D}\cr
+  &= A\bullet(\overline{B} + \overline{C} + \overline{D}\bullet(1)) +
+     \overline{A}\,\overline{B}\,\overline{C}\,\overline{D}\cr
+  &= A\bullet(\overline{B} + \overline{C} + \overline{D}) +
+     \overline{A}\,\overline{B}\,\overline{C}\,\overline{D}\cr
+  &= A\,\overline{B} + A\,\overline{C} + A\,\overline{C} +
+     \overline{A}\,\overline{B}\,\overline{C}\,\overline{D}\cr
+}$$
+@end tex
+At this point, we need to simplify the 4th term. This can be accomplished by
+factoring and expanding before continuing to simplify.
+@tex
+$$\eqalign{
+Y &= A\,\overline{B} + A\,\overline{C} + A\,\overline{D} +
+     \overline{A}\,\overline{B}\,\overline{C}\,\overline{D}\cr
+  &= A\,\overline{B} + A\,\overline{C} +
+     \overline{D}\bullet(A + \overline{B}\,\overline{C}\,\overline{D})\cr
+  &= A\,\overline{B} + A\,\overline{C} +
+     \overline{D}\bullet(A\bullet(\overline{B}\,\overline{C} + 1) +
+        \overline{A}\,\overline{B}\,\overline{C})\cr
+  &= A\,\overline{B} + A\,\overline{C} +
+     \overline{D}\bullet(A\,\overline{B}\,\overline{C} + A + \overline{A}\,\overline{B}\,\overline{C})\cr
+  &= A\,\overline{B} + A\,\overline{C} +
+     \overline{D}\bullet(A + \overline{B}\,\overline{C}\bullet(A + \overline{A}))\cr
+  &= A\,\overline{B} + A\,\overline{C} +
+     \overline{D}\bullet(A + \overline{B}\,\overline{C}\bullet(1))\cr
+  &= A\,\overline{B} + A\,\overline{C} + A\,\overline{D} + \overline{B}\,\overline{C}\,\overline{D}\cr
+  &= A\bullet(\overline{B} + \overline{C} + \overline{D}) + \overline{B}\,\overline{C}\,\overline{D}\cr
+  &= A\bullet(\overline{B\,C\,D}) +
+     \overline{B}\,\overline{C}\,\overline{D}\cr
+Y &= A\,\overline{B\,C\,D} +
+     \overline{B}\,\overline{C}\,\overline{D}\cr
+}$$
+@end tex
+This truth table is simply too large to consider including in this document. I
+may change my mind. Problem is that @code{texinfo} tables are so complex to
+work with---it is just too horrible to contemplate. I may change my mind after
+completing the rest of the exercises.
+@*
+@tex
+\vbox{\hrule width6in}
+@end tex
+@c ############################################################################
+@c                                Exercise 2.16
+@c ############################################################################
+@*@*
+@sc{exercise 2.16} Sketch a reasonably simple combinational circuit implementing
+each of the functions from Exercise 2.14.@*@*
+@comment
+@comment In General
+@comment
+@sc{solution} Sketch the combinational logic functions using the rules for the
+minimized functions.
+
+@float Figure ,solution216
+@center @image{solution_216,4in,,,png}
+@caption{Circuits for functions from Exercise 2.14}
+@end float
+@*
+@tex
+\vbox{\hrule width6in}
+@end tex
+@c ############################################################################
+@c                                Exercise 2.22
+@c ############################################################################
+@*@*
+@sc{exercise 2.22} Prove that the following theorems are true using perfect
+induction. You need not prove their duals.
+@enumerate a
+@item The idempotency theorem (T3)
+@item The distributivity theorem (T8)
+@item The combining theorem (T10)
+@end enumerate
+@comment
+@comment In General
+@comment
+@sc{solution} Construct a truth table for each theorem using as many inputs as
+needed as stated in the text. Fill in the inputs in counting order. Compute the
+value of each term and then compute the result for each side of the theorem.
+Verify that they are equivalent.@*@*
+@comment
+@comment Exercise 2.22 Part A
+@comment
+@*@*
+@sc{solution} @math{(a)}
+Theorem T3 Idempotency states:
+@tex
+$$B\bullet B = B$$
+@end tex
+The truth table is simple and contains only two rows. This is because there are
+only two discrete states.
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{
+    \quad $#$ &
+    \strut\quad $#$ \quad &
+    \vrule# &
+    \hfil\quad $#$ \hfil\quad \cr
+    B & B && B\bullet B\cr
+    \noalign{\hrule}
+    & \omit & height2pt & \omit \cr
+    0 & 0 && 0 \cr
+    1 & 1 && 1 \cr
+    }
+}
+$$
+@end tex
+@*
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.22 Part B
+@comment
+@*@*
+@sc{solution} @math{(b)}
+Theorem T8, Distributivity states:
+@tex
+$$ (B\bullet C) + (B\bullet D) = B\bullet(C + D)$$
+@end tex
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{
+    \quad $#$ &
+    \strut\quad $#$ \quad &
+    $#$ \quad &
+    \vrule# &
+    \hfil\quad $#$ \hfil\quad &
+    \vrule# &
+    \hfil\quad $#$ \hfil\quad \cr
+    B & C & D && B\,C + B\,D && B\bullet(C + D) \cr
+    \noalign{\hrule}
+    & \omit & \omit & height2pt & \omit & height2pt & \omit \cr
+    0 & 0 & 0 && 0 && 0 \cr
+    0 & 0 & 1 && 0 && 0 \cr
+    0 & 1 & 0 && 0 && 0 \cr
+    0 & 1 & 1 && 0 && 0 \cr
+    1 & 0 & 0 && 0 && 0 \cr
+    1 & 0 & 1 && 1 && 1 \cr
+    1 & 1 & 0 && 1 && 1 \cr
+    1 & 1 & 1 && 1 && 1 \cr
+    }
+}
+$$
+@end tex
+@*
+@tex
+\hskip1.5in\vbox{\hrule width3in}
+@end tex
+@comment
+@comment Exercise 2.22 Part C
+@comment
+@*@*
+@sc{solution} @math{(c)}
+Theorem T10, Combining states:
+@tex
+$$ (B\bullet C) + (B\bullet \overline{C}) = B$$
+@end tex
+The truth table is below.
+@tex
+$$
+\vbox{\offinterlineskip
+    \halign{
+    \quad $#$ &
+    \strut\quad $#$ \quad &
+    \vrule# &
+    \hfil\quad $#$ \hfil\quad \cr
+    B & C && (B\bullet C) + (B \bullet \overline{C})\cr
+    \noalign{\hrule}
+    & \omit & height2pt & \omit \cr
+    0 & 0 && 0 \cr
+    0 & 1 && 0 \cr
+    1 & 0 && 1 \cr
+    1 & 1 && 1 \cr
+    }
+}
+$$
+@end tex
 @bye
