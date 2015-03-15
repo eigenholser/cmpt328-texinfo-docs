@@ -57,28 +57,26 @@
 @end menu
 @headings singleafter
 @tex
-\font\cmss=cmss12
-\font\cmssa=cmss12 scaled\magstep4
-\font\cmssb=cmss12 scaled\magstep5
-
-%title page
-\hrule depth 2pt
-\vskip 1.5pt
-\hrule depth 0.4pt
-\vskip 10pt
-\centerline{\cmssa COMPUTER\kern7ptARCHITECTURE}
-\vskip 10pt
-\centerline{\cmssa CMPT\kern7pt328}
-\vskip 3.0in
-\centerline{\cmssb \raise5pt \hbox{COMBINATIONAL LOGIC}}
-\centerline{\cmssb \raise5pt \hbox{ASSIGNMENT}}
-\vfill
-%\centerline{\cmss \raise5pt\hbox{\hss WEDNESDAY MARCH 18, 2015\hss}}
-\centerline{\cmssa \raise10pt \hbox{STUDENT:} \raise10pt\hbox{$\underline{\hbox{SCOTT OVERHOLSER\hss}}$}}
-\hrule depth 0.4pt
-\vskip 1.1pt
-\hrule depth 2pt
-\eject
+%\font\cmss=cmss12
+%\font\cmssa=cmss12 scaled\magstep4
+%\font\cmssb=cmss12 scaled\magstep5
+%
+%%title page
+%\hrule depth 2pt
+%\vskip 1.5pt
+%\hrule depth 0.4pt
+%\vskip 10pt
+%\centerline{\cmssa COMPUTER\kern7ptARCHITECTURE}
+%\vskip 10pt
+%\centerline{\cmssa CMPT\kern7pt328}
+%\vskip 3.0in
+%\centerline{\cmssb \raise5pt \hbox{COMBINATIONAL LOGIC}}
+%\centerline{\cmssb \raise5pt \hbox{ASSIGNMENT}}
+%\vfill
+%\hrule depth 0.4pt
+%\vskip 1.1pt
+%\hrule depth 2pt
+%\eject
 @end tex
 @everyheading @thischapter @| @| @thispage¬
 @everyfooting @value{UPDATED} @| @| Westminster College
@@ -278,7 +276,7 @@ $$\eqalign{
     Y &= \overline{A}\,\overline{B}\,\overline{C}\,\overline{D} +
          \overline{A}\,\overline{B}\,C\overline{D} +
          \overline{A}\,\overline{B}\,C\,D +
-         \overline{A}\,B\,C\overline{D}\cr
+         \overline{A}\,B\,C\,\overline{D}\cr
       &+ \overline{A}\,B\,C\,D +
          A\,\overline{B}\,\overline{C}\,\overline{D} +
          A\,\overline{B}\,C\,\overline{D}
@@ -1114,7 +1112,7 @@ $$\eqalign{
 Y &= A\,\overline{B} + A\,\overline{C} + A\,\overline{D} +
      \overline{A}\,\overline{B}\,\overline{C}\,\overline{D}\cr
   &= A\,\overline{B} + A\,\overline{C} +
-     \overline{D}\bullet(A + \overline{B}\,\overline{C}\,\overline{D})\cr
+     \overline{D}\bullet(A + \overline{A}\,\overline{B}\,\overline{C})\cr
   &= A\,\overline{B} + A\,\overline{C} +
      \overline{D}\bullet(A\bullet(\overline{B}\,\overline{C} + 1) +
         \overline{A}\,\overline{B}\,\overline{C})\cr
