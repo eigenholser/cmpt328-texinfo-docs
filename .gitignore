@@ -15,6 +15,9 @@
 *.txt
 *.vr
 *.xml
+tikz/*
+*.aux
+*.dvi
 
 # Vim
 *.swp
