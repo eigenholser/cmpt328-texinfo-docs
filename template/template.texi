@@ -13,6 +13,7 @@
 @setfilename @value{filename}.info
 @settitle @value{title}
 @finalout
+@paragraphindent 0
 @comment %**end of header
 
 @include @value{filename}.texi.updated
