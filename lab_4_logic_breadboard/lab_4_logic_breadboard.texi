@@ -1,0 +1,319 @@
+\input texinfo   @c -*-texinfo-*-
+
+@set title Lab 4 Logic Breadboard
+@set subtitle CMPT 328 Computer Architecture
+@set splash1 lab_4_logic_breadboard-splash.texi
+@set splash2 westminster-splash.texi
+@set author Scott Overholser
+@set category Laboratory
+@set filename lab_4_logic_breadboard
+
+@comment %**start of header
+@setchapternewpage off
+@setfilename @value{filename}.info
+@settitle @value{title}
+@finalout
+@paragraphindent 0
+@comment %**end of header
+
+@include @value{filename}.texi.updated
+@include copying.texi
+
+@titlepage
+@title @value{title}
+@subtitle @value{subtitle}
+@include @value{splash1}
+@author @value{author}
+
+@c Secondary title page.
+@page
+@include @value{splash2}
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@comment Table of Contents
+@contents
+
+@dircategory @value{category}
+@direntry
+* Texinfo Doc Template         Template for Creating New Docs
+@end direntry
+
+@include headings.texi
+@include constants.texi
+
+@ifnottex
+@node Top
+@top @value{title}
+
+@insertcopying
+@end ifnottex
+
+@comment This is the Chapter Menu
+@menu
+* Introduction::              Introduction
+* Lab Objective::             Lab Objective
+* Notes::                     Notes
+* Data Bus::                  Data Bus
+* Enable Lines::              Enable Lines
+* Connect The LaunchPad::     Connect The LaunchPad
+* The Finished Product::      The Finished Product
+* Experiments::               Experiments
+* Lab Report::                Lab Report
+@end menu
+
+@comment This is a starting point.
+@node Introduction
+@chapter Introduction
+The LaunchPad will be used in this lab as a controller for circuits built on
+a breadboard. The program written for the LaunchPad implements some high-level
+programming constructs in assembler as we will see in @cite{Section 6.4 Programming}
+in @cite{Digital Design and Computer Architecture.}
+
+The
+@uref{https://westminster.instructure.com/files/66279640/download?download_frd=1,Lab 4 Breadboard project}
+will be used for this lab.
+
+@node Lab Objective
+@chapter Lab Objective
+Work with combinational and sequential logic circuits on a breadboard using
+the LaunchPad as a controller.
+
+@node Notes
+@chapter Notes
+The LaunchPad will be connected to the breadboard to act as a controller for
+the logic circuits you will build. The connections must be made carefully.
+The LaunchPad can be damaged. There is little risk of this happening but do
+be aware.
+
+The breadboard is contains four independent modules arranged side by side. Each
+module has it's own power and ground. For the purpose of this lab they will be
+numbered left to right as module 1, module 2, module 3, and module 4. There
+is also power and ground at the top. This is where the power adapter will be
+connected. Power to each module individually will tap into the top rail.
+
+@itemize
+@item @uref{https://westminster.instructure.com/files/66279640/download?download_frd=1,Lab 4 Breadboard project}
+@item @uref{https://westminster.instructure.com/files/62246648/download?download_frd=1, TM4C123G LaunchPad Evaluation Board User's Guide}
+@item @uref{https://westminster.instructure.com/files/62780837/download?download_frd=1,74LS75 4-bit D Latch datasheet}
+@item @uref{https://westminster.instructure.com/files/62780838/download?download_frd=1,74LS83 4-bit Full Binary Adder datasheet.}
+@item @uref{https://westminster.instructure.com/files/62780820/download?download_frd=1,74LS04 Hex Inverter datasheet.}
+@item @uref{https://westminster.instructure.com/files/62780827/download?download_frd=1,74LS08 Quad 2-Input AND Gate datasheet.}
+@item @uref{https://westminster.instructure.com/files/66270831/download?download_frd=1,74LS32 Quad 2-Input OR Gate datasheet.}
+@end itemize
+
+@node Data Bus
+@chapter Data Bus
+In this lab we will use one or more 4-bit data buses constructed with red LEDs
+to provide a visual indication of the value to which each bit is set. The bus
+is simply a collection of 4 common conductors to which other devices, including
+the LaunchPad will be connected. @ref{databus} is a schematic that shows how to
+connect the LED to the bus serially through a 330 Ohm resistor to ground.
+
+@float Figure ,databus
+@center @image{bus,,,,}
+@caption{4-Bit Data Bus LED Schematic.}
+@end float
+
+The 330 Ohm resistor was selected specifically because it will allow sufficient
+current flow through the LED to make it's brightness satisfactory. A 1K Ohm
+resistor would have limited the current too much and resulted in a dimmer LED.
+
+The ``4'' next to the LED symbol in the @ref{databus} schematic indicates that
+this is a 4-bit bus and that there will be four sets of these LED/resistor
+circuits---one for each bit in the 4--bit bus.
+
+Install the data bus on the far lower right with each data line positioned on rows as follows:
+
+Each bit on the bus should be arranged on the breadboard in a systematic way
+so we can all have a standard layout. In module 4 furthest to the right, install
+each line of the 4-bit data bus according to the schematic as follows:
+
+@itemize
+@item Bit 0 positioned on row 60
+@item Bit 1 positioned on row 50
+@item Bit 2 positioned on row 40
+@item Bit 3 positioned on row 30
+@end itemize
+
+With your breadboard, construct your bus by installing the red LED and resistor
+so that the LED anode---the long leg---connects to the bus, the LED cathode
+connects to one lead of the resistor and the other lead of the resistor connects
+to ground.
+
+The LED cathode will necessarily need to connect to the resistor on the adjacent
+row in the module. The resistor will then connect to ground. For example, Bit 3
+LED anode will connect on row 30 while Bit 3 LED cathode will connect on row 29.
+The resistor will connect from row 29 to ground.
+
+Using a short jumper wire, bridge the center gap in the breadboard section to
+add additional connection points for each bus data line.
+
+Repeat this process and build a second 4-bit bus in module 1 using the same row
+configuration. The first bus will be referred to as bus 1 and the second, bus 2.
+
+@node Enable Lines
+@chapter Enable Lines
+In a similar manner to the 4-bit data bus construction, use green LEDs to create
+two 1-bit data lines EN1 and EN2. Each of these will be in the same module 4 as
+the data bus already built.
+
+@float Figure ,enablelines
+@center @image{enable,,,,}
+@caption{2-Bit Enable Lines LED Schematic.}
+@end float
+
+@itemize
+@item EN1 positioned on row 20.
+@item EN2 positioned on row 10.
+@end itemize
+
+@node Connect The LaunchPad
+@chapter Connect The LaunchPad
+Using jumper wires of sufficient length, connect the LaunchPad pins to the
+breadboard circuit.
+
+See the @uref{https://westminster.instructure.com/files/62246648/download?download_frd=1, TM4C123G LaunchPad Evaluation Board User's Guide} schematic on page twenty for jumper block maps.
+
+@itemize
+@item J2 pin 1 is ground. Connect this to the ground rail on the breadboard.
+@item J2 pins 8, 9, and 10 correspond to GPIO port A pins 4, 3, and 2 respectively.
+connect J2 pins 8, 9, and 10 to breadboard data bus bits 2, 1, and 0 respectively.
+@item J1 pin 8 corrsponds to GPIO port A pin 5. Connect J1 pin 8 to breadboard
+data bus bit 3.
+@item J1 pins 9 and 10 correspond to GPIO port A pins 6 and 7. Connect J1 pin
+9 to EN1. Connect J1 pin 10 to EN2.
+@end itemize
+
+@node The Finished Product
+@chapter The Finished Product
+Rather than a paint-by-numbers approach indicating row and column connection
+points for each bus, here is a photograph of the finished product.
+
+@float Figure, finishedproduct
+@center @image{finishedproduct,3in,,,}
+@caption{The breadboard with 2 4-bit buses, EN1, and EN2.}
+@end float
+
+In @ref{finishedproduct}, the LaunchPad is shown on the breadbboard. That is
+not a necessary arrangement. It was done just for the illustration.
+
+@node Experiments
+@chapter Experiments
+Download the
+@uref{https://westminster.instructure.com/files/66279640/download?download_frd=1,Lab 4 Breadboard}
+project from Canvas. Extract the project to a location of your choice.
+
+Connect your LaunchPad to your development environment. Start the IAR Systems
+Embedded Workbench and open the Lab 4 workspace. Compile the project then
+download and debug.
+
+You should now be able to run the program on your LaunchPad without running the
+IAR Systems Embedded Workbench.
+
+Keep the LaunchPad connected to your USB port for power.
+
+@section 4-bit D Latch
+Refer to the
+@uref{https://westminster.instructure.com/files/62780837/download?download_frd=1, 74LS75 4-bit D Latch datasheet.}
+Find a 74LS75 and install it on the breadboard in module 2 at row 40 across the
+middle line in columns E--F.
+
+@itemize
+@item Connect @math{D_n} to the corresponding bits of
+bus 1 on the breadboard.
+@item Connect @math{Q_n} to the corresponding bits of bus 2
+on the breadboard.
+@item Connect @math{E_{0-1}} and @math{E_{2-3}} to EN1 on the
+breadboard.
+@item Connect @math{V_{CC}} and GND on the 74LS75.
+@end itemize
+
+Load the bus 1 data onto the 74LS75 latch by pressing the SW2 button to
+activate EN1. You may need to long press SW2 to select EN1 (blue) versus EN2
+(green.)
+
+Experiment with loading data onto bus 1 by fast pressing SW1 and then activating
+EN1 by pressing SW2. Repeat with different values. Each time, you should see
+that the LEDs on bus 2 will update to match the LEDs on bus 1 when EN1 is
+activated.
+
+@section 4-bit Full Binary Adder
+In this section you will continue to use the 4-bit D latch used in the previous
+section.
+Refer to the
+@uref{https://westminster.instructure.com/files/62780838/download?download_frd=1,74LS83 4-bit Full Binary Adder datasheet.}
+Find a 74LS83 and install it on the breadboard in module 2 at row 50 across the
+middle line in colums E--F.
+
+@itemize
+@item Connect the @math{A_n} inputs of the adder to the @math{Q_n} outputs of the
+74LS75 4-bit latch used in the previous section. This means you will disconnect
+the 74LS75 @math{Q_n} outputs from the LEDs in bus 2.
+@item Connect the @math{B_n} inputs of the adder to the corresponding bits of
+bus 1.
+@item Connect the sum outputs to the corresponding bits of the bus 2 LEDs.
+@item Connect the adder carry in @math{C_0} to ground. It floats high and
+represents an incorrect carry in if this is not done.
+@end itemize
+
+Repeat the process of fast pressing SW1 on the LaunchPad to select a 4-bit
+value on bus 1. When satisfied, press SW2---when EN1 is selected---to latch
+the value. Remember the value you latched. Then fast press SW1 again to write
+a new value to bus 1. Inspect the LEDs on bus 2 and confirm that the addition
+is correct.
+
+Now disconnect @math{C_0} so the carry in is active. Repeat the previous steps
+and confirm that the carry is being added to the result on bus 2.
+
+@section Theorems of Boolean Algebra
+For this section, start the IAR Systems Embedded Workbench and open the lab 4
+program workspace.
+
+On line 69 of @file{main.s}, @code{count_limit} should be changed to 4. This
+will restrict the data output to bus 1 to a 2-bit value 0--3.
+
+Recompile
+the program, then download and debug. This is sufficient to flash the new program
+to the LaunchPad which will now operate without need of the IDE.
+
+@subsection DeMorgan's Theorem
+Reference the datasheets for the
+@uref{https://westminster.instructure.com/files/62780820/download?download_frd=1,74LS04 Hex Inverter},
+@uref{https://westminster.instructure.com/files/62780827/download?download_frd=1,74LS08 Quad 2-Input AND Gate},
+and
+@uref{https://westminster.instructure.com/files/66270831/download?download_frd=1,74LS32 Quad 2-Input OR Gate}.
+
+Using the appropriate components, build the circuits shown in @ref{nandequiv} and
+@ref{norequiv}.
+
+@float Figure ,nandequiv
+@center @image{nand_equiv,,,,}
+@caption{NAND Equivalent Circuits.}
+@end float
+
+@tex
+$$\overline{A\,B} = \overline{A} + \overline{B}$$
+@end tex
+
+@float Figure ,norequiv
+@center @image{nor_equiv,,,,}
+@caption{NOR Equivalent Circuits.}
+@end float
+
+@tex
+$$\overline{A + B} = \overline{A}\,\overline{B}$$
+@end tex
+
+For each circuit in turn, connect bus 1 bit 0 to input @math{A} and bus 1 bit 1
+to input @math{B}. Connect output @math{Y} to bus 2 bit 0.
+
+Using the LaunchPad as a controller, cycle through the 2-bit range and verify
+the output. You should be making notes on this output for your lab report.
+
+@node Lab Report
+@chapter Lab Report
+Write a lab report summarizing your observations.
+
+@bye

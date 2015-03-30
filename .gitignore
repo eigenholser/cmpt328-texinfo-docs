@@ -15,7 +15,6 @@
 *.txt
 *.vr
 *.xml
-tikz/*
 *.aux
 *.dvi
 
