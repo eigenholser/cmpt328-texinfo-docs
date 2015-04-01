@@ -191,13 +191,15 @@ data bus bit 3.
 Rather than a paint-by-numbers approach indicating row and column connection
 points for each bus, here is a photograph of the finished product.
 
+In @ref{finishedproduct}, the LaunchPad is shown on the breadbboard. That is
+not a necessary arrangement. It was done just for the illustration.
+
+@page
+
 @float Figure, finishedproduct
 @center @image{finishedproduct,3in,,,}
 @caption{The breadboard with 2 4-bit buses, EN1, and EN2.}
 @end float
-
-In @ref{finishedproduct}, the LaunchPad is shown on the breadbboard. That is
-not a necessary arrangement. It was done just for the illustration.
 
 @node Experiments
 @chapter Experiments
@@ -271,20 +273,28 @@ and confirm that the carry is being added to the result on bus 2.
 For this section, start the IAR Systems Embedded Workbench and open the lab 4
 program workspace.
 
-On line 69 of @file{main.s}, @code{count_limit} should be changed to 4. This
+On line 69 of @file{main.s}, @code{count_limit} may be changed to 4. This
 will restrict the data output to bus 1 to a 2-bit value 0--3.
 
-Recompile
+Consider an alternate approach. Rather than changing @code{count_limit}, leave it
+as is and utilize EN2 for the second 2-bits of the 4-bit latch. This will permit
+you to independently latch the 2 most significant bits and the 2 least significant
+bits on bus 1 using EN1 and EN2.
+
+Using the alternate approach will enable you to build and operate both logic
+circuits at the same time.
+
+If you choose the first approach, recompile
 the program, then download and debug. This is sufficient to flash the new program
 to the LaunchPad which will now operate without need of the IDE.
 
-@subsection DeMorgan's Theorem
 Reference the datasheets for the
 @uref{https://westminster.instructure.com/files/62780820/download?download_frd=1,74LS04 Hex Inverter},
 @uref{https://westminster.instructure.com/files/62780827/download?download_frd=1,74LS08 Quad 2-Input AND Gate},
 and
 @uref{https://westminster.instructure.com/files/66270831/download?download_frd=1,74LS32 Quad 2-Input OR Gate}.
 
+@subsection DeMorgan's Theorem
 Using the appropriate components, build the circuits shown in @ref{nandequiv} and
 @ref{norequiv}.
 
@@ -294,7 +304,7 @@ Using the appropriate components, build the circuits shown in @ref{nandequiv} an
 @end float
 
 @tex
-$$\overline{A\,B} = \overline{A} + \overline{B}$$
+$$\overline{B\,C} = \overline{B} + \overline{C}$$
 @end tex
 
 @float Figure ,norequiv
@@ -303,11 +313,42 @@ $$\overline{A\,B} = \overline{A} + \overline{B}$$
 @end float
 
 @tex
-$$\overline{A + B} = \overline{A}\,\overline{B}$$
+$$\overline{B + C} = \overline{B}\,\overline{C}$$
 @end tex
 
-For each circuit in turn, connect bus 1 bit 0 to input @math{A} and bus 1 bit 1
-to input @math{B}. Connect output @math{Y} to bus 2 bit 0.
+For each circuit in turn, connect bus 1 bit 0 to input @math{B} and bus 1 bit 1
+to input @math{C}. Connect output @math{Y} to bus 2 bit 0.
+
+Using the LaunchPad as a controller, cycle through the 2-bit range and verify
+the output. You should be making notes on this output for your lab report.
+
+@c
+@c
+@c
+@subsection Covering Theorem
+Build a simple logic gate circuit that demonstrates the covering theorem and
+it's dual shown in @ref{covering} and @ref{coveringdual}.
+
+@float Figure ,covering
+@center @image{covering,,,,}
+@caption{Covering Theorem Circuit.}
+@end float
+
+@tex
+$$B \bullet (B + C) = B$$
+@end tex
+
+@float Figure ,coveringdual
+@center @image{covering_dual,,,,}
+@caption{Covering Dual Theorem Circuit.}
+@end float
+
+@tex
+$$B + (B \bullet C) = B$$
+@end tex
+
+For each circuit in turn, connect bus 1 bit 0 to input @math{B} and bus 1 bit 1
+to input @math{C}. Connect output @math{Y} to bus 2 bit 0.
 
 Using the LaunchPad as a controller, cycle through the 2-bit range and verify
 the output. You should be making notes on this output for your lab report.
