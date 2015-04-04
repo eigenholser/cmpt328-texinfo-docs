@@ -165,8 +165,8 @@ the data bus already built.
 @end float
 
 @itemize
-@item EN1 positioned on row 20.
-@item EN2 positioned on row 10.
+@item EN1 (mode green) positioned on row 10.
+@item EN2 (mode blue) positioned on row 20.
 @end itemize
 
 @node Connect The LaunchPad
@@ -233,8 +233,8 @@ breadboard.
 @end itemize
 
 Load the bus 1 data onto the 74LS75 latch by pressing the SW2 button to
-activate EN1. You may need to long press SW2 to select EN1 (blue) versus EN2
-(green.)
+activate EN1. You may need to long press SW2 to select EN1 (green) versus EN2
+(blue.)
 
 Experiment with loading data onto bus 1 by fast pressing SW1 and then activating
 EN1 by pressing SW2. Repeat with different values. Each time, you should see
