@@ -12,4 +12,5 @@ to that directory and also invoking ``make.``
 Create a new document by using the ``package.sh`` shell script. It will create
 a new TexInfo document directory from the ``template`` directory.
 
-There is more but that is the happy path.
+There is a lot more but that covers the primary usage. PDF documents for this
+repository have been generated and placed in the ``pdf`` directory.
